@@ -1,4 +1,5 @@
 // import * as turf from '@turf/turf'
+import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
 import { mapPlacePointsFeatures } from './store'
 
@@ -16,6 +17,25 @@ export const addPlaceSource = () => {
       data: mapPlacePointsFeatures.value,
     })
   }
+}
+const popup = new mapboxgl.Popup({
+  anchor: 'bottom-left',
+  closeButton: false,
+  closeOnClick: true,
+  className: 'LayerPopup',
+})
+
+const handleFeatureClick = (e: any) => {
+  const map = window.map
+  const props = e.features[0]
+  const description
+  = `<h2>${props.properties.name}</h2>
+  <p>时间: ${props.properties.date}</p>
+  <p>是否扎营: ${props.properties.isCamp || false}</p>
+  `
+
+  const coordinates = e.features[0].geometry.coordinates.slice()
+  popup.setLngLat(coordinates).setHTML(description).addTo(map)
 }
 
 export const drawLine = () => {
@@ -115,22 +135,25 @@ export const drawPoint = () => {
     type: 'symbol',
     source: MAP_PLACE_SOURCE,
     layout: {
-      'text-field': ['get', 'name'],
-      'icon-size': 0.25,
-      'icon-image': ['get', 'marker-color'],
+      'text-field': ['get', 'date'],
+      'icon-size': 1,
+      'icon-image': ['get', 'icon'],
       'text-size': 12,
       'text-offset': [0, 0.5],
       'text-anchor': 'top',
       'icon-allow-overlap': true,
     },
     paint: {
-      'text-color': isDark.value ? '#bbb' : '#7e6c56',
-      'text-halo-color': isDark.value ? '#000' : '#fff',
+      'text-color': '#333',
+      'text-halo-color': '#fff',
       'text-halo-width': 1,
       'text-halo-blur': 0,
     },
     filter: ['==', ['geometry-type'], 'Point'],
   })
+
+  map.on('click', MAP_PLACE_LAYER_POINT, handleFeatureClick)
+  map.on('touchend', MAP_PLACE_LAYER_POINT, handleFeatureClick)
 }
 
 export const reloadPlace = () => {

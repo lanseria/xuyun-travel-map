@@ -7,7 +7,8 @@ import MapboxLanguage from '@mapbox/mapbox-gl-language'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 // import type { Feature, FeatureCollection, Point } from '@turf/turf'
-import { LayerStyleList, MapboxAccessToken, MyCustomControl, mapPlacePoints, mapStyle } from '~/composables'
+import type { Feature, Point } from '@turf/turf'
+import { LayerStyleList, MapboxAccessToken, MyCustomControl, mapLoaded, mapPlacePoints, mapStyle } from '~/composables'
 
 mapboxgl.accessToken
   = MapboxAccessToken
@@ -21,7 +22,16 @@ const updateMap = () => {
 const { execute, isFetching, error, data: fetchData, abort, canAbort, onFetchResponse, onFetchError } = useFetch('/202212-202301.geojson', { immediate: true }).get().json()
 
 onFetchResponse(() => {
-  mapPlacePoints.value = fetchData.value.features
+  const features: Feature<Point>[] = fetchData.value.features
+  mapPlacePoints.value = features.map((item) => {
+    return {
+      ...item,
+      properties: {
+        ...item.properties,
+        icon: item.properties!.isCamp ? 'campsite' : 'bicycle',
+      },
+    }
+  })
 })
 
 onMounted(() => {
@@ -42,11 +52,12 @@ onMounted(() => {
   map.addControl(new MapboxLanguage({ defaultLanguage: 'zh-Hans' }))
 
   map.addControl(new MyCustomControl(map))
-
+  mapLoaded.value = false
   map.on('load', () => {
     map!.resize()
     mapLoad()
     updateMap()
+    mapLoaded.value = true
   })
 })
 </script>
@@ -56,6 +67,8 @@ onMounted(() => {
     ref="mapContainer"
     class="h-full w-full top-0 bottom-0 left-0 right-0 relative"
   >
-    <div />
+    <!-- <template v-if="mapLoaded">
+      <MapMarker v-for="(item, index) in mapPlacePoints" :key="index" :scale="0.5" :properties="item.properties!" :lng-lat="item.geometry.coordinates" />
+    </template> -->
   </div>
 </template>

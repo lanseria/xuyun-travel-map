@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     Hello: typeof import('./src/components/Hello.vue')['default']
     Mapbox: typeof import('./src/components/Mapbox.vue')['default']
     MapComp: typeof import('./src/components/MapComp.vue')['default']
+    MapMarker: typeof import('./src/components/MapMarker.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

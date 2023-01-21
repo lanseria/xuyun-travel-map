@@ -3,6 +3,7 @@ import type { Feature, LineString, Point, Polygon } from '@turf/turf'
 import * as turf from '@turf/turf'
 
 export const collapsed = ref(false)
+export const mapLoaded = ref(false)
 
 export const mapCenter = useStorage('map-center', [124.724, 40.881])
 export const mapStyle = useStorage('map-style', 'streets')

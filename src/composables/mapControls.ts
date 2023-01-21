@@ -11,8 +11,9 @@ export class MyCustomControl {
 
   onAdd(map: mapboxgl.Map) {
     this.map = map
-    this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group text-black'
-    this.container.textContent = 'Dark'
+    this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group'
+    this.container.setAttribute('style', 'color:#333;padding:1px 2px;cursor:pointer;')
+    this.container.textContent = 'Light'
     this.container.onclick = () => {
       toggleDark()
     }
