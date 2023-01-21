@@ -10,7 +10,10 @@ declare global {
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
   const LayerStyleList: typeof import('./src/composables/constants')['LayerStyleList']
+  const MAP_PLACE_LAYER_POINT: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_POINT']
+  const MAP_PLACE_SOURCE: typeof import('./src/composables/constants')['MAP_PLACE_SOURCE']
   const MapboxAccessToken: typeof import('./src/composables/constants')['MapboxAccessToken']
+  const addPlaceSource: typeof import('./src/composables/mapLayer')['addPlaceSource']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const collapsed: typeof import('./src/composables/store')['collapsed']
@@ -33,6 +36,7 @@ declare global {
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const drawCityPoint: typeof import('./src/composables/mapLayer')['drawCityPoint']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
@@ -49,6 +53,9 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
+  const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
+  const mapPlaceFeatures: typeof import('./src/composables/store')['mapPlaceFeatures']
+  const mapStyle: typeof import('./src/composables/store')['mapStyle']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
@@ -87,6 +94,7 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const reloadPlace: typeof import('./src/composables/mapLayer')['reloadPlace']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveDirective: typeof import('vue')['resolveDirective']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
@@ -294,7 +302,10 @@ declare module 'vue' {
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly LayerStyleList: UnwrapRef<typeof import('./src/composables/constants')['LayerStyleList']>
+    readonly MAP_PLACE_LAYER_POINT: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_POINT']>
+    readonly MAP_PLACE_SOURCE: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_SOURCE']>
     readonly MapboxAccessToken: UnwrapRef<typeof import('./src/composables/constants')['MapboxAccessToken']>
+    readonly addPlaceSource: UnwrapRef<typeof import('./src/composables/mapLayer')['addPlaceSource']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly collapsed: UnwrapRef<typeof import('./src/composables/store')['collapsed']>
@@ -317,6 +328,7 @@ declare module 'vue' {
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
+    readonly drawCityPoint: UnwrapRef<typeof import('./src/composables/mapLayer')['drawCityPoint']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
@@ -333,6 +345,9 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
+    readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
+    readonly mapPlaceFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlaceFeatures']>
+    readonly mapStyle: UnwrapRef<typeof import('./src/composables/store')['mapStyle']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
@@ -371,6 +386,7 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly reloadPlace: UnwrapRef<typeof import('./src/composables/mapLayer')['reloadPlace']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveDirective: UnwrapRef<typeof import('vue')['resolveDirective']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>

@@ -4,4 +4,5 @@ declare module '*.vue' {
   export default component
 }
 
+declare module "@mapbox/mapbox-gl-directions" 
 declare module "@mapbox/mapbox-gl-language"
