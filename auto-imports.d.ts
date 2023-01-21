@@ -58,6 +58,7 @@ declare global {
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
+  const mapLoaded: typeof import('./src/composables/store')['mapLoaded']
   const mapPlaceLine: typeof import('./src/composables/store')['mapPlaceLine']
   const mapPlacePoints: typeof import('./src/composables/store')['mapPlacePoints']
   const mapPlacePointsFeatures: typeof import('./src/composables/store')['mapPlacePointsFeatures']
@@ -356,6 +357,7 @@ declare module 'vue' {
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
+    readonly mapLoaded: UnwrapRef<typeof import('./src/composables/store')['mapLoaded']>
     readonly mapPlaceLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceLine']>
     readonly mapPlacePoints: UnwrapRef<typeof import('./src/composables/store')['mapPlacePoints']>
     readonly mapPlacePointsFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlacePointsFeatures']>

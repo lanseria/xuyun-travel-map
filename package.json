@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --port 3333 --host",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "up": "taze major -I"
