@@ -47,29 +47,24 @@ const handleFeatureClick = (e: any) => {
   handleFeatureDetail(props)
 }
 
-export const drawLine = () => {
+const drawAnimateLine = () => {
   const map = window.map
   const source: any = map.getSource(MAP_PLACE_SOURCE)
+  const LayerNameBg = `${MAP_PLACE_LAYER_LINESTRING_BG}`
+  const LayerNameDashed = `${MAP_PLACE_LAYER_LINESTRING_DASHED}`
   if (!source)
     return
-  if (map.getLayer(MAP_PLACE_LAYER_LINESTRING_BG))
-    map.removeLayer(MAP_PLACE_LAYER_LINESTRING_BG)
-  if (map.getLayer(MAP_PLACE_LAYER_LINESTRING_DASHED))
-    map.removeLayer(MAP_PLACE_LAYER_LINESTRING_DASHED)
+  if (map.getLayer(LayerNameBg))
+    map.removeLayer(LayerNameBg)
+  if (map.getLayer(LayerNameDashed))
+    map.removeLayer(LayerNameDashed)
 
   map.addLayer({
-    id: MAP_PLACE_LAYER_LINESTRING_BG,
+    id: LayerNameBg,
     type: 'line',
     source: MAP_PLACE_SOURCE,
-    // layout: {
-    //   'line-cap': ['coalesce', ['get', 'line-cap'], 'round'],
-    //   'line-join': ['coalesce', ['get', 'line-cap'], 'round'],
-    // },
     paint: {
-      // 'line-color': ['coalesce', ['get', 'line-color'], '#000'],
-      // 'line-width': ['coalesce', ['get', 'line-width'], 2],
-      // 'line-opacity': ['coalesce', ['get', 'line-opacity'], 1],
-      'line-color': 'green',
+      'line-color': ['get', 'color'],
       'line-width': 6,
       'line-opacity': 0.4,
     },
@@ -78,11 +73,11 @@ export const drawLine = () => {
 
   // add a line layer with line-dasharray set to the first value in dashArraySequence
   map.addLayer({
-    id: MAP_PLACE_LAYER_LINESTRING_DASHED,
+    id: LayerNameDashed,
     type: 'line',
     source: MAP_PLACE_SOURCE,
     paint: {
-      'line-color': 'green',
+      'line-color': ['get', 'color'],
       'line-width': 6,
       'line-dasharray': [0, 4, 3],
     },
@@ -117,7 +112,7 @@ export const drawLine = () => {
 
     if (newStep !== step) {
       map.setPaintProperty(
-        MAP_PLACE_LAYER_LINESTRING_DASHED,
+        LayerNameDashed,
         'line-dasharray',
         dashArraySequence[step],
       )
@@ -130,6 +125,10 @@ export const drawLine = () => {
 
   // start the animation
   animateDashArray(0)
+}
+
+export const drawLine = () => {
+  drawAnimateLine()
 }
 
 export const drawPoint = () => {

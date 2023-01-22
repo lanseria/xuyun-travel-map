@@ -16,6 +16,7 @@ declare global {
   const MAP_PLACE_SOURCE: typeof import('./src/composables/constants')['MAP_PLACE_SOURCE']
   const MapboxAccessToken: typeof import('./src/composables/constants')['MapboxAccessToken']
   const MyCustomControl: typeof import('./src/composables/mapControls')['MyCustomControl']
+  const activeTab: typeof import('./src/composables/store')['activeTab']
   const addPlaceSource: typeof import('./src/composables/mapLayer')['addPlaceSource']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
@@ -34,6 +35,7 @@ declare global {
   const createReactiveFn: typeof import('@vueuse/core')['createReactiveFn']
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
+  const currentProperties: typeof import('./src/composables/store')['currentProperties']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
@@ -47,6 +49,9 @@ declare global {
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
+  const handleCollapsed: typeof import('./src/composables/store')['handleCollapsed']
+  const handleCollapsedFalse: typeof import('./src/composables/store')['handleCollapsedFalse']
+  const handleFeatureDetail: typeof import('./src/composables/mapLayer')['handleFeatureDetail']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
   const isDark: typeof import('./src/composables/dark')['isDark']
@@ -57,12 +62,15 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
+  const mapEndPlacePoint: typeof import('./src/composables/store')['mapEndPlacePoint']
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
   const mapLoaded: typeof import('./src/composables/store')['mapLoaded']
-  const mapPlaceLine: typeof import('./src/composables/store')['mapPlaceLine']
+  const mapPlaceFinishedLine: typeof import('./src/composables/store')['mapPlaceFinishedLine']
   const mapPlaceLineBbox: typeof import('./src/composables/store')['mapPlaceLineBbox']
   const mapPlacePoints: typeof import('./src/composables/store')['mapPlacePoints']
   const mapPlacePointsFeatures: typeof import('./src/composables/store')['mapPlacePointsFeatures']
+  const mapPlaceUnfinishedLine: typeof import('./src/composables/store')['mapPlaceUnfinishedLine']
+  const mapStartPlacePoint: typeof import('./src/composables/store')['mapStartPlacePoint']
   const mapStyle: typeof import('./src/composables/store')['mapStyle']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
@@ -316,6 +324,7 @@ declare module 'vue' {
     readonly MAP_PLACE_SOURCE: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_SOURCE']>
     readonly MapboxAccessToken: UnwrapRef<typeof import('./src/composables/constants')['MapboxAccessToken']>
     readonly MyCustomControl: UnwrapRef<typeof import('./src/composables/mapControls')['MyCustomControl']>
+    readonly activeTab: UnwrapRef<typeof import('./src/composables/store')['activeTab']>
     readonly addPlaceSource: UnwrapRef<typeof import('./src/composables/mapLayer')['addPlaceSource']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -334,6 +343,7 @@ declare module 'vue' {
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
+    readonly currentProperties: UnwrapRef<typeof import('./src/composables/store')['currentProperties']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
@@ -347,6 +357,9 @@ declare module 'vue' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly handleCollapsed: UnwrapRef<typeof import('./src/composables/store')['handleCollapsed']>
+    readonly handleCollapsedFalse: UnwrapRef<typeof import('./src/composables/store')['handleCollapsedFalse']>
+    readonly handleFeatureDetail: UnwrapRef<typeof import('./src/composables/mapLayer')['handleFeatureDetail']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
@@ -357,12 +370,15 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
+    readonly mapEndPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapEndPlacePoint']>
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
     readonly mapLoaded: UnwrapRef<typeof import('./src/composables/store')['mapLoaded']>
-    readonly mapPlaceLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceLine']>
+    readonly mapPlaceFinishedLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceFinishedLine']>
     readonly mapPlaceLineBbox: UnwrapRef<typeof import('./src/composables/store')['mapPlaceLineBbox']>
     readonly mapPlacePoints: UnwrapRef<typeof import('./src/composables/store')['mapPlacePoints']>
     readonly mapPlacePointsFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlacePointsFeatures']>
+    readonly mapPlaceUnfinishedLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceUnfinishedLine']>
+    readonly mapStartPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapStartPlacePoint']>
     readonly mapStyle: UnwrapRef<typeof import('./src/composables/store')['mapStyle']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>

@@ -11,6 +11,7 @@ specifiers:
   '@unocss/reset': ^0.48.4
   '@vitejs/plugin-vue': ^4.0.0
   '@vueuse/core': ^9.11.1
+  dayjs: ^1.11.7
   eslint: ^8.32.0
   lodash-es: ^4.17.21
   mapbox-gl: ^2.12.0
@@ -32,6 +33,7 @@ dependencies:
   '@turf/turf': 6.5.0
   '@types/mapbox-gl': 2.7.10
   '@vueuse/core': 9.11.1_vue@3.2.45
+  dayjs: 1.11.7
   lodash-es: 4.17.21
   mapbox-gl: 2.12.0
   vue: 3.2.45

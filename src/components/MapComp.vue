@@ -2,13 +2,10 @@
 // import type { Ref } from 'vue'
 import type { LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
-// import * as MapboxDirections from '@mapbox/mapbox-gl-directions'
 import MapboxLanguage from '@mapbox/mapbox-gl-language'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-// import type { Feature, FeatureCollection, Point } from '@turf/turf'
-import type { Feature, Point } from '@turf/turf'
-import { LayerStyleList, MapboxAccessToken, MyCustomControl, handleCollapsed, mapLoaded, mapPlacePoints, mapStyle } from '~/composables'
+import { LayerStyleList, MapboxAccessToken, MyCustomControl, handleCollapsed, mapLoaded, mapStyle } from '~/composables'
 
 mapboxgl.accessToken
   = MapboxAccessToken
@@ -19,12 +16,6 @@ const mapContainer = shallowRef()
 const updateMap = () => {
   //
 }
-const { data: fetchData, onFetchResponse } = useFetch('/202212-202301.geojson', { immediate: true }).get().json()
-
-onFetchResponse(() => {
-  const features: Feature<Point>[] = fetchData.value.features
-  mapPlacePoints.value = features
-})
 
 onMounted(() => {
   const styleValue = LayerStyleList.find(item => item.value === mapStyle.value)
@@ -59,7 +50,12 @@ onMounted(() => {
     ref="mapContainer"
     class="h-full w-full top-0 bottom-0 left-0 right-0 relative"
   >
-    <div class="sidebar-handle absolute right-0 bottom-9 px-4 py-1 bg-light dark:bg-dark cursor-pointer hidden md:block z-10" @click="handleCollapsed()">
+    <MapData
+      class="absolute top-10px left-1/2 z-10 bg-white" :style="{
+        transform: 'translate(-50%, 0)',
+      }"
+    />
+    <div class="sidebar-handle absolute right-0 bottom-9 z-10 px-4 py-1 bg-light dark:bg-dark cursor-pointer hidden md:block" @click="handleCollapsed()">
       <div v-if="collapsed" class="i-carbon:caret-right" />
       <div v-else class="i-carbon:caret-left" />
     </div>

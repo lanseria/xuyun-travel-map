@@ -16,6 +16,7 @@
     "@turf/turf": "^6.5.0",
     "@types/mapbox-gl": "^2.7.10",
     "@vueuse/core": "^9.11.1",
+    "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21",
     "mapbox-gl": "^2.12.0",
     "vue": "^3.2.45",

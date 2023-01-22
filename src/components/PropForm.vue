@@ -48,7 +48,7 @@ const handleDelete = () => {
           <iframe class="w-full h-250px" :src="`//player.bilibili.com/player.html?bvid=${currentProperties.vid}&t=${currentProperties.vt}`" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />
           <div>
             B站链接：
-            <a-link :href="`https://www.bilibili.com/video/${currentProperties.vid}/?t=${currentProperties.vt}`">
+            <a-link :href="`https://www.bilibili.com/video/${currentProperties.vid}/?t=${currentProperties.vt}`" target="_blank">
               {{ currentProperties.vid }}
             </a-link>
           </div>
@@ -58,10 +58,13 @@ const handleDelete = () => {
       <a-form-item>
         <ASpace>
           <a-button type="primary" @click="handleUpdate()">
-            编辑数据
+            改进数据
+          </a-button>
+          <a-button status="success" @click="handleDelete()">
+            设置起点
           </a-button>
           <a-button status="danger" @click="handleDelete()">
-            移除
+            设置终点
           </a-button>
         </ASpace>
       </a-form-item>

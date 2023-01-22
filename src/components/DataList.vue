@@ -14,7 +14,7 @@ const columns = [
   {
     title: '日期',
     dataIndex: 'properties.date',
-    width: 110,
+    width: 120,
   },
   {
     title: '时间',
