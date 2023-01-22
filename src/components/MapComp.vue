@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import MapboxLanguage from '@mapbox/mapbox-gl-language'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { LayerStyleList, MapboxAccessToken, MyCustomControl, handleCollapsed, mapLoaded, mapStyle } from '~/composables'
+import { LayerStyleList, MapboxAccessToken, handleCollapsed, mapLoaded, mapStyle } from '~/composables'
 
 mapboxgl.accessToken
   = MapboxAccessToken
@@ -34,7 +34,7 @@ onMounted(() => {
   map.addControl(new mapboxgl.FullscreenControl())
   map.addControl(new MapboxLanguage({ defaultLanguage: 'zh-Hans' }))
 
-  map.addControl(new MyCustomControl(map))
+  // map.addControl(new MyCustomControl(map))
   mapLoaded.value = false
   map.on('load', () => {
     map!.resize()
