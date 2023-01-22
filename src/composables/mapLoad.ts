@@ -42,7 +42,7 @@ export const mapLoad = () => {
   // map.addImage('#7e7e7e', createColorPoint(125, 125, 125, 255))
 
   setTimeout(() => {
-    reloadPlace()
+    // reloadPlace()
 
     watchDebounced(() => mapPlacePointsFeatures.value, () => {
       console.warn('mapPlaceFeatures changed')

@@ -1,7 +1,8 @@
 // import * as turf from '@turf/turf'
+import type { LngLatBoundsLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
-import { mapPlacePointsFeatures } from './store'
+import { mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
 
 export const addPlaceSource = () => {
   const map = window.map
@@ -31,7 +32,6 @@ const handleFeatureClick = (e: any) => {
   const description
   = `<h2>${props.properties.name}</h2>
   <p>时间: ${props.properties.date}</p>
-  <p>是否扎营: ${props.properties.isCamp || false}</p>
   `
 
   const coordinates = e.features[0].geometry.coordinates.slice()
@@ -156,8 +156,18 @@ export const drawPoint = () => {
   map.on('touchend', MAP_PLACE_LAYER_POINT, handleFeatureClick)
 }
 
+const fitBbox = () => {
+  const map = window.map
+  const box = mapPlaceLineBbox.value.bbox!
+  const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
+  map.fitBounds(bbox, {
+    padding: { top: 200, bottom: 200, left: 200, right: 200 },
+  })
+}
+
 export const reloadPlace = () => {
   addPlaceSource()
   drawLine()
   drawPoint()
+  fitBbox()
 }

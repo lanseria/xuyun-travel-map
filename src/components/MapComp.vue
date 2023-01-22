@@ -23,15 +23,7 @@ const { execute, isFetching, error, data: fetchData, abort, canAbort, onFetchRes
 
 onFetchResponse(() => {
   const features: Feature<Point>[] = fetchData.value.features
-  mapPlacePoints.value = features.map((item) => {
-    return {
-      ...item,
-      properties: {
-        ...item.properties,
-        icon: item.properties!.isCamp ? 'campsite' : 'bicycle',
-      },
-    }
-  })
+  mapPlacePoints.value = features
 })
 
 onMounted(() => {

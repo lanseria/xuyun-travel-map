@@ -19,6 +19,11 @@ export const mapPlaceLine = computed(() => {
   return turf.lineString(linePointList)
 })
 
+export const mapPlaceLineBbox = computed(() => {
+  const bbox = turf.bbox(mapPlaceLine.value)
+  return turf.bboxPolygon(bbox)
+})
+
 export const mapPlacePointsFeatures = computed(() => {
   const all: MyFeature[] = [...mapPlacePoints.value, mapPlaceLine.value]
   return turf.featureCollection(all)
