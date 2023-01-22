@@ -60,6 +60,7 @@ declare global {
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
   const mapLoaded: typeof import('./src/composables/store')['mapLoaded']
   const mapPlaceLine: typeof import('./src/composables/store')['mapPlaceLine']
+  const mapPlaceLineBbox: typeof import('./src/composables/store')['mapPlaceLineBbox']
   const mapPlacePoints: typeof import('./src/composables/store')['mapPlacePoints']
   const mapPlacePointsFeatures: typeof import('./src/composables/store')['mapPlacePointsFeatures']
   const mapStyle: typeof import('./src/composables/store')['mapStyle']
@@ -359,6 +360,7 @@ declare module 'vue' {
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
     readonly mapLoaded: UnwrapRef<typeof import('./src/composables/store')['mapLoaded']>
     readonly mapPlaceLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceLine']>
+    readonly mapPlaceLineBbox: UnwrapRef<typeof import('./src/composables/store')['mapPlaceLineBbox']>
     readonly mapPlacePoints: UnwrapRef<typeof import('./src/composables/store')['mapPlacePoints']>
     readonly mapPlacePointsFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlacePointsFeatures']>
     readonly mapStyle: UnwrapRef<typeof import('./src/composables/store')['mapStyle']>

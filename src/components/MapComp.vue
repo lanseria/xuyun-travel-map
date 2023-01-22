@@ -8,7 +8,7 @@ import MapboxLanguage from '@mapbox/mapbox-gl-language'
 import 'mapbox-gl/dist/mapbox-gl.css'
 // import type { Feature, FeatureCollection, Point } from '@turf/turf'
 import type { Feature, Point } from '@turf/turf'
-import { LayerStyleList, MapboxAccessToken, MyCustomControl, mapLoaded, mapPlacePoints, mapStyle } from '~/composables'
+import { LayerStyleList, MapboxAccessToken, MyCustomControl, handleCollapsed, mapLoaded, mapPlacePoints, mapStyle } from '~/composables'
 
 mapboxgl.accessToken
   = MapboxAccessToken
@@ -19,7 +19,7 @@ const mapContainer = shallowRef()
 const updateMap = () => {
   //
 }
-const { execute, isFetching, error, data: fetchData, abort, canAbort, onFetchResponse, onFetchError } = useFetch('/202212-202301.geojson', { immediate: true }).get().json()
+const { data: fetchData, onFetchResponse } = useFetch('/202212-202301.geojson', { immediate: true }).get().json()
 
 onFetchResponse(() => {
   const features: Feature<Point>[] = fetchData.value.features
@@ -59,8 +59,9 @@ onMounted(() => {
     ref="mapContainer"
     class="h-full w-full top-0 bottom-0 left-0 right-0 relative"
   >
-    <!-- <template v-if="mapLoaded">
-      <MapMarker v-for="(item, index) in mapPlacePoints" :key="index" :scale="0.5" :properties="item.properties!" :lng-lat="item.geometry.coordinates" />
-    </template> -->
+    <div class="sidebar-handle absolute right-0 bottom-9 px-4 py-1 bg-light dark:bg-dark cursor-pointer hidden md:block z-10" @click="handleCollapsed()">
+      <div v-if="collapsed" class="i-carbon:caret-right" />
+      <div v-else class="i-carbon:caret-left" />
+    </div>
   </div>
 </template>

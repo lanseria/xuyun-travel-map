@@ -2,7 +2,7 @@
 import type { LngLatBoundsLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
-import { mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
+import { activeTab, currentProperties, mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
 
 export const addPlaceSource = () => {
   const map = window.map
@@ -25,17 +25,26 @@ const popup = new mapboxgl.Popup({
   closeOnClick: true,
   className: 'LayerPopup',
 })
-
-const handleFeatureClick = (e: any) => {
-  const map = window.map
-  const props = e.features[0]
+export const handleFeatureDetail = (props: any, isTabDetail = true) => {
   const description
   = `<h2>${props.properties.name}</h2>
   <p>时间: ${props.properties.date}</p>
   `
 
-  const coordinates = e.features[0].geometry.coordinates.slice()
-  popup.setLngLat(coordinates).setHTML(description).addTo(map)
+  const coordinates = props.geometry.coordinates.slice()
+  popup.setLngLat(coordinates).setHTML(description).addTo(window.map)
+
+  // 设置完立即显示其当前要素属性
+  isTabDetail && (activeTab.value = 'detail')
+  currentProperties.value = {
+    ...props.properties,
+  }
+  collapsed.value = true
+}
+
+const handleFeatureClick = (e: any) => {
+  const props = e.features[0]
+  handleFeatureDetail(props)
 }
 
 export const drawLine = () => {
