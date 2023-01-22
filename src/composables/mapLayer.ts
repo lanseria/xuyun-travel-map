@@ -1,8 +1,9 @@
 // import * as turf from '@turf/turf'
-import type { LngLatBoundsLike } from 'mapbox-gl'
+import type { Feature, Point } from '@turf/turf'
+import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
-import { activeTab, currentProperties, mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
+import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures, stopNumber } from './store'
 
 export const addPlaceSource = () => {
   const map = window.map
@@ -25,13 +26,13 @@ const popup = new mapboxgl.Popup({
   closeOnClick: true,
   className: 'LayerPopup',
 })
-export const handleFeatureDetail = (props: any, isTabDetail = true) => {
+export const handleFeatureDetail = (props: Feature<Point>, isTabDetail = true) => {
   const description
-  = `<h2>${props.properties.name}</h2>
-  <p>时间: ${props.properties.date}</p>
+  = `<h2>${props.properties!.name}</h2>
+  <p>时间: ${props.properties!.date}</p>
   `
 
-  const coordinates = props.geometry.coordinates.slice()
+  const coordinates = props.geometry.coordinates.slice() as LngLatLike
   popup.setLngLat(coordinates).setHTML(description).addTo(window.map)
 
   // 设置完立即显示其当前要素属性
@@ -39,6 +40,7 @@ export const handleFeatureDetail = (props: any, isTabDetail = true) => {
   currentProperties.value = {
     ...props.properties,
   }
+  currentFeature.value = props
   collapsed.value = true
 }
 
@@ -102,7 +104,6 @@ const drawAnimateLine = () => {
   ]
 
   let step = 0
-
   function animateDashArray(timestamp: number) {
   // Update line-dasharray using the next value in dashArraySequence. The
   // divisor in the expression `timestamp / 50` controls the animation speed.
@@ -120,11 +121,12 @@ const drawAnimateLine = () => {
     }
 
     // Request the next frame of the animation.
-    requestAnimationFrame(animateDashArray)
+    stopNumber.value = requestAnimationFrame(animateDashArray)
   }
 
   // start the animation
-  animateDashArray(0)
+  cancelAnimationFrame(stopNumber.value)
+  isAnimation.value && animateDashArray(0)
 }
 
 export const drawLine = () => {

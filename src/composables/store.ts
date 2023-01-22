@@ -3,6 +3,12 @@ import type { Feature, LineString, Point, Polygon } from '@turf/turf'
 import * as turf from '@turf/turf'
 
 export const collapsed = ref(false)
+export const isAnimation = ref(false)
+export const stopNumber = ref(0)
+export const toggleAnimation = () => {
+  isAnimation.value = !isAnimation.value
+  drawLine()
+}
 watchDebounced(() => collapsed.value, () => {
   window.map.resize()
 }, { debounce: 300, maxWait: 600 })
@@ -13,7 +19,21 @@ export const handleCollapsedFalse = () => {
   collapsed.value = false
 }
 
+export const currentProperties = ref(null) as Ref<any>
+export const currentFeature = ref() as Ref<Feature<Point>>
+
 export const mapLoaded = ref(false)
+
+export const mapDistanceStartPoint = ref<Feature<Point>>()
+export const mapDistanceEndPoint = ref<Feature<Point>>()
+
+export const handleSetStartPoint = () => {
+  mapDistanceStartPoint.value = currentFeature.value
+}
+
+export const handleSetEndPoint = () => {
+  mapDistanceEndPoint.value = currentFeature.value
+}
 
 export const activeTab = useStorage('map-activeTab', 'detail')
 
@@ -36,8 +56,6 @@ endOnFetchResponse(() => {
   mapStartPlacePoint.value = endData.value.startEndPoints[0]
   mapEndPlacePoint.value = endData.value.startEndPoints[1]
 })
-
-export const currentProperties = ref(null) as Ref<any>
 
 export const mapPlaceFinishedLine = computed(() => {
   const linePointList = mapPlacePoints.value.map((item) => {

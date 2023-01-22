@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     DataList: typeof import('./src/components/DataList.vue')['default']
     MapComp: typeof import('./src/components/MapComp.vue')['default']
     MapData: typeof import('./src/components/MapData.vue')['default']
+    MapDistance: typeof import('./src/components/MapDistance.vue')['default']
     MapMarker: typeof import('./src/components/MapMarker.vue')['default']
     PropForm: typeof import('./src/components/PropForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -60,10 +60,10 @@ const handleDelete = () => {
           <a-button type="primary" @click="handleUpdate()">
             改进数据
           </a-button>
-          <a-button status="success" @click="handleDelete()">
+          <a-button status="success" @click="handleSetStartPoint()">
             设置起点
           </a-button>
-          <a-button status="danger" @click="handleDelete()">
+          <a-button status="danger" @click="handleSetEndPoint()">
             设置终点
           </a-button>
         </ASpace>
