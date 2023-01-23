@@ -4,10 +4,8 @@ const isShowForm = computed(() => {
   return currentProperties.value !== null
 })
 const handleUpdate = () => {
-}
-
-const handleDelete = () => {
-  //
+  const url = `https://github.com/lanseria/xuyun-map-data/blob/main/2212-2303-dongbei/raw/${currentProperties.value.date}.json`
+  open(url)
 }
 </script>
 
