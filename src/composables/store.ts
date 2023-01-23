@@ -44,7 +44,7 @@ export const mapStyle = useStorage('map-style', 'streets')
 export type MyFeature = Feature<Polygon | Point | LineString>
 
 export const mapPlacePoints = useStorage<Feature<Point>[]>('map-place-point-features', [])
-const { data, onFetchResponse } = useFetch('/2212-2303-dongbei/all-points.geojson', { immediate: true }).get().json()
+const { data, onFetchResponse } = useFetch('https://raw.githubusercontent.com/lanseria/xuyun-map-data/main/2212-2303-dongbei/data/all-points.geojson', { immediate: true }).get().json()
 onFetchResponse(() => {
   const features: Feature<Point>[] = data.value.features
   mapPlacePoints.value = features

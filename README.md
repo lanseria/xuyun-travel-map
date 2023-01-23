@@ -1,4 +1,12 @@
-# Arco Uno Basic Template
+# 徐云流浪中国地图
+
+<p align='center'>
+<img src="./docs/xuyun-map.netlify.app_.png" width='500'/>
+</p>
+
+<p align='center'>
+Web App for <a href='https://github.com/lanseria/xuyun-map-data'>徐云流浪中国地图开源数据</a>
+</p>
 
 ## Features
 
@@ -19,21 +27,3 @@
 - 🦾 TypeScript, of course
 
 - ☁️ Deploy on Netlify, zero-config
-
-## Try it now!
-
-> arco-uno-basic-template requires Node >=14.18
-
-### GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/lanseria/arco-uno-basic-template/generate).
-
-### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit lanseria/arco-uno-basic-template my-arco-uno-app
-cd my-arco-uno-app
-pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
-```
