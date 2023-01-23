@@ -40,6 +40,7 @@ const handleActive = (item: TabItem) => {
     <div class="shrink-0">
       <PropForm v-if="activeTab === 'detail'" />
       <DataList v-if="activeTab === 'data'" />
+      <HelpText v-if="activeTab === 'help'" />
     </div>
   </div>
 </template>

@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DataList: typeof import('./src/components/DataList.vue')['default']
+    HelpText: typeof import('./src/components/HelpText.vue')['default']
     MapComp: typeof import('./src/components/MapComp.vue')['default']
     MapData: typeof import('./src/components/MapData.vue')['default']
     MapDistance: typeof import('./src/components/MapDistance.vue')['default']

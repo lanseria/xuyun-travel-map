@@ -49,7 +49,7 @@ const handleDelete = () => {
           <div>
             B站链接：
             <a-link :href="`https://www.bilibili.com/video/${currentProperties.vid}/?t=${currentProperties.vt}`" target="_blank">
-              {{ currentProperties.vid }}
+              {{ currentProperties.vName }}
             </a-link>
           </div>
         </div>

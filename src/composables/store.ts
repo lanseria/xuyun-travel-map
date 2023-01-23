@@ -8,6 +8,7 @@ export const stopNumber = ref(0)
 export const toggleAnimation = () => {
   isAnimation.value = !isAnimation.value
   drawLine()
+  drawPoint()
 }
 watchDebounced(() => collapsed.value, () => {
   window.map.resize()
@@ -43,7 +44,7 @@ export const mapStyle = useStorage('map-style', 'streets')
 export type MyFeature = Feature<Polygon | Point | LineString>
 
 export const mapPlacePoints = useStorage<Feature<Point>[]>('map-place-point-features', [])
-const { data, onFetchResponse } = useFetch('/202212-202301.geojson', { immediate: true }).get().json()
+const { data, onFetchResponse } = useFetch('/2212-2303-dongbei/all-points.geojson', { immediate: true }).get().json()
 onFetchResponse(() => {
   const features: Feature<Point>[] = data.value.features
   mapPlacePoints.value = features

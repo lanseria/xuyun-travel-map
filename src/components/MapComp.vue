@@ -51,7 +51,7 @@ onMounted(() => {
     class="h-full w-full top-0 bottom-0 left-0 right-0 relative"
   >
     <div class="absolute top-2 left-2 z-10 flex flex-col items-start">
-      <MapDistance class="bg-white" />
+      <!-- <MapDistance class="bg-white" /> -->
     </div>
     <div
       class="absolute top-2 left-1/2 z-10 flex flex-col items-start"

@@ -35,6 +35,7 @@ declare global {
   const createReactiveFn: typeof import('@vueuse/core')['createReactiveFn']
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
+  const currentFeature: typeof import('./src/composables/store')['currentFeature']
   const currentProperties: typeof import('./src/composables/store')['currentProperties']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
@@ -52,8 +53,11 @@ declare global {
   const handleCollapsed: typeof import('./src/composables/store')['handleCollapsed']
   const handleCollapsedFalse: typeof import('./src/composables/store')['handleCollapsedFalse']
   const handleFeatureDetail: typeof import('./src/composables/mapLayer')['handleFeatureDetail']
+  const handleSetEndPoint: typeof import('./src/composables/store')['handleSetEndPoint']
+  const handleSetStartPoint: typeof import('./src/composables/store')['handleSetStartPoint']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
+  const isAnimation: typeof import('./src/composables/store')['isAnimation']
   const isDark: typeof import('./src/composables/dark')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
   const isProxy: typeof import('vue')['isProxy']
@@ -62,6 +66,8 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
+  const mapDistanceEndPoint: typeof import('./src/composables/store')['mapDistanceEndPoint']
+  const mapDistanceStartPoint: typeof import('./src/composables/store')['mapDistanceStartPoint']
   const mapEndPlacePoint: typeof import('./src/composables/store')['mapEndPlacePoint']
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
   const mapLoaded: typeof import('./src/composables/store')['mapLoaded']
@@ -118,6 +124,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const stopNumber: typeof import('./src/composables/store')['stopNumber']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const templateRef: typeof import('@vueuse/core')['templateRef']
@@ -127,6 +134,7 @@ declare global {
   const toReactive: typeof import('@vueuse/core')['toReactive']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
+  const toggleAnimation: typeof import('./src/composables/store')['toggleAnimation']
   const toggleDark: typeof import('./src/composables/dark')['toggleDark']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
@@ -343,6 +351,7 @@ declare module 'vue' {
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
+    readonly currentFeature: UnwrapRef<typeof import('./src/composables/store')['currentFeature']>
     readonly currentProperties: UnwrapRef<typeof import('./src/composables/store')['currentProperties']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
@@ -360,8 +369,11 @@ declare module 'vue' {
     readonly handleCollapsed: UnwrapRef<typeof import('./src/composables/store')['handleCollapsed']>
     readonly handleCollapsedFalse: UnwrapRef<typeof import('./src/composables/store')['handleCollapsedFalse']>
     readonly handleFeatureDetail: UnwrapRef<typeof import('./src/composables/mapLayer')['handleFeatureDetail']>
+    readonly handleSetEndPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetEndPoint']>
+    readonly handleSetStartPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetStartPoint']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly isAnimation: UnwrapRef<typeof import('./src/composables/store')['isAnimation']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
@@ -370,6 +382,8 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
+    readonly mapDistanceEndPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndPoint']>
+    readonly mapDistanceStartPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceStartPoint']>
     readonly mapEndPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapEndPlacePoint']>
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
     readonly mapLoaded: UnwrapRef<typeof import('./src/composables/store')['mapLoaded']>
@@ -426,6 +440,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly stopNumber: UnwrapRef<typeof import('./src/composables/store')['stopNumber']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
@@ -435,6 +450,7 @@ declare module 'vue' {
     readonly toReactive: UnwrapRef<typeof import('@vueuse/core')['toReactive']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
+    readonly toggleAnimation: UnwrapRef<typeof import('./src/composables/store')['toggleAnimation']>
     readonly toggleDark: UnwrapRef<typeof import('./src/composables/dark')['toggleDark']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
