@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "fetchxyz": "git clone https://hub.fastgit.xyz/lanseria/xuyun-map-data.git public/data || git -C public/data pull",
+    "fetch": "git clone https://github.com/lanseria/xuyun-map-data.git public/data || git -C public/data pull",
+    "data": " ni -C public/data/ && nr -C public/data/ dev:init && nr -C public/data/ dev:gen",
+    "postinstall": "npm i -g @antfu/ni && npm run fetchxyz && npm run data",
     "dev": "vite --port 3333 --host",
     "build": "vite build",
     "lint": "eslint .",
