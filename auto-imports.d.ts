@@ -66,7 +66,9 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
+  const mapDistanceEndInput: typeof import('./src/composables/store')['mapDistanceEndInput']
   const mapDistanceEndPoint: typeof import('./src/composables/store')['mapDistanceEndPoint']
+  const mapDistanceStartInput: typeof import('./src/composables/store')['mapDistanceStartInput']
   const mapDistanceStartPoint: typeof import('./src/composables/store')['mapDistanceStartPoint']
   const mapEndPlacePoint: typeof import('./src/composables/store')['mapEndPlacePoint']
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
@@ -382,7 +384,9 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
+    readonly mapDistanceEndInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndInput']>
     readonly mapDistanceEndPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndPoint']>
+    readonly mapDistanceStartInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceStartInput']>
     readonly mapDistanceStartPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceStartPoint']>
     readonly mapEndPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapEndPlacePoint']>
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>

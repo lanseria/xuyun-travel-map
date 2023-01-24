@@ -7,7 +7,7 @@
     "fetchxyz": "git clone https://hub.fastgit.xyz/lanseria/xuyun-map-data.git public/data || git -C public/data pull",
     "fetch": "git clone https://github.com/lanseria/xuyun-map-data.git public/data || git -C public/data pull",
     "data": " ni -C public/data/ && nr -C public/data/ dev:init && nr -C public/data/ dev:gen",
-    "postinstall": "npm i -g @antfu/ni && npm run fetch && npm run data",
+    "postinstall": "npm i -g @antfu/ni && npm run fetch && npm run data && cp public/data/src/types.ts ./src/composables/types.ts",
     "dev": "vite --port 3333 --host",
     "build": "vite build",
     "lint": "eslint .",

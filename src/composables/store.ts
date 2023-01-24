@@ -1,6 +1,7 @@
 import type { Ref } from 'vue'
 import type { Feature, LineString, Point, Polygon } from '@turf/turf'
 import * as turf from '@turf/turf'
+import type { RawData } from './types'
 
 export const collapsed = ref(false)
 export const isAnimation = ref(false)
@@ -28,12 +29,17 @@ export const mapLoaded = ref(false)
 export const mapDistanceStartPoint = ref<Feature<Point>>()
 export const mapDistanceEndPoint = ref<Feature<Point>>()
 
+export const mapDistanceStartInput = ref('')
+export const mapDistanceEndInput = ref('')
+
 export const handleSetStartPoint = () => {
   mapDistanceStartPoint.value = currentFeature.value
+  mapDistanceStartInput.value = JSON.stringify(currentFeature.value.geometry.coordinates)
 }
 
 export const handleSetEndPoint = () => {
   mapDistanceEndPoint.value = currentFeature.value
+  mapDistanceEndInput.value = JSON.stringify(currentFeature.value.geometry.coordinates)
 }
 
 export const activeTab = useStorage('map-activeTab', 'detail')
@@ -56,6 +62,12 @@ const { data: endData, onFetchResponse: endOnFetchResponse } = useFetch('/video.
 endOnFetchResponse(() => {
   mapStartPlacePoint.value = endData.value.startEndPoints[0]
   mapEndPlacePoint.value = endData.value.startEndPoints[1]
+})
+
+export const lastestVideoInfo = ref<RawData>()
+const { data: lastVideoData, onFetchResponse: lastVideoOnFetchResponse } = useFetch('/data/lastest.json', { immediate: true }).get().json()
+lastVideoOnFetchResponse(() => {
+  lastestVideoInfo.value = lastVideoData.value
 })
 
 export const mapPlaceFinishedLine = computed(() => {

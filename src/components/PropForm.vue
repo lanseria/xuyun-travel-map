@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { currentProperties } from '~/composables/store'
+import { currentProperties, mapDistanceEndInput, mapDistanceStartInput } from '~/composables/store'
 const isShowForm = computed(() => {
   return currentProperties.value !== null
 })
@@ -9,9 +9,9 @@ const handleUpdate = () => {
 }
 
 const handleCalcDistance = () => {
-  if (mapDistanceStartPoint.value && mapDistanceEndPoint.value) {
-    const startPosition = mapDistanceStartPoint.value.geometry.coordinates.reverse().join(',')
-    const endPosition = mapDistanceEndPoint.value.geometry.coordinates.reverse().join(',')
+  if (mapDistanceStartInput.value && mapDistanceEndInput.value) {
+    const startPosition = JSON.parse(mapDistanceStartInput.value).reverse().join(',')
+    const endPosition = JSON.parse(mapDistanceEndInput.value).reverse().join(',')
     const startEndPos = [startPosition, endPosition].join(';')
     const paramsEncodeStr = encodeURIComponent(startEndPos)
     const url = `https://www.openstreetmap.org/directions?engine=graphhopper_bicycle&route=${paramsEncodeStr}#map=13/30.1070/122.0650`
@@ -69,22 +69,30 @@ const handleCalcDistance = () => {
           <a-button type="primary" @click="handleUpdate()">
             改进数据
           </a-button>
-          <a-button status="success" @click="handleSetStartPoint()">
-            设置起点
-          </a-button>
-          <a-button status="danger" @click="handleSetEndPoint()">
-            设置终点
-          </a-button>
         </ASpace>
       </a-form-item>
       <a-form-item>
         <ASpace direction="vertical">
-          <a-tag color="green">
-            {{ mapDistanceStartPoint?.geometry.coordinates }}
-          </a-tag>
-          <a-tag color="red">
-            {{ mapDistanceEndPoint?.geometry.coordinates }}
-          </a-tag>
+          <ASpace>
+            <ASpace direction="vertical">
+              <a-button status="success" @click="handleSetStartPoint()">
+                <template #icon>
+                  <icon-location />
+                </template>
+                设置起点
+              </a-button>
+              <a-textarea v-model="mapDistanceStartInput" placeholder="设置当前点为起始坐标或手动填入" allow-clear />
+            </ASpace>
+            <ASpace direction="vertical">
+              <a-button status="danger" @click="handleSetEndPoint()">
+                <template #icon>
+                  <icon-location />
+                </template>
+                设置终点
+              </a-button>
+              <a-textarea v-model="mapDistanceEndInput" placeholder="设置当前点为终点坐标或手动填入" allow-clear />
+            </ASpace>
+          </ASpace>
           <a-button type="primary" @click="handleCalcDistance()">
             计算距离
           </a-button>

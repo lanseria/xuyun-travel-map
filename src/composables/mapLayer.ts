@@ -4,6 +4,7 @@ import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
 import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures, stopNumber } from './store'
+import { queryDevice } from './utils'
 
 export const addPlaceSource = () => {
   const map = window.map
@@ -170,9 +171,17 @@ const fitBbox = () => {
   const map = window.map
   const box = mapPlaceLineBbox.value.bbox!
   const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
-  map.fitBounds(bbox, {
-    padding: { top: 200, bottom: 200, left: 200, right: 200 },
-  })
+  const isMobile = queryDevice()
+  if (isMobile) {
+    map.fitBounds(bbox, {
+      padding: { top: 200, bottom: 10, left: 20, right: 20 },
+    })
+  }
+  else {
+    map.fitBounds(bbox, {
+      padding: { top: 200, bottom: 200, left: 200, right: 200 },
+    })
+  }
 }
 
 export const reloadPlace = () => {

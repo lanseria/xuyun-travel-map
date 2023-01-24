@@ -1,6 +1,8 @@
 export * from './dark'
 export * from './store'
 export * from './constants'
+export * from './types'
+export * from './utils'
 
 export * from './mapStyle'
 export * from './mapLoad'

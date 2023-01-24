@@ -62,6 +62,7 @@ onMounted(() => {
       <MapData
         class="bg-white"
       />
+      <MapNotice class="mt-2" />
     </div>
     <div class="absolute bottom-2 left-2 z-10 flex flex-col items-start">
       <div class="bg-white rounded-1/2 w-50px h-50px flex justify-center items-center cursor-pointer" @click="toggleAnimation">
