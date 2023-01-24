@@ -32,9 +32,9 @@ const handleActive = (item: TabItem) => {
   <div class="flex flex-col overflow-x-hidden box-border relative bg-white">
     <div class="top border-b border-solid border-light-6 dark:border-gray-6">
       <div class="buttons flex">
-        <button v-for="item in tabList" :key="item.value" class="grow flex justify-center items-center" :class="{ 'bg-light-7 dark:bg-gray-7': activeTab === item.value }" :title="item.label" @click="handleActive(item)">
+        <div v-for="item in tabList" :key="item.value" class="grow flex justify-center items-center cursor-pointer" :class="{ 'bg-light-7 dark:bg-gray-7': activeTab === item.value }" :title="item.label" @click="handleActive(item)">
           <div class="inline-block" :class="item.icon" /><span>{{ item.label }}</span>
-        </button>
+        </div>
       </div>
     </div>
     <div class="shrink-0">

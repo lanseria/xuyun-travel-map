@@ -30,6 +30,10 @@ const { isMobile } = useMobile()
 <template>
   <div>
     <a-space v-if="!isMobile" size="large" class="px-4 py-2">
+      <a-statistic title="开始日期" :value="mapStartPlacePoint?.properties!.date" format="YYYY-MM-DD">
+        <template #suffix />
+      </a-statistic>
+
       <a-statistic title="已骑行" :value="alreadyDayCount" show-group-separator>
         <template #suffix>
           天

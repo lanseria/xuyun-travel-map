@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <a-typography class="p-5" :style="{ marginTop: '-40px' }">
+  <a-typography class="m-5" :style="{ marginTop: '-20px' }">
     <a-typography-title>
       Help
     </a-typography-title>

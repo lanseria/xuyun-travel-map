@@ -8,13 +8,13 @@ const { isMobile } = useMobile()
   <div class="bg-white">
     <ASpace v-if="!isMobile" class="p-2">
       <a-tag color="red">
-        New
+        New!
+      </a-tag>
+      <a-tag color="green">
+        <icon-arrow-rise />{{ lastestVideoInfo?.vDistanceKm }}公里
       </a-tag>
       <a-tag color="blue">
         {{ lastestVideoInfo?.vDate }}视频更新
-      </a-tag>
-      <a-tag color="green">
-        增加{{ lastestVideoInfo?.vDistanceKm }}公里
       </a-tag>
       <a-link :href="`https://www.bilibili.com/video/${lastestVideoInfo?.vid}`" target="_blank">
         <template #icon>
