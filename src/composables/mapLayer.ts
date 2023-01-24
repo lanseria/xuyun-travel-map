@@ -1,9 +1,9 @@
 // import * as turf from '@turf/turf'
-import type { Feature, Point } from '@turf/turf'
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
 import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures, stopNumber } from './store'
+import type { PointFeature } from './types'
 import { queryDevice } from './utils'
 
 export const addPlaceSource = () => {
@@ -22,12 +22,13 @@ export const addPlaceSource = () => {
   }
 }
 const popup = new mapboxgl.Popup({
+  offset: [10, -20],
   anchor: 'bottom-left',
   closeButton: false,
   closeOnClick: true,
   className: 'LayerPopup',
 })
-export const handleFeatureDetail = (props: Feature<Point>, isTabDetail = true) => {
+export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
   const description
   = `<h2>${props.properties!.name}</h2>
   <p>时间: ${props.properties!.date}</p>
@@ -147,10 +148,11 @@ export const drawPoint = () => {
     source: MAP_PLACE_SOURCE,
     layout: {
       'text-field': ['get', 'date'],
-      'icon-size': 1,
+      'icon-size': 0.15,
       'icon-image': ['get', 'icon'],
       'text-size': 12,
-      'text-offset': [0, 0.5],
+      'text-font': ['Smiley Sans Oblique'],
+      'text-offset': [0, 0.55],
       'text-anchor': 'top',
       'icon-allow-overlap': true,
     },

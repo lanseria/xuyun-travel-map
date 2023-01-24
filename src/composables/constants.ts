@@ -2,7 +2,7 @@ import { osmStyle } from './mapStyle'
 
 const MapBoxStylePrefix = 'mapbox://styles'
 
-export const MapboxAccessToken = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2wxMGo5ZWk3MTF3dTNkcnRwcDMyMXowOSJ9.kxLDvTThtaU0uiBOXanNvA'
+export const MapboxAccessToken = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2tzNDE4MDI0MHg5ZjJvcndtZzF4YTB6aCJ9.5k-y1Bx3km5MAOp4KVpb9g'
 
 export const MAP_PLACE_SOURCE = 'MapPlaceSource'
 export const MAP_PLACE_LAYER_POINT = 'MapPlaceLayerPoint'

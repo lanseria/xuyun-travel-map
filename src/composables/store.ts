@@ -53,7 +53,13 @@ export const mapPlacePoints = useStorage<Feature<Point>[]>('map-place-point-feat
 const { data, onFetchResponse } = useFetch('/data/2212-2303-dongbei/data/all-points.geojson', { immediate: true }).get().json()
 onFetchResponse(() => {
   const features: Feature<Point>[] = data.value.features
-  mapPlacePoints.value = features
+  mapPlacePoints.value = features.map(item => ({
+    ...item,
+    properties: {
+      ...item.properties,
+      icon: `${item.properties!.icon}1`,
+    },
+  }))
 })
 
 export const mapStartPlacePoint = ref<Feature<Point>>()

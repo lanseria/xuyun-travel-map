@@ -40,13 +40,19 @@ export const mapLoad = () => {
   // map.addImage('#F3AE1A', createColorPoint(255, 193, 7, 255))
   // map.addImage('#ffb8b8', createColorPoint(255, 184, 184, 255))
   // map.addImage('#7e7e7e', createColorPoint(125, 125, 125, 255))
+  window.map.addSource('mapbox-dem', {
+    type: 'raster-dem',
+    url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+    tileSize: 512,
+    maxzoom: 14,
+  })
+  window.map.setTerrain({ source: 'mapbox-dem', exaggeration: 1 })
+  watchDebounced(() => mapPlacePointsFeatures.value, () => {
+    console.warn('mapPlaceFeatures changed')
+    reloadPlace()
+  }, { debounce: 300, maxWait: 600, immediate: true })
+  // setTimeout(() => {
+  //   // reloadPlace()
 
-  setTimeout(() => {
-    // reloadPlace()
-
-    watchDebounced(() => mapPlacePointsFeatures.value, () => {
-      console.warn('mapPlaceFeatures changed')
-      reloadPlace()
-    }, { debounce: 300, maxWait: 600, immediate: true })
-  }, 1000)
+  // }, 1000)
 }

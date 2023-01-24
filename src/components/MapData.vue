@@ -10,9 +10,12 @@ const alreadyKm = 341 + 79 + 62 + 27 + 136 + 120 + 186 + 110 + 77
 
 const restKm = allKm - alreadyKm
 
+const startDay = computed(() => {
+  return dayjs(mapStartPlacePoint.value?.properties!.date)
+})
+
 const alreadyDayCount = computed(() => {
-  const date = dayjs(mapStartPlacePoint.value?.properties!.date)
-  return dayjs().diff(date, 'day') // 7
+  return dayjs().diff(startDay.value, 'day') // 7
 })
 const avgKm = computed(() => {
   return alreadyKm / alreadyDayCount.value
@@ -30,7 +33,7 @@ const { isMobile } = useMobile()
 <template>
   <div>
     <a-space v-if="!isMobile" size="large" class="px-4 py-2">
-      <a-statistic title="开始日期" :value="mapStartPlacePoint?.properties!.date" format="YYYY-MM-DD">
+      <a-statistic title="开始日期" :value="startDay.toDate()" format="YYYY-MM-DD">
         <template #suffix />
       </a-statistic>
 
