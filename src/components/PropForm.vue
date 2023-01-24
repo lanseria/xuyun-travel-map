@@ -1,8 +1,21 @@
 <script lang="ts" setup>
+import type { PointFeature } from '~/composables'
 import { currentProperties, mapDistanceEndInput, mapDistanceStartInput } from '~/composables/store'
 const isShowForm = computed(() => {
   return currentProperties.value !== null
 })
+
+const handleGeojsonUpdate = () => {
+  const data: PointFeature = {
+    properties: currentFeature.value.properties,
+    type: currentFeature.value.type,
+    geometry: currentFeature.value.geometry,
+  }
+  const json = JSON.stringify(data)
+  const url = `http://geojson.io/#data=data:application/json,${encodeURIComponent(json)}`
+  open((url))
+}
+
 const handleUpdate = () => {
   const url = `https://github.com/lanseria/xuyun-map-data/blob/main/2212-2303-dongbei/raw/${currentProperties.value.vDate}.json`
   open(url)
@@ -66,8 +79,11 @@ const handleCalcDistance = () => {
 
       <a-form-item>
         <ASpace>
-          <a-button type="primary" @click="handleUpdate()">
-            改进数据
+          <a-button type="primary" @click="handleGeojsonUpdate()">
+            geojson.io 上改进数据
+          </a-button>
+          <a-button @click="handleUpdate()">
+            Github 上改进数据
           </a-button>
         </ASpace>
       </a-form-item>

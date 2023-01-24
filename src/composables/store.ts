@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import type { Feature, LineString, Point, Polygon } from '@turf/turf'
 import * as turf from '@turf/turf'
-import type { RawData } from './types'
+import type { PointFeature, RawData } from './types'
 
 export const collapsed = ref(false)
 export const isAnimation = ref(false)
@@ -22,7 +22,7 @@ export const handleCollapsedFalse = () => {
 }
 
 export const currentProperties = ref(null) as Ref<any>
-export const currentFeature = ref() as Ref<Feature<Point>>
+export const currentFeature = ref() as Ref<PointFeature>
 
 export const mapLoaded = ref(false)
 
