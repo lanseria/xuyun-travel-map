@@ -76,8 +76,8 @@ const handleCalcDistance = () => {
           </div>
         </div>
       </a-form-item>
-
-      <a-form-item>
+      <ADivider />
+      <a-form-item label="数据改进">
         <ASpace>
           <a-button type="primary" @click="handleGeojsonUpdate()">
             geojson.io 上改进数据
@@ -87,7 +87,7 @@ const handleCalcDistance = () => {
           </a-button>
         </ASpace>
       </a-form-item>
-      <a-form-item>
+      <a-form-item label="距离计算">
         <ASpace direction="vertical">
           <ASpace>
             <ASpace direction="vertical">

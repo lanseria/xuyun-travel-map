@@ -4,8 +4,11 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { mapStartPlacePoint, useMobile } from '~/composables'
 dayjs.extend(relativeTime)
 
+const allKm = 1403 + 1138
+
 const alreadyKm = 341 + 79 + 62 + 27 + 136 + 120 + 186 + 110 + 77
-const restKm = 1480
+
+const restKm = allKm - alreadyKm
 
 const alreadyDayCount = computed(() => {
   const date = dayjs(mapStartPlacePoint.value?.properties!.date)
