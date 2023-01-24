@@ -7,6 +7,17 @@ const handleUpdate = () => {
   const url = `https://github.com/lanseria/xuyun-map-data/blob/main/2212-2303-dongbei/raw/${currentProperties.value.vDate}.json`
   open(url)
 }
+
+const handleCalcDistance = () => {
+  if (mapDistanceStartPoint.value && mapDistanceEndPoint.value) {
+    const startPosition = mapDistanceStartPoint.value.geometry.coordinates.reverse().join(',')
+    const endPosition = mapDistanceEndPoint.value.geometry.coordinates.reverse().join(',')
+    const startEndPos = [startPosition, endPosition].join(';')
+    const paramsEncodeStr = encodeURIComponent(startEndPos)
+    const url = `https://www.openstreetmap.org/directions?engine=graphhopper_bicycle&route=${paramsEncodeStr}#map=13/30.1070/122.0650`
+    open(url)
+  }
+}
 </script>
 
 <template>
@@ -63,6 +74,19 @@ const handleUpdate = () => {
           </a-button>
           <a-button status="danger" @click="handleSetEndPoint()">
             设置终点
+          </a-button>
+        </ASpace>
+      </a-form-item>
+      <a-form-item>
+        <ASpace direction="vertical">
+          <a-tag color="green">
+            {{ mapDistanceStartPoint?.geometry.coordinates }}
+          </a-tag>
+          <a-tag color="red">
+            {{ mapDistanceEndPoint?.geometry.coordinates }}
+          </a-tag>
+          <a-button type="primary" @click="handleCalcDistance()">
+            计算距离
           </a-button>
         </ASpace>
       </a-form-item>
