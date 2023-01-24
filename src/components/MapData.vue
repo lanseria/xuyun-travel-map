@@ -22,7 +22,7 @@ const arriveDate = computed(() => {
   return dayjs().add(restDayCount.value, 'day').toDate()
 })
 
-const isMobile = queryDevice()
+const isMobile = computed(() => queryDevice())
 </script>
 
 <template>

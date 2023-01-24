@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { lastestVideoInfo, queryDevice } from '~/composables'
 
-const isMobile = queryDevice()
+const isMobile = computed(() => queryDevice())
 </script>
 
 <template>

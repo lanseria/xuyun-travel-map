@@ -64,6 +64,7 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const lastestVideoInfo: typeof import('./src/composables/store')['lastestVideoInfo']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
   const mapDistanceEndInput: typeof import('./src/composables/store')['mapDistanceEndInput']
@@ -105,6 +106,7 @@ declare global {
   const osmStyle: typeof import('./src/composables/mapStyle')['osmStyle']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const provide: typeof import('vue')['provide']
+  const queryDevice: typeof import('./src/composables/utils')['queryDevice']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']
@@ -382,6 +384,7 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly lastestVideoInfo: UnwrapRef<typeof import('./src/composables/store')['lastestVideoInfo']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
     readonly mapDistanceEndInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndInput']>
@@ -423,6 +426,7 @@ declare module 'vue' {
     readonly osmStyle: UnwrapRef<typeof import('./src/composables/mapStyle')['osmStyle']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
+    readonly queryDevice: UnwrapRef<typeof import('./src/composables/utils')['queryDevice']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
