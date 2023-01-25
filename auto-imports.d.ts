@@ -81,6 +81,7 @@ declare global {
   const mapPlaceUnfinishedLine: typeof import('./src/composables/store')['mapPlaceUnfinishedLine']
   const mapStartPlacePoint: typeof import('./src/composables/store')['mapStartPlacePoint']
   const mapStyle: typeof import('./src/composables/store')['mapStyle']
+  const mapVideos: typeof import('./src/composables/store')['mapVideos']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
@@ -402,6 +403,7 @@ declare module 'vue' {
     readonly mapPlaceUnfinishedLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceUnfinishedLine']>
     readonly mapStartPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapStartPlacePoint']>
     readonly mapStyle: UnwrapRef<typeof import('./src/composables/store')['mapStyle']>
+    readonly mapVideos: UnwrapRef<typeof import('./src/composables/store')['mapVideos']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>

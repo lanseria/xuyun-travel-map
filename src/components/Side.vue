@@ -38,9 +38,9 @@ const handleActive = (item: TabItem) => {
       </div>
     </div>
     <div class="shrink-0">
-      <PropForm v-if="activeTab === 'detail'" />
-      <DataList v-if="activeTab === 'data'" />
-      <HelpText v-if="activeTab === 'help'" />
+      <PropForm v-show="activeTab === 'detail'" />
+      <DataList v-show="activeTab === 'data'" />
+      <HelpText v-show="activeTab === 'help'" />
     </div>
   </div>
 </template>

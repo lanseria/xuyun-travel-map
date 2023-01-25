@@ -1,4 +1,4 @@
-import type { Feature, Point } from '@turf/turf'
+import type { Feature, LineString, Point } from '@turf/turf'
 
 export interface PointFeatureProp {
   // 自动生成
@@ -9,6 +9,8 @@ export interface PointFeatureProp {
   date: string
   // 切片点时间（大致）
   time: string
+  // 类型
+  type: 'bicycle' | 'campsite'
   // 自动生成
   icon: string
   // 视频ID
@@ -47,6 +49,19 @@ export interface RawData {
   vClips: RawItemData[]
 }
 
+export interface VideoData {
+  // 视频ID
+  vid: string
+  // 视频发布时间
+  vDate: string
+  // 视频名称
+  vName: string
+  // 视频路程km
+  vDistanceKm: number
+  vPointIds: string[]
+  vLine?: LineFeature
+}
+
 export interface RouteItem {
   label: string
   value: string
@@ -55,3 +70,5 @@ export interface RouteItem {
 }
 
 export type PointFeature = Feature<Point, PointFeatureProp>
+
+export type LineFeature = Feature<LineString>

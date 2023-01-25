@@ -4,11 +4,17 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { mapStartPlacePoint, useMobile } from '~/composables'
 dayjs.extend(relativeTime)
 
-const allKm = 1403 + 1138
+const alreadyKm = computed(() => {
+  return mapVideos.value.map(item => item.vDistanceKm).reduce((x, y) => x + y, 0)
+})
 
-const alreadyKm = 341 + 79 + 62 + 27 + 136 + 120 + 186 + 110 + 77
+const allKm = computed(() => {
+  return 1346.8 + alreadyKm.value
+})
 
-const restKm = allKm - alreadyKm
+const restKm = computed(() => {
+  return allKm.value - alreadyKm.value
+})
 
 const startDay = computed(() => {
   return dayjs(mapStartPlacePoint.value?.properties!.date)
@@ -18,10 +24,10 @@ const alreadyDayCount = computed(() => {
   return dayjs().diff(startDay.value, 'day') // 7
 })
 const avgKm = computed(() => {
-  return alreadyKm / alreadyDayCount.value
+  return alreadyKm.value / alreadyDayCount.value
 })
 const restDayCount = computed(() => {
-  return restKm / avgKm.value
+  return restKm.value / avgKm.value
 })
 
 const arriveDate = computed(() => {

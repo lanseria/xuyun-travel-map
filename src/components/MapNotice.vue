@@ -35,7 +35,7 @@ const { isMobile } = useMobile()
               {{ lastestVideoInfo?.vDate }}视频更新
             </a-tag>
             <a-tag color="green">
-              增加{{ lastestVideoInfo?.vDistanceKm }}公里
+              <icon-arrow-rise />{{ lastestVideoInfo?.vDistanceKm }}公里
             </a-tag>
           </ASpace>
           <a-link :href="`https://www.bilibili.com/video/${lastestVideoInfo?.vid}`" target="_blank">

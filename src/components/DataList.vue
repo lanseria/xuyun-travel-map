@@ -1,47 +1,51 @@
 <script lang="ts" setup>
-import { handleFeatureDetail } from '~/composables'
+import type { TableExpandable } from '@arco-design/web-vue'
+// import type { VideoData } from '~/composables'
+import { mapVideos } from '~/composables'
 
 const columns = [
   {
-    title: '描述',
-    dataIndex: 'properties.name',
+    title: '发布时间',
+    dataIndex: 'vDate',
+    width: 115,
   },
   {
-    title: '要素类型',
-    dataIndex: 'properties.icon',
-    width: 95,
+    title: '视频名称',
+    slotName: 'vName',
   },
   {
-    title: '日期',
-    dataIndex: 'properties.date',
-    width: 120,
-  },
-  {
-    title: '时间',
-    dataIndex: 'properties.time',
-    width: 110,
+    title: '路程',
+    dataIndex: 'vDistanceKm',
+    width: 70,
   },
 ]
-const data = computed(() => {
-  if (mapPlacePoints.value.length === 0)
-    return []
-  return mapPlacePoints.value
+const expandable = reactive<TableExpandable>({
+  title: '点',
+  width: 30,
 })
-
-const handleRowClick = (record: any) => {
-  const map = window.map
-  handleFeatureDetail(record, false)
-  setTimeout(() => {
-    map.flyTo({
-      center: record.geometry.coordinates,
-      zoom: 12,
-    })
-  })
+const rowClass = (record: any) => {
+  if (currentProperties.value) {
+    // console.log(record.key === currentProperties.value.vid)
+    return record.key === currentProperties.value.vid ? 'sepia' : ''
+  }
+  else { return '' }
 }
 </script>
 
 <template>
   <div>
-    <a-table :columns="columns" :data="data" :pagination="false" @row-click="handleRowClick" />
+    <a-table :columns="columns" :data="mapVideos" row-key="vid" :pagination="false" :expandable="expandable" :row-class="rowClass">
+      <template #vName="{ record }">
+        <a-link :href="`https://www.bilibili.com/video/${record.vid}`" target="_blank">
+          <template #icon>
+            <icon-live-broadcast />
+          </template>
+          {{ record.vName }}
+        </a-link>
+      </template>
+      <template #expand-row="{ record }">
+        <DataPointList :vid="record.vid" />
+      </template>
+    </a-table>
   </div>
 </template>

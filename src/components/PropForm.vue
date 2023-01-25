@@ -2,7 +2,7 @@
 import type { PointFeature } from '~/composables'
 import { currentProperties, mapDistanceEndInput, mapDistanceStartInput } from '~/composables/store'
 const isShowForm = computed(() => {
-  return currentProperties.value !== null
+  return currentProperties.value !== undefined
 })
 
 const handleGeojsonUpdate = () => {
@@ -25,9 +25,9 @@ const handleCalcDistance = () => {
   if (mapDistanceStartInput.value && mapDistanceEndInput.value) {
     const startPosition = JSON.parse(mapDistanceStartInput.value).reverse().join(',')
     const endPosition = JSON.parse(mapDistanceEndInput.value).reverse().join(',')
-    const startEndPos = [startPosition, endPosition].join(';')
-    const paramsEncodeStr = encodeURIComponent(startEndPos)
-    const url = `https://www.openstreetmap.org/directions?engine=graphhopper_bicycle&route=${paramsEncodeStr}#map=13/30.1070/122.0650`
+    const startEndPos = `point=${encodeURIComponent(startPosition)}&point=${encodeURIComponent(endPosition)}&profile=mtb&layer=OpenStreetMap`
+    // https://graphhopper.com/maps/?point=41.885208%2C126.709205&point=42.826936%2C125.940162&profile=mtb&layer=OpenStreetMap
+    const url = `https://graphhopper.com/maps/?${startEndPos}`
     open(url)
   }
 }
@@ -48,8 +48,8 @@ const handleCalcDistance = () => {
         />
       </a-form-item>
 
-      <a-form-item field="icon" label="图标类型">
-        <a-radio-group v-model="currentProperties.icon">
+      <a-form-item field="type" label="图标类型">
+        <a-radio-group v-model="currentProperties.type">
           <a-radio value="campsite">
             驻扎
           </a-radio>
