@@ -10,6 +10,9 @@ const columns = [
     title: '发布时间',
     dataIndex: 'vDate',
     width: 115,
+    sortable: {
+      sortDirections: ['ascend', 'descend'],
+    },
   },
   {
     title: '视频名称',
@@ -50,7 +53,7 @@ const handleViewLine = (record: VideoData) => {
 
 <template>
   <div>
-    <a-table :columns="columns" :data="mapVideos.reverse()" row-key="vid" :pagination="false" :scroll="scroll" :expandable="expandable" :row-class="rowClass">
+    <a-table :columns="columns" :data="mapVideos" row-key="vid" :pagination="false" :scroll="scroll" :expandable="expandable" :row-class="rowClass">
       <template #vName="{ record }">
         <a-link :href="`https://www.bilibili.com/video/${record.vid}`" target="_blank">
           <template #icon>
