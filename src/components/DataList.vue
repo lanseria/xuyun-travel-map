@@ -15,13 +15,20 @@ const columns = [
   },
   {
     title: '路程',
-    dataIndex: 'vDistanceKm',
-    width: 70,
+    slotName: 'vDistanceKm',
+    width: 80,
   },
 ]
 const expandable = reactive<TableExpandable>({
   title: '点',
   width: 30,
+})
+const { isMobile } = useMobile()
+const scroll = computed(() => {
+  return {
+    x: '100%',
+    y: isMobile.value ? '300px' : 'calc(100vh - 50px)',
+  }
 })
 const rowClass = (record: any) => {
   if (currentProperties.value) {
@@ -34,7 +41,7 @@ const rowClass = (record: any) => {
 
 <template>
   <div>
-    <a-table :columns="columns" :data="mapVideos" row-key="vid" :pagination="false" :expandable="expandable" :row-class="rowClass">
+    <a-table :columns="columns" :data="mapVideos" row-key="vid" :pagination="false" :scroll="scroll" :expandable="expandable" :row-class="rowClass">
       <template #vName="{ record }">
         <a-link :href="`https://www.bilibili.com/video/${record.vid}`" target="_blank">
           <template #icon>
@@ -42,6 +49,9 @@ const rowClass = (record: any) => {
           </template>
           {{ record.vName }}
         </a-link>
+      </template>
+      <template #vDistanceKm="{ record }">
+        {{ record.vDistanceKm }}Km
       </template>
       <template #expand-row="{ record }">
         <DataPointList :vid="record.vid" />

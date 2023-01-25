@@ -85,7 +85,7 @@ const { isMobile } = useMobile()
         <div>平均每日骑行 <span class="text-green">{{ avgKm.toFixed(2) }}</span> Km</div>
       </ASpace>
       <ASpace>
-        <div>预计剩余 <span class="text-red">{{ restKm }}</span> Km</div>
+        <div>预计剩余 <span class="text-red">{{ restKm.toFixed(2) }}</span> Km</div>
         <div>预计剩余 <span class="text-red">{{ restDayCount.toFixed(0) }}</span> 天</div>
         <div>预计到达日期 {{ dayjs(arriveDate).format('YYYY-MM-DD') }}</div>
       </ASpace>

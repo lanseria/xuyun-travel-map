@@ -18,6 +18,14 @@
       </a-typography-text>
     </a-typography-paragraph>
 
+    <a-typography-paragraph>
+      <a-typography-text>
+        作者：
+      </a-typography-text><a-link href="https://space.bilibili.com/8487409" target="_blank">
+        B站 爱吃包子的超
+      </a-link>
+    </a-typography-paragraph>
+
     <a-typography-title :heading="2">
       资源
     </a-typography-title>

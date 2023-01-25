@@ -32,7 +32,7 @@ const handleZoomClick = (record: PointFeature, detail = false) => {
         {{ item.properties.date }} {{ item.properties.time }} {{ item.properties.name }}
       </div>
       <div>
-        视频切片 {{ item.properties.vt }}
+        视频切片 <span class="text-red-5">{{ item.properties.vt }}s</span>
       </div>
       <template #actions>
         <icon-edit @click="handleZoomClick(item, true)" />
