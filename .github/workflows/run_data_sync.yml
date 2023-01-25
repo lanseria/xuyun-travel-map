@@ -23,5 +23,4 @@ jobs:
         with:
           message: "chore: update source sha"
           add: "sha"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          default_author: github_actions
