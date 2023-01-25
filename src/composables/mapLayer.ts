@@ -1,4 +1,5 @@
 // import * as turf from '@turf/turf'
+import type { BBox } from '@turf/turf'
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
@@ -169,9 +170,8 @@ export const drawPoint = () => {
   map.on('touchend', MAP_PLACE_LAYER_POINT, handleFeatureClick)
 }
 
-const fitBbox = () => {
+export const fitBbox = (box: BBox) => {
   const map = window.map
-  const box = mapPlaceLineBbox.value.bbox!
   const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
   const isMobile = queryDevice()
   if (isMobile) {
@@ -190,5 +190,6 @@ export const reloadPlace = () => {
   addPlaceSource()
   drawLine()
   drawPoint()
-  fitBbox()
+  const box = mapPlaceLineBbox.value.bbox!
+  fitBbox(box)
 }

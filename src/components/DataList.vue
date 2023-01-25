@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { TableExpandable } from '@arco-design/web-vue'
 // import type { VideoData } from '~/composables'
+import * as turf from '@turf/turf'
+import type { VideoData } from '~/composables'
 import { mapVideos } from '~/composables'
 
 const columns = [
@@ -37,11 +39,18 @@ const rowClass = (record: any) => {
   }
   else { return '' }
 }
+
+const handleViewLine = (record: VideoData) => {
+  if (record.vLine) {
+    const b = turf.bbox(record.vLine)
+    fitBbox(b)
+  }
+}
 </script>
 
 <template>
   <div>
-    <a-table :columns="columns" :data="mapVideos" row-key="vid" :pagination="false" :scroll="scroll" :expandable="expandable" :row-class="rowClass">
+    <a-table :columns="columns" :data="mapVideos.reverse()" row-key="vid" :pagination="false" :scroll="scroll" :expandable="expandable" :row-class="rowClass">
       <template #vName="{ record }">
         <a-link :href="`https://www.bilibili.com/video/${record.vid}`" target="_blank">
           <template #icon>
@@ -51,7 +60,9 @@ const rowClass = (record: any) => {
         </a-link>
       </template>
       <template #vDistanceKm="{ record }">
-        {{ record.vDistanceKm }}Km
+        <div class="cursor-pointer text-cyan-5 underline" @click="handleViewLine(record)">
+          {{ record.vDistanceKm }}Km
+        </div>
       </template>
       <template #expand-row="{ record }">
         <DataPointList :vid="record.vid" />

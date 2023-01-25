@@ -6,11 +6,7 @@ import type { PointFeature, PointFeatureProp, RawData, VideoData } from './types
 export const collapsed = ref(false)
 export const isAnimation = ref(false)
 export const stopNumber = ref(0)
-export const toggleAnimation = () => {
-  isAnimation.value = !isAnimation.value
-  drawLine()
-  drawPoint()
-}
+
 watchDebounced(() => collapsed.value, () => {
   window.map.resize()
 }, { debounce: 300, maxWait: 600 })
@@ -100,10 +96,14 @@ export const mapPlacePointsFeatures = computed(() => {
   // finishedLineString.properties!.color = 'green'
 
   const finishedVideoLines: Feature<LineString>[] = []
-  mapVideos.value.forEach((videoItem) => {
+  mapVideos.value.forEach((videoItem, idx) => {
     if (videoItem.vLine) {
+      const colorArray = ['#be185d', '#be123c', '#b91c1c', '#c2410c', '#b45309', '#b45309', '#4d7c0f',
+        '#047857', '#0f766e', '#0e7490', '#0369a1', '#1d4ed8', '#4338ca', '#6d28d9', '#6d28d9', '#a21caf']
+      const rand = idx % colorArray.length
+      const rValue = colorArray[rand]
       const line = videoItem.vLine
-      line.properties!.color = 'green'
+      line.properties!.color = rValue
       finishedVideoLines.push(line)
     }
   })
@@ -113,3 +113,72 @@ export const mapPlacePointsFeatures = computed(() => {
   const all: MyFeature[] = [...mapPlacePoints.value, ...finishedVideoLines, unfinishedLineString]
   return turf.featureCollection(all)
 })
+
+export const toggleAnimation = () => {
+  isAnimation.value = !isAnimation.value
+  drawLine()
+  drawPoint()
+  // const currentLine = mapVideos.value.find(item => item.vid)?.vLine
+  // console.log(currentLine)
+  // if (currentLine) {
+  //   const map = window.map
+  //   const animationDuration = 80000
+  //   const cameraAltitude = 10000
+  //   // get the overall distance of each route so we can interpolate along them
+  //   const routeDistance = turf.lineDistance(currentLine)
+  //   console.log('routeDistance:', routeDistance)
+
+  //   let start = 0
+
+  //   function frame(time: number) {
+  //     if (!start)
+  //       start = time
+  //     // phase determines how far through the animation we are
+  //     const phase = (time - start) / animationDuration
+
+  //     // phase is normalized between 0 and 1
+  //     // when the animation is finished, reset start to loop the animation
+  //     if (phase > 1) {
+  //     // wait 1.5 seconds before looping
+  //       setTimeout(() => {
+  //         start = 0.0
+  //       }, 1500)
+  //     }
+  //     // use the phase to get a point that is the appropriate distance along the route
+  //     // this approach syncs the camera and route positions ensuring they move
+  //     // at roughly equal rates even if they don't contain the same number of points
+  //     const alongRoute = turf.along(
+  //       currentLine!,
+  //       routeDistance * phase + 100,
+  //     ).geometry.coordinates
+
+  //     const alongCamera = turf.along(
+  //       currentLine!,
+  //       routeDistance * phase,
+  //     ).geometry.coordinates
+
+  //     const camera = map.getFreeCameraOptions()
+
+  //     // set the position and altitude of the camera
+  //     camera.position = mapboxgl.MercatorCoordinate.fromLngLat(
+  //       {
+  //         lng: alongCamera[0],
+  //         lat: alongCamera[1],
+  //       },
+  //       cameraAltitude,
+  //     )
+
+  //     // tell the camera to look at a point along the route
+  //     camera.lookAtPoint({
+  //       lng: alongRoute[0],
+  //       lat: alongRoute[1],
+  //     })
+
+  //     map.setFreeCameraOptions(camera)
+
+  //     window.requestAnimationFrame(frame)
+  //   }
+
+  //   window.requestAnimationFrame(frame)
+  // }
+}
