@@ -14,8 +14,8 @@ const pointList = computed(() => {
   })
 })
 
-const handleZoomClick = (record: PointFeature, detail = false) => {
-  handleFeatureDetail(record, detail)
+const handleZoomClick = (record: PointFeature, openDetail = false) => {
+  handleFeatureDetail(record, openDetail)
   // setTimeout(() => {
   //   window.map.flyTo({
   //     center: record.geometry.coordinates as LngLatLike,

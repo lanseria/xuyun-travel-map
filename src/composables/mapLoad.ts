@@ -51,8 +51,8 @@ export const mapLoad = () => {
     console.warn('mapPlaceFeatures changed')
     reloadPlace()
   }, { debounce: 300, maxWait: 600, immediate: true })
-  // setTimeout(() => {
-  //   // reloadPlace()
 
-  // }, 1000)
+  setTimeout(() => {
+    fitBbox()
+  }, 1000)
 }

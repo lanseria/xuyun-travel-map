@@ -111,24 +111,24 @@ export const mapPlacePointsFeatures = computed(() => {
   // 已完成的所有线路数组
   const finishedVideoLines: Feature<LineString>[] = []
 
-  if (currentProperties.value) {
-    const video = mapVideos.value.find(item => item.vid === currentProperties.value!.vid)
-    if (video?.vLine)
-      finishedVideoLines.push(video.vLine)
-  }
-  else {
-    mapVideos.value.forEach((videoItem, idx) => {
-      if (videoItem.vLine) {
-        const colorArray = ['#be185d', '#be123c', '#b91c1c', '#c2410c', '#b45309', '#b45309', '#4d7c0f',
-          '#047857', '#0f766e', '#0e7490', '#0369a1', '#1d4ed8', '#4338ca', '#6d28d9', '#6d28d9', '#a21caf']
-        const rand = idx % colorArray.length
-        const rValue = colorArray[rand]
-        const line = videoItem.vLine
-        line.properties!.color = rValue
-        finishedVideoLines.push(line)
-      }
-    })
-  }
+  // if (currentProperties.value) {
+  //   const video = mapVideos.value.find(item => item.vid === currentProperties.value!.vid)
+  //   if (video?.vLine)
+  //     finishedVideoLines.push(video.vLine)
+  // }
+  // else {
+  mapVideos.value.forEach((videoItem, idx) => {
+    if (videoItem.vLine) {
+      const colorArray = ['#be185d', '#be123c', '#b91c1c', '#c2410c', '#b45309', '#b45309', '#4d7c0f',
+        '#047857', '#0f766e', '#0e7490', '#0369a1', '#1d4ed8', '#4338ca', '#6d28d9', '#6d28d9', '#a21caf']
+      const rand = idx % colorArray.length
+      const rValue = colorArray[rand]
+      const line = videoItem.vLine
+      line.properties!.color = rValue
+      finishedVideoLines.push(line)
+    }
+  })
+  // }
 
   // 未完成的直线对象
   const unfinishedLineString = mapPlaceUnfinishedLine.value
@@ -215,4 +215,5 @@ export const reloadInitStatus = () => {
   currentFeature.value = undefined
   currentProperties.value = undefined
   reloadPlace()
+  fitBbox()
 }

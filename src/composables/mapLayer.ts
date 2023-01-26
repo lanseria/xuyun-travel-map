@@ -1,5 +1,5 @@
 // import * as turf from '@turf/turf'
-import type { BBox } from '@turf/turf'
+// import type { BBox } from '@turf/turf'
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
@@ -8,6 +8,24 @@ import type { PointFeature } from './types'
 import { queryDevice } from './utils'
 
 let stopNumber = 0
+
+export const fitBbox = () => {
+  const box = mapPlaceLineBbox.value.bbox!
+  const map = window.map
+  const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
+  const isMobile = queryDevice()
+  if (isMobile) {
+    map.fitBounds(bbox, {
+      padding: { top: 200, bottom: 10, left: 20, right: 20 },
+    })
+  }
+  else {
+    map.fitBounds(bbox, {
+      padding: { top: 300, bottom: 100, left: 200, right: 200 },
+      duration: 100,
+    })
+  }
+}
 
 export const addPlaceSource = () => {
   const map = window.map
@@ -32,7 +50,6 @@ const popup = new mapboxgl.Popup({
   className: 'LayerPopup',
 })
 export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
-  console.log(props, isTabDetail)
   const description
   = `<h2>${props.properties!.name}</h2>
   <p>时间: ${props.properties!.date}</p>
@@ -53,6 +70,7 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => 
 const handleFeatureClick = (e: any) => {
   const props = e.features[0]
   handleFeatureDetail(props)
+  fitBbox()
 }
 
 const drawAnimateLine = () => {
@@ -197,27 +215,9 @@ export const drawBboxPolygon = () => {
   })
 }
 
-export const fitBbox = (box: BBox) => {
-  addPlaceSource()
-  const map = window.map
-  const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
-  const isMobile = queryDevice()
-  if (isMobile) {
-    map.fitBounds(bbox, {
-      padding: { top: 200, bottom: 10, left: 20, right: 20 },
-    })
-  }
-  else {
-    map.fitBounds(bbox, {
-      padding: { top: 300, bottom: 100, left: 200, right: 200 },
-    })
-  }
-  drawBboxPolygon()
-}
-
 export const reloadPlace = () => {
-  const box = mapPlaceLineBbox.value.bbox!
-  fitBbox(box)
+  addPlaceSource()
   drawLine()
   drawPoint()
+  drawBboxPolygon()
 }

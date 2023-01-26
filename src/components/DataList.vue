@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { TableExpandable, TableSortable } from '@arco-design/web-vue'
 // import type { VideoData } from '~/composables'
-import * as turf from '@turf/turf'
+// import * as turf from '@turf/turf'
 import type { VideoData } from '~/composables'
 import { mapVideos } from '~/composables'
 
@@ -48,10 +48,10 @@ const handleViewLine = (record: VideoData) => {
   if (vPoints.length)
     handleFeatureDetail(vPoints[0], false)
 
-  if (record.vLine) {
-    const b = turf.bbox(record.vLine)
-    fitBbox(b)
-  }
+  // if (record.vLine) {
+  //   const b = turf.bbox(record.vLine)
+  //   fitBbox(b)
+  // }
 }
 </script>
 
