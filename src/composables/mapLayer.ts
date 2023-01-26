@@ -42,18 +42,25 @@ export const addPlaceSource = () => {
     })
   }
 }
-const popup = new mapboxgl.Popup({
+
+export const customPopupStyleOpt: mapboxgl.PopupOptions = {
   offset: [10, -20],
   anchor: 'bottom-left',
   closeButton: false,
   closeOnClick: true,
   className: 'LayerPopup',
-})
-export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
-  const description
-  = `<h2>${props.properties!.name}</h2>
+}
+
+export const descHtml = (props: PointFeature) => {
+  return `<h2>${props.properties!.name}</h2>
   <p>时间: ${props.properties!.date}</p>
   `
+}
+
+export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
+  const description = descHtml(props)
+
+  const popup = new mapboxgl.Popup(customPopupStyleOpt)
 
   const coordinates = props.geometry.coordinates.slice() as LngLatLike
   popup.setLngLat(coordinates).setHTML(description).addTo(window.map)
@@ -68,9 +75,11 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => 
 }
 
 const handleFeatureClick = (e: any) => {
-  const props = e.features[0]
-  handleFeatureDetail(props)
-  fitBbox()
+  const props: PointFeature = e.features[0]
+  if (props.properties.id) {
+    handleFeatureDetail(props)
+    fitBbox()
+  }
 }
 
 const drawAnimateLine = () => {

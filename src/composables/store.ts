@@ -103,11 +103,16 @@ export const mapPlaceLineBbox = computed(() => {
 
 export const mapPlacePointsFeatures = computed(() => {
   // filter Points
-  const filterPoints
-  = currentProperties.value
-    ? mapPlacePoints.value.filter(item =>
-      item.properties.vid === currentProperties.value!.vid)
-    : mapPlacePoints.value
+  // const filterPoints
+  // = currentProperties.value
+  //   ? mapPlacePoints.value.filter(item =>
+  //     item.properties.vid === currentProperties.value!.vid)
+  //   : [...mapPlacePoints.value]
+
+  const filterPoints = [...mapPlacePoints.value]
+
+  mapStartPlacePoint.value && filterPoints.push(mapStartPlacePoint.value)
+  mapEndPlacePoint.value && filterPoints.push(mapEndPlacePoint.value)
   // 已完成的所有线路数组
   const finishedVideoLines: Feature<LineString>[] = []
 
