@@ -2,7 +2,7 @@
 import type { BBox } from '@turf/turf'
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
-import { MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
+import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
 import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures, stopNumber } from './store'
 import type { PointFeature } from './types'
 import { queryDevice } from './utils'
@@ -170,7 +170,32 @@ export const drawPoint = () => {
   map.on('touchend', MAP_PLACE_LAYER_POINT, handleFeatureClick)
 }
 
+export const drawBboxPolygon = () => {
+  const map = window.map
+  const source: any = map.getSource(MAP_PLACE_SOURCE)
+  if (!source)
+    return
+  if (map.getLayer(MAP_PLACE_LAYER_BBOX))
+    map.removeLayer(MAP_PLACE_LAYER_BBOX)
+
+  // Add a black outline around the polygon.
+  map.addLayer({
+    id: MAP_PLACE_LAYER_BBOX,
+    type: 'line',
+    source: MAP_PLACE_SOURCE,
+    layout: {},
+    paint: {
+      'line-color': ['coalesce', ['get', 'line-color'], '#aaa'],
+      'line-width': ['coalesce', ['get', 'line-width'], 2],
+      'line-opacity': ['coalesce', ['get', 'line-opacity'], 1],
+      'line-dasharray': [0, 4, 3],
+    },
+    filter: ['==', ['geometry-type'], 'Polygon'],
+  })
+}
+
 export const fitBbox = (box: BBox) => {
+  addPlaceSource()
   const map = window.map
   const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
   const isMobile = queryDevice()
@@ -181,15 +206,15 @@ export const fitBbox = (box: BBox) => {
   }
   else {
     map.fitBounds(bbox, {
-      padding: { top: 200, bottom: 200, left: 200, right: 200 },
+      padding: { top: 300, bottom: 100, left: 200, right: 200 },
     })
   }
+  drawBboxPolygon()
 }
 
 export const reloadPlace = () => {
-  addPlaceSource()
-  drawLine()
-  drawPoint()
   const box = mapPlaceLineBbox.value.bbox!
   fitBbox(box)
+  drawLine()
+  drawPoint()
 }

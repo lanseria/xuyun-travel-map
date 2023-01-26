@@ -87,14 +87,20 @@ export const mapPlaceUnfinishedLine = computed(() => {
 })
 
 export const mapPlaceLineBbox = computed(() => {
+  if (currentProperties.value) {
+    const vid = currentProperties.value.vid
+    const video = mapVideos.value.find(item => item.vid === vid)
+    if (video && video.vLine) {
+      const bbox = turf.bbox(video.vLine)
+      return turf.bboxPolygon(bbox)
+    }
+  }
   const bbox = turf.bbox(mapPlaceFinishedLine.value)
   return turf.bboxPolygon(bbox)
 })
 
 export const mapPlacePointsFeatures = computed(() => {
-  // const finishedLineString = mapPlaceFinishedLine.value
-  // finishedLineString.properties!.color = 'green'
-
+  // 已完成的所有线路数组
   const finishedVideoLines: Feature<LineString>[] = []
   mapVideos.value.forEach((videoItem, idx) => {
     if (videoItem.vLine) {
@@ -107,10 +113,15 @@ export const mapPlacePointsFeatures = computed(() => {
       finishedVideoLines.push(line)
     }
   })
-
+  // 未完成的直线对象
   const unfinishedLineString = mapPlaceUnfinishedLine.value
   unfinishedLineString.properties!.color = 'gray'
-  const all: MyFeature[] = [...mapPlacePoints.value, ...finishedVideoLines, unfinishedLineString]
+  // 组合所有 Features
+  const all: MyFeature[] = [
+    ...mapPlacePoints.value,
+    ...finishedVideoLines, unfinishedLineString,
+    mapPlaceLineBbox.value,
+  ]
   return turf.featureCollection(all)
 })
 

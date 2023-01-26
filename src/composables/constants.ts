@@ -9,6 +9,8 @@ export const MAP_PLACE_LAYER_POINT = 'MapPlaceLayerPoint'
 export const MAP_PLACE_LAYER_LINESTRING_BG = 'MAP_PLACE_LAYER_LINESTRING_BG'
 export const MAP_PLACE_LAYER_LINESTRING_DASHED = 'MAP_PLACE_LAYER_LINESTRING_DASHED'
 
+export const MAP_PLACE_LAYER_BBOX = 'MapPlaceLayerBbox'
+
 export const LayerStyleList = [
   {
     name: 'osm',

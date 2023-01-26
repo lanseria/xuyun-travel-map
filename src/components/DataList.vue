@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { TableExpandable } from '@arco-design/web-vue'
+import type { TableExpandable, TableSortable } from '@arco-design/web-vue'
 // import type { VideoData } from '~/composables'
 import * as turf from '@turf/turf'
 import type { VideoData } from '~/composables'
@@ -12,7 +12,7 @@ const columns = [
     width: 115,
     sortable: {
       sortDirections: ['ascend', 'descend'],
-    },
+    } satisfies TableSortable,
   },
   {
     title: '视频名称',
@@ -44,6 +44,10 @@ const rowClass = (record: any) => {
 }
 
 const handleViewLine = (record: VideoData) => {
+  const vPoints = mapPlacePoints.value.filter(item => item.properties.vid === record.vid)
+  if (vPoints.length)
+    handleFeatureDetail(vPoints[0], false)
+
   if (record.vLine) {
     const b = turf.bbox(record.vLine)
     fitBbox(b)
