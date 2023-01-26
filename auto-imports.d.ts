@@ -10,6 +10,7 @@ declare global {
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
   const LayerStyleList: typeof import('./src/composables/constants')['LayerStyleList']
+  const MAP_PLACE_LAYER_BBOX: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_BBOX']
   const MAP_PLACE_LAYER_LINESTRING_BG: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_BG']
   const MAP_PLACE_LAYER_LINESTRING_DASHED: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_DASHED']
   const MAP_PLACE_LAYER_POINT: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_POINT']
@@ -42,6 +43,7 @@ declare global {
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const drawBboxPolygon: typeof import('./src/composables/mapLayer')['drawBboxPolygon']
   const drawLine: typeof import('./src/composables/mapLayer')['drawLine']
   const drawPoint: typeof import('./src/composables/mapLayer')['drawPoint']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
@@ -68,6 +70,7 @@ declare global {
   const lastestVideoInfo: typeof import('./src/composables/store')['lastestVideoInfo']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
+  const mapContainerWidth: typeof import('./src/composables/store')['mapContainerWidth']
   const mapDistanceEndInput: typeof import('./src/composables/store')['mapDistanceEndInput']
   const mapDistanceEndPoint: typeof import('./src/composables/store')['mapDistanceEndPoint']
   const mapDistanceStartInput: typeof import('./src/composables/store')['mapDistanceStartInput']
@@ -122,6 +125,7 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const reloadInitStatus: typeof import('./src/composables/store')['reloadInitStatus']
   const reloadPlace: typeof import('./src/composables/mapLayer')['reloadPlace']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveDirective: typeof import('vue')['resolveDirective']
@@ -130,7 +134,6 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
-  const stopNumber: typeof import('./src/composables/store')['stopNumber']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const templateRef: typeof import('@vueuse/core')['templateRef']
@@ -333,6 +336,7 @@ declare module 'vue' {
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly LayerStyleList: UnwrapRef<typeof import('./src/composables/constants')['LayerStyleList']>
+    readonly MAP_PLACE_LAYER_BBOX: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_BBOX']>
     readonly MAP_PLACE_LAYER_LINESTRING_BG: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_BG']>
     readonly MAP_PLACE_LAYER_LINESTRING_DASHED: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_DASHED']>
     readonly MAP_PLACE_LAYER_POINT: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_POINT']>
@@ -365,6 +369,7 @@ declare module 'vue' {
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
+    readonly drawBboxPolygon: UnwrapRef<typeof import('./src/composables/mapLayer')['drawBboxPolygon']>
     readonly drawLine: UnwrapRef<typeof import('./src/composables/mapLayer')['drawLine']>
     readonly drawPoint: UnwrapRef<typeof import('./src/composables/mapLayer')['drawPoint']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
@@ -391,6 +396,7 @@ declare module 'vue' {
     readonly lastestVideoInfo: UnwrapRef<typeof import('./src/composables/store')['lastestVideoInfo']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
+    readonly mapContainerWidth: UnwrapRef<typeof import('./src/composables/store')['mapContainerWidth']>
     readonly mapDistanceEndInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndInput']>
     readonly mapDistanceEndPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndPoint']>
     readonly mapDistanceStartInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceStartInput']>
@@ -445,6 +451,7 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly reloadInitStatus: UnwrapRef<typeof import('./src/composables/store')['reloadInitStatus']>
     readonly reloadPlace: UnwrapRef<typeof import('./src/composables/mapLayer')['reloadPlace']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveDirective: UnwrapRef<typeof import('vue')['resolveDirective']>
@@ -453,7 +460,6 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
-    readonly stopNumber: UnwrapRef<typeof import('./src/composables/store')['stopNumber']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>

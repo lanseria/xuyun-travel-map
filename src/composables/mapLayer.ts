@@ -3,9 +3,11 @@ import type { BBox } from '@turf/turf'
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
-import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures, stopNumber } from './store'
+import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
 import type { PointFeature } from './types'
 import { queryDevice } from './utils'
+
+let stopNumber = 0
 
 export const addPlaceSource = () => {
   const map = window.map
@@ -30,6 +32,7 @@ const popup = new mapboxgl.Popup({
   className: 'LayerPopup',
 })
 export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
+  console.log(props, isTabDetail)
   const description
   = `<h2>${props.properties!.name}</h2>
   <p>时间: ${props.properties!.date}</p>
@@ -124,11 +127,11 @@ const drawAnimateLine = () => {
     }
 
     // Request the next frame of the animation.
-    stopNumber.value = requestAnimationFrame(animateDashArray)
+    stopNumber = requestAnimationFrame(animateDashArray)
   }
 
   // start the animation
-  cancelAnimationFrame(stopNumber.value)
+  cancelAnimationFrame(stopNumber)
   isAnimation.value && animateDashArray(0)
 }
 
@@ -186,7 +189,7 @@ export const drawBboxPolygon = () => {
     layout: {},
     paint: {
       'line-color': ['coalesce', ['get', 'line-color'], '#aaa'],
-      'line-width': ['coalesce', ['get', 'line-width'], 2],
+      'line-width': ['coalesce', ['get', 'line-width'], 5],
       'line-opacity': ['coalesce', ['get', 'line-opacity'], 1],
       'line-dasharray': [0, 4, 3],
     },

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { LngLatLike } from 'mapbox-gl'
+// import type { LngLatLike } from 'mapbox-gl'
 import type { PointFeature } from '~/composables'
 
 const props = defineProps({
@@ -16,27 +16,31 @@ const pointList = computed(() => {
 
 const handleZoomClick = (record: PointFeature, detail = false) => {
   handleFeatureDetail(record, detail)
-  setTimeout(() => {
-    window.map.flyTo({
-      center: record.geometry.coordinates as LngLatLike,
-      zoom: 12,
-    })
-  })
+  // setTimeout(() => {
+  //   window.map.flyTo({
+  //     center: record.geometry.coordinates as LngLatLike,
+  //     zoom: 12,
+  //   })
+  // })
 }
 </script>
 
 <template>
   <a-list>
     <a-list-item v-for="item in pointList" :key="item.properties.id">
-      <div :class="{ 'text-red sepia': item.properties.id === currentProperties.id }">
+      <div :class="{ 'text-red sepia': item.properties.id === currentProperties!.id }">
         {{ item.properties.date }} {{ item.properties.time }} {{ item.properties.name }}
       </div>
       <div>
         视频切片 <span class="text-red-5">{{ item.properties.vt }}s</span>
       </div>
       <template #actions>
-        <icon-edit @click="handleZoomClick(item, true)" />
-        <icon-zoom-in @click="handleZoomClick(item)" />
+        <a-button size="mini" status="warning" shape="circle" @click="handleZoomClick(item, true)">
+          <icon-edit />
+        </a-button>
+        <a-button size="mini" status="success" shape="circle" @click="handleZoomClick(item)">
+          <icon-zoom-in />
+        </a-button>
       </template>
     </a-list-item>
   </a-list>

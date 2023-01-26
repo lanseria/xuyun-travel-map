@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import MapboxLanguage from '@mapbox/mapbox-gl-language'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { LayerStyleList, MapboxAccessToken, handleCollapsed, isAnimation, mapLoaded, mapStyle, toggleAnimation } from '~/composables'
+import { LayerStyleList, MapboxAccessToken, handleCollapsed, mapLoaded, mapStyle } from '~/composables'
 
 mapboxgl.accessToken
   = MapboxAccessToken
@@ -16,7 +16,6 @@ const mapContainer = shallowRef()
 const updateMap = () => {
   //
 }
-
 onMounted(() => {
   const styleValue = LayerStyleList.find(item => item.value === mapStyle.value)
   map = new mapboxgl.Map({
@@ -64,11 +63,8 @@ onMounted(() => {
       />
       <MapNotice class="mt-2" />
     </div>
-    <div class="absolute bottom-2 left-2 z-10 flex flex-col items-start">
-      <div class="bg-white rounded-1/2 w-50px h-50px flex justify-center items-center cursor-pointer" @click="toggleAnimation">
-        <icon-play-arrow-fill v-if="!isAnimation" :size="40" />
-        <icon-pause-circle-fill v-else :size="40" />
-      </div>
+    <div class="absolute bottom-2 left-2 z-10">
+      <MapOperation />
     </div>
     <div class="sidebar-handle absolute right-0 bottom-9 z-10 px-4 py-1 bg-light dark:bg-dark cursor-pointer hidden md:block" @click="handleCollapsed()">
       <div v-if="collapsed" class="i-carbon:caret-right" />
