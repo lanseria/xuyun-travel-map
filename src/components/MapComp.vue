@@ -58,6 +58,9 @@ onMounted(() => {
         transform: 'translate(-50%, 0)',
       }"
     >
+      <MapRoute
+        class="bg-white"
+      />
       <MapData
         class="bg-white"
       />

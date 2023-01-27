@@ -38,11 +38,13 @@ declare global {
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
   const currentFeature: typeof import('./src/composables/store')['currentFeature']
   const currentProperties: typeof import('./src/composables/store')['currentProperties']
+  const customPopupStyleOpt: typeof import('./src/composables/mapLayer')['customPopupStyleOpt']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const descHtml: typeof import('./src/composables/mapLayer')['descHtml']
   const drawBboxPolygon: typeof import('./src/composables/mapLayer')['drawBboxPolygon']
   const drawLine: typeof import('./src/composables/mapLayer')['drawLine']
   const drawPoint: typeof import('./src/composables/mapLayer')['drawPoint']
@@ -364,11 +366,13 @@ declare module 'vue' {
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly currentFeature: UnwrapRef<typeof import('./src/composables/store')['currentFeature']>
     readonly currentProperties: UnwrapRef<typeof import('./src/composables/store')['currentProperties']>
+    readonly customPopupStyleOpt: UnwrapRef<typeof import('./src/composables/mapLayer')['customPopupStyleOpt']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
+    readonly descHtml: UnwrapRef<typeof import('./src/composables/mapLayer')['descHtml']>
     readonly drawBboxPolygon: UnwrapRef<typeof import('./src/composables/mapLayer')['drawBboxPolygon']>
     readonly drawLine: UnwrapRef<typeof import('./src/composables/mapLayer')['drawLine']>
     readonly drawPoint: UnwrapRef<typeof import('./src/composables/mapLayer')['drawPoint']>

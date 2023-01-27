@@ -62,12 +62,31 @@ export interface VideoData {
   vLine?: LineFeature
 }
 
+export type StartEndPointFeature = Feature<Point, {
+  'date': string
+  'name': string
+  'type': string
+  'icon': string
+}>
+
 export interface RouteItem {
   label: string
   value: string
   dateRange: number[]
   url: string
 }
+
+export interface RouteVideoItem {
+  uid: string
+  sid: string
+  name: string
+  desc: string
+  value: string
+  date: string
+  startEndPoints: StartEndPointFeature[]
+}
+
+export interface RouteVideoJsonItem extends RouteVideoItem, RouteItem {}
 
 export type PointFeature = Feature<Point, PointFeatureProp>
 

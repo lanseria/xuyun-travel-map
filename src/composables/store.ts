@@ -1,6 +1,6 @@
 import type { Feature, LineString, Point, Polygon } from '@turf/turf'
 import * as turf from '@turf/turf'
-import type { PointFeature, PointFeatureProp, RawData, VideoData } from './types'
+import type { PointFeature, PointFeatureProp, RawData, RouteVideoJsonItem, VideoData } from './types'
 
 export const mapContainerWidth = ref(0)
 
@@ -47,33 +47,55 @@ export const mapStyle = useStorage('map-style', 'streets')
 export type MyFeature = Feature<Polygon | Point | LineString>
 
 export const mapPlacePoints = ref<PointFeature[]>([])
-const { data, onFetchResponse } = useFetch('/data/2212-2303-dongbei/data/all-points.geojson', { immediate: true }).get().json()
-onFetchResponse(() => {
-  const features: PointFeature[] = data.value.features
-  mapPlacePoints.value = features
-})
-
 export const mapVideos = ref<VideoData[]>([])
-const { data: videoData, onFetchResponse: videoOnFetchResponse } = useFetch('/data/2212-2303-dongbei/data/all-videos.json', { immediate: true }).get().json()
-videoOnFetchResponse(() => {
-  const features: VideoData[] = videoData.value.map((item: any) => ({
-    ...item, expand: '',
-  }))
-  mapVideos.value = features
-})
 
 export const mapStartPlacePoint = ref<PointFeature>()
 export const mapEndPlacePoint = ref<PointFeature>()
-const { data: endData, onFetchResponse: endOnFetchResponse } = useFetch('/video.json', { immediate: true }).get().json()
-endOnFetchResponse(() => {
-  mapStartPlacePoint.value = endData.value.startEndPoints[0]
-  mapEndPlacePoint.value = endData.value.startEndPoints[1]
-})
 
 export const lastestVideoInfo = ref<RawData>()
-const { data: lastVideoData, onFetchResponse: lastVideoOnFetchResponse } = useFetch('/data/lastest.json', { immediate: true }).get().json()
-lastVideoOnFetchResponse(() => {
-  lastestVideoInfo.value = lastVideoData.value
+
+export const currentRouteValue = ref('dongbei')
+export const allRouteList = ref<RouteVideoJsonItem[]>([])
+const { data, onFetchResponse } = useFetch('/data/routes.json', { immediate: true }).get().json()
+
+export const fetchRouteData = () => {
+  const currentRoute = allRouteList.value.find(item => item.value === currentRouteValue.value)
+  if (currentRoute) {
+    const dataPath = `${currentRoute.date}-${currentRoute.value}`
+
+    const { data, onFetchResponse } = useFetch(`/data/${dataPath}/data/all-points.geojson`, { immediate: true }).get().json()
+    onFetchResponse(() => {
+      const features: PointFeature[] = data.value.features
+      mapPlacePoints.value = features
+    })
+
+    const { data: videoData, onFetchResponse: videoOnFetchResponse } = useFetch(`/data/${dataPath}/data/all-videos.json`, { immediate: true }).get().json()
+    videoOnFetchResponse(() => {
+      const features: VideoData[] = videoData.value.map((item: any) => ({
+        ...item, expand: '',
+      }))
+      mapVideos.value = features
+    })
+    const { data: endData, onFetchResponse: endOnFetchResponse } = useFetch(`/data/${dataPath}/video.json`, { immediate: true }).get().json()
+    endOnFetchResponse(() => {
+      mapStartPlacePoint.value = endData.value.startEndPoints[0]
+      mapEndPlacePoint.value = endData.value.startEndPoints[1]
+    })
+
+    const { data: lastVideoData, onFetchResponse: lastVideoOnFetchResponse } = useFetch('/data/lastest.json', { immediate: true }).get().json()
+    lastVideoOnFetchResponse(() => {
+      lastestVideoInfo.value = lastVideoData.value
+    })
+  }
+}
+
+watchDebounced(() => currentRouteValue.value, () => {
+  fetchRouteData()
+}, { debounce: 300, maxWait: 600 })
+
+onFetchResponse(() => {
+  allRouteList.value = data.value
+  fetchRouteData()
 })
 
 export const mapPlaceFinishedLine = computed(() => {
