@@ -11,6 +11,7 @@ declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const LayerStyleList: typeof import('./src/composables/constants')['LayerStyleList']
   const MAP_PLACE_LAYER_BBOX: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_BBOX']
+  const MAP_PLACE_LAYER_BBOX_FILL: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_BBOX_FILL']
   const MAP_PLACE_LAYER_LINESTRING_BG: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_BG']
   const MAP_PLACE_LAYER_LINESTRING_DASHED: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_DASHED']
   const MAP_PLACE_LAYER_POINT: typeof import('./src/composables/constants')['MAP_PLACE_LAYER_POINT']
@@ -19,6 +20,7 @@ declare global {
   const MyCustomControl: typeof import('./src/composables/mapControls')['MyCustomControl']
   const activeTab: typeof import('./src/composables/store')['activeTab']
   const addPlaceSource: typeof import('./src/composables/mapLayer')['addPlaceSource']
+  const allRouteList: typeof import('./src/composables/store')['allRouteList']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const collapsed: typeof import('./src/composables/store')['collapsed']
@@ -38,6 +40,7 @@ declare global {
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
   const currentFeature: typeof import('./src/composables/store')['currentFeature']
   const currentProperties: typeof import('./src/composables/store')['currentProperties']
+  const currentRouteValue: typeof import('./src/composables/store')['currentRouteValue']
   const customPopupStyleOpt: typeof import('./src/composables/mapLayer')['customPopupStyleOpt']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
@@ -51,7 +54,6 @@ declare global {
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
-  const fitBbox: typeof import('./src/composables/mapLayer')['fitBbox']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
@@ -74,18 +76,11 @@ declare global {
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
   const mapContainerWidth: typeof import('./src/composables/store')['mapContainerWidth']
   const mapDistanceEndInput: typeof import('./src/composables/store')['mapDistanceEndInput']
-  const mapDistanceEndPoint: typeof import('./src/composables/store')['mapDistanceEndPoint']
   const mapDistanceStartInput: typeof import('./src/composables/store')['mapDistanceStartInput']
-  const mapDistanceStartPoint: typeof import('./src/composables/store')['mapDistanceStartPoint']
-  const mapEndPlacePoint: typeof import('./src/composables/store')['mapEndPlacePoint']
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
   const mapLoaded: typeof import('./src/composables/store')['mapLoaded']
-  const mapPlaceFinishedLine: typeof import('./src/composables/store')['mapPlaceFinishedLine']
-  const mapPlaceLineBbox: typeof import('./src/composables/store')['mapPlaceLineBbox']
-  const mapPlacePoints: typeof import('./src/composables/store')['mapPlacePoints']
-  const mapPlacePointsFeatures: typeof import('./src/composables/store')['mapPlacePointsFeatures']
-  const mapPlaceUnfinishedLine: typeof import('./src/composables/store')['mapPlaceUnfinishedLine']
-  const mapStartPlacePoint: typeof import('./src/composables/store')['mapStartPlacePoint']
+  const mapPlaceFeatureCollection: typeof import('./src/composables/store')['mapPlaceFeatureCollection']
+  const mapPlaceFeatures: typeof import('./src/composables/store')['mapPlaceFeatures']
   const mapStyle: typeof import('./src/composables/store')['mapStyle']
   const mapVideos: typeof import('./src/composables/store')['mapVideos']
   const markRaw: typeof import('vue')['markRaw']
@@ -339,6 +334,7 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly LayerStyleList: UnwrapRef<typeof import('./src/composables/constants')['LayerStyleList']>
     readonly MAP_PLACE_LAYER_BBOX: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_BBOX']>
+    readonly MAP_PLACE_LAYER_BBOX_FILL: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_BBOX_FILL']>
     readonly MAP_PLACE_LAYER_LINESTRING_BG: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_BG']>
     readonly MAP_PLACE_LAYER_LINESTRING_DASHED: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_LINESTRING_DASHED']>
     readonly MAP_PLACE_LAYER_POINT: UnwrapRef<typeof import('./src/composables/constants')['MAP_PLACE_LAYER_POINT']>
@@ -347,6 +343,7 @@ declare module 'vue' {
     readonly MyCustomControl: UnwrapRef<typeof import('./src/composables/mapControls')['MyCustomControl']>
     readonly activeTab: UnwrapRef<typeof import('./src/composables/store')['activeTab']>
     readonly addPlaceSource: UnwrapRef<typeof import('./src/composables/mapLayer')['addPlaceSource']>
+    readonly allRouteList: UnwrapRef<typeof import('./src/composables/store')['allRouteList']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly collapsed: UnwrapRef<typeof import('./src/composables/store')['collapsed']>
@@ -366,6 +363,7 @@ declare module 'vue' {
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly currentFeature: UnwrapRef<typeof import('./src/composables/store')['currentFeature']>
     readonly currentProperties: UnwrapRef<typeof import('./src/composables/store')['currentProperties']>
+    readonly currentRouteValue: UnwrapRef<typeof import('./src/composables/store')['currentRouteValue']>
     readonly customPopupStyleOpt: UnwrapRef<typeof import('./src/composables/mapLayer')['customPopupStyleOpt']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
@@ -379,7 +377,6 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly fitBbox: UnwrapRef<typeof import('./src/composables/mapLayer')['fitBbox']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -402,18 +399,11 @@ declare module 'vue' {
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
     readonly mapContainerWidth: UnwrapRef<typeof import('./src/composables/store')['mapContainerWidth']>
     readonly mapDistanceEndInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndInput']>
-    readonly mapDistanceEndPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceEndPoint']>
     readonly mapDistanceStartInput: UnwrapRef<typeof import('./src/composables/store')['mapDistanceStartInput']>
-    readonly mapDistanceStartPoint: UnwrapRef<typeof import('./src/composables/store')['mapDistanceStartPoint']>
-    readonly mapEndPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapEndPlacePoint']>
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
     readonly mapLoaded: UnwrapRef<typeof import('./src/composables/store')['mapLoaded']>
-    readonly mapPlaceFinishedLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceFinishedLine']>
-    readonly mapPlaceLineBbox: UnwrapRef<typeof import('./src/composables/store')['mapPlaceLineBbox']>
-    readonly mapPlacePoints: UnwrapRef<typeof import('./src/composables/store')['mapPlacePoints']>
-    readonly mapPlacePointsFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlacePointsFeatures']>
-    readonly mapPlaceUnfinishedLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceUnfinishedLine']>
-    readonly mapStartPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapStartPlacePoint']>
+    readonly mapPlaceFeatureCollection: UnwrapRef<typeof import('./src/composables/store')['mapPlaceFeatureCollection']>
+    readonly mapPlaceFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlaceFeatures']>
     readonly mapStyle: UnwrapRef<typeof import('./src/composables/store')['mapStyle']>
     readonly mapVideos: UnwrapRef<typeof import('./src/composables/store')['mapVideos']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>

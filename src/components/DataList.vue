@@ -44,9 +44,9 @@ const rowClass = (record: any) => {
 }
 
 const handleViewLine = (record: VideoData) => {
-  const vPoints = mapPlacePoints.value.filter(item => item.properties.vid === record.vid)
-  if (vPoints.length)
-    handleFeatureDetail(vPoints[0], false)
+  // const vPoints = mapPlacePoints.value.filter(item => item.properties.vid === record.vid)
+  // if (vPoints.length)
+  //   handleFeatureDetail(vPoints[0], false)
 
   // if (record.vLine) {
   //   const b = turf.bbox(record.vLine)

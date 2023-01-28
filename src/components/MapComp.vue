@@ -23,7 +23,7 @@ onMounted(() => {
     style: styleValue?.style,
     // style: 'mapbox://styles/mapbox/outdoors-v12',
     center: mapCenter.value as LngLatLike,
-    zoom: 7.53,
+    zoom: 4,
     preserveDrawingBuffer: true,
     hash: true,
   })
@@ -59,15 +59,16 @@ onMounted(() => {
       }"
     >
       <MapRoute
-        class="bg-white"
+        class="bg-white mt-2"
       />
-      <MapData
+      <!-- <MapData
+        v-if="currentRouteValue === '2212-2303-dongbei'"
         class="bg-white"
-      />
+      /> -->
       <MapNotice class="mt-2" />
     </div>
     <div class="absolute bottom-2 left-2 z-10">
-      <MapOperation />
+      <!-- <MapOperation /> -->
     </div>
     <div class="sidebar-handle absolute right-0 bottom-9 z-10 px-4 py-1 bg-light dark:bg-dark cursor-pointer hidden md:block" @click="handleCollapsed()">
       <div v-if="collapsed" class="i-carbon:caret-right" />

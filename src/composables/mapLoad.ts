@@ -1,5 +1,5 @@
 import { reloadPlace } from './mapLayer'
-import { mapPlacePointsFeatures } from './store'
+import { mapPlaceFeatureCollection } from './store'
 
 // const loadImg = (name: string, url: string, sdf = false) => {
 //   const map = window.map
@@ -47,12 +47,12 @@ export const mapLoad = () => {
     maxzoom: 14,
   })
   window.map.setTerrain({ source: 'mapbox-dem', exaggeration: 1 })
-  watchDebounced(() => mapPlacePointsFeatures.value, () => {
+  watchDebounced(() => mapPlaceFeatureCollection.value, () => {
     console.warn('mapPlaceFeatures changed')
     reloadPlace()
   }, { debounce: 300, maxWait: 600, immediate: true })
 
-  setTimeout(() => {
-    fitBbox()
-  }, 1000)
+  // setTimeout(() => {
+  //   fitBbox()
+  // }, 1000)
 }

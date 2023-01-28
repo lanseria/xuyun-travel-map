@@ -9,9 +9,10 @@ const props = defineProps({
   },
 })
 const pointList = computed(() => {
-  return mapPlacePoints.value.filter((p) => {
-    return p.properties.vid === props.vid
-  })
+  return []
+  // return mapPlacePoints.value.filter((p) => {
+  //   return p.properties.vid === props.vid
+  // })
 })
 
 const handleZoomClick = (record: PointFeature, openDetail = false) => {

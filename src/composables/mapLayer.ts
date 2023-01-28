@@ -2,43 +2,43 @@
 // import type { BBox } from '@turf/turf'
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
-import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
-import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
+import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_BBOX_FILL, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
+import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceFeatureCollection } from './store'
 import type { PointFeature } from './types'
-import { queryDevice } from './utils'
+// import { queryDevice } from './utils'
 
 let stopNumber = 0
 
-export const fitBbox = () => {
-  const box = mapPlaceLineBbox.value.bbox!
-  const map = window.map
-  const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
-  const isMobile = queryDevice()
-  if (isMobile) {
-    map.fitBounds(bbox, {
-      padding: { top: 200, bottom: 10, left: 20, right: 20 },
-    })
-  }
-  else {
-    map.fitBounds(bbox, {
-      padding: { top: 300, bottom: 100, left: 200, right: 200 },
-      duration: 100,
-    })
-  }
-}
+// export const fitBbox = () => {
+//   const box = mapPlaceLineBbox.value.bbox!
+//   const map = window.map
+//   const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
+//   const isMobile = queryDevice()
+//   if (isMobile) {
+//     map.fitBounds(bbox, {
+//       padding: { top: 200, bottom: 10, left: 20, right: 20 },
+//     })
+//   }
+//   else {
+//     map.fitBounds(bbox, {
+//       padding: { top: 300, bottom: 100, left: 200, right: 200 },
+//       duration: 100,
+//     })
+//   }
+// }
 
 export const addPlaceSource = () => {
   const map = window.map
   const source: any = map.getSource(MAP_PLACE_SOURCE)
   if (source) {
     source.setData(
-      mapPlacePointsFeatures.value,
+      mapPlaceFeatureCollection.value,
     )
   }
   else {
     map.addSource(MAP_PLACE_SOURCE, {
       type: 'geojson',
-      data: mapPlacePointsFeatures.value,
+      data: mapPlaceFeatureCollection.value as any,
     })
   }
 }
@@ -76,10 +76,9 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => 
 
 const handleFeatureClick = (e: any) => {
   const props: PointFeature = e.features[0]
-  if (props.properties.id) {
+  if (props.properties.id)
     handleFeatureDetail(props)
-    fitBbox()
-  }
+    // fitBbox()
 }
 
 const drawAnimateLine = () => {
@@ -178,7 +177,7 @@ export const drawPoint = () => {
     type: 'symbol',
     source: MAP_PLACE_SOURCE,
     layout: {
-      'text-field': ['get', 'date'],
+      'text-field': ['get', 'name'],
       'icon-size': 0.15,
       'icon-image': ['get', 'icon'],
       'text-size': 12,
@@ -207,6 +206,20 @@ export const drawBboxPolygon = () => {
     return
   if (map.getLayer(MAP_PLACE_LAYER_BBOX))
     map.removeLayer(MAP_PLACE_LAYER_BBOX)
+  if (map.getLayer(MAP_PLACE_LAYER_BBOX_FILL))
+    map.removeLayer(MAP_PLACE_LAYER_BBOX_FILL)
+
+  map.addLayer({
+    id: MAP_PLACE_LAYER_BBOX_FILL,
+    type: 'fill',
+    source: MAP_PLACE_SOURCE, // reference the data source
+    layout: {},
+    paint: {
+      'fill-color': ['coalesce', ['get', 'fill-color'], '#000'],
+      'fill-opacity': ['coalesce', ['get', 'fill-opacity'], 0.3],
+    },
+    filter: ['==', ['geometry-type'], 'Polygon'],
+  })
 
   // Add a black outline around the polygon.
   map.addLayer({

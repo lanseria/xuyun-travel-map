@@ -8,9 +8,9 @@ const handleCheck = (item: RouteVideoJsonItem) => {
 </script>
 
 <template>
-  <ASpace class="py-2 px-4 mb-2">
+  <ASpace class="py-2 px-4">
     <a-tag v-for="item in allRouteList" :key="item.sid" :checked="item.value === currentRouteValue" checkable color="arcoblue" @check="handleCheck(item)">
-      {{ item.name }}
+      {{ `${item.date}-${item.name}` }}
     </a-tag>
   </ASpace>
 </template>
