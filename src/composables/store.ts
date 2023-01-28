@@ -54,29 +54,27 @@ export const mapEndPlacePoint = ref<PointFeature>()
 
 export const lastestVideoInfo = ref<RawData>()
 
-export const currentRouteValue = ref('dongbei')
+export const currentRouteValue = ref('2212-2303-dongbei')
 export const allRouteList = ref<RouteVideoJsonItem[]>([])
 const { data, onFetchResponse } = useFetch('/data/routes.json', { immediate: true }).get().json()
 
 export const fetchRouteData = () => {
   const currentRoute = allRouteList.value.find(item => item.value === currentRouteValue.value)
   if (currentRoute) {
-    const dataPath = `${currentRoute.date}-${currentRoute.value}`
-
-    const { data, onFetchResponse } = useFetch(`/data/${dataPath}/data/all-points.geojson`, { immediate: true }).get().json()
+    const { data, onFetchResponse } = useFetch(`/data/${currentRouteValue.value}/data/all-points.geojson`, { immediate: true }).get().json()
     onFetchResponse(() => {
       const features: PointFeature[] = data.value.features
       mapPlacePoints.value = features
     })
 
-    const { data: videoData, onFetchResponse: videoOnFetchResponse } = useFetch(`/data/${dataPath}/data/all-videos.json`, { immediate: true }).get().json()
+    const { data: videoData, onFetchResponse: videoOnFetchResponse } = useFetch(`/data/${currentRouteValue.value}/data/all-videos.json`, { immediate: true }).get().json()
     videoOnFetchResponse(() => {
       const features: VideoData[] = videoData.value.map((item: any) => ({
         ...item, expand: '',
       }))
       mapVideos.value = features
     })
-    const { data: endData, onFetchResponse: endOnFetchResponse } = useFetch(`/data/${dataPath}/video.json`, { immediate: true }).get().json()
+    const { data: endData, onFetchResponse: endOnFetchResponse } = useFetch(`/data/${currentRouteValue.value}/video.json`, { immediate: true }).get().json()
     endOnFetchResponse(() => {
       mapStartPlacePoint.value = endData.value.startEndPoints[0]
       mapEndPlacePoint.value = endData.value.startEndPoints[1]
@@ -106,6 +104,7 @@ export const mapPlaceFinishedLine = computed(() => {
 })
 
 export const mapPlaceUnfinishedLine = computed(() => {
+  // console.log(mapPlacePoints.value)
   const linePointList = [mapPlacePoints.value[mapPlacePoints.value.length - 1].geometry.coordinates, mapEndPlacePoint.value!.geometry.coordinates]
   return turf.lineString(linePointList)
 })
