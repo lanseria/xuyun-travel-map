@@ -25,13 +25,11 @@ export const mapDistanceStartInput = ref('')
 export const mapDistanceEndInput = ref('')
 
 export const handleSetStartPoint = () => {
-  mapDistanceStartPoint.value = currentFeature.value
   if (currentFeature.value)
     mapDistanceStartInput.value = JSON.stringify(currentFeature.value.geometry.coordinates)
 }
 
 export const handleSetEndPoint = () => {
-  mapDistanceEndPoint.value = currentFeature.value
   if (currentFeature.value)
     mapDistanceEndInput.value = JSON.stringify(currentFeature.value.geometry.coordinates)
 }
@@ -69,18 +67,19 @@ onFetchResponse(() => {
     mapPlaceFeatures.value.push(...item.featureList)
   })
   // console.log(mapPlaceFeatures.value)
+  // console.log(mapPlaceFeatures.value)
   // fetchAllRouteLines()
   // fetchRouteData()
 })
 
 export const mapPlaceFeatureCollection = computed(() => {
-  let mapFeatureList: AllFeature[] = [...mapPlaceFeatures.value]
-  if (currentRouteValue.value) {
-    mapFeatureList = mapFeatureList.filter((item) => {
-      item.properties
-    })
-  }
-  return turf.featureCollection(mapFeatureList as any)
+  const mapFeatureList: AllFeature[] = [...mapPlaceFeatures.value]
+  // if (currentRouteValue.value) {
+  //   mapFeatureList = mapFeatureList.filter((item) => {
+  //     // item.properties
+  //   })
+  // }
+  return mapFeatureList
 })
 
 export const toggleAnimation = () => {

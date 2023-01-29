@@ -47,6 +47,7 @@ export const mapLoad = () => {
     maxzoom: 14,
   })
   window.map.setTerrain({ source: 'mapbox-dem', exaggeration: 1 })
+  reloadPlace()
   watchDebounced(() => mapPlaceFeatureCollection.value, () => {
     console.warn('mapPlaceFeatures changed')
     reloadPlace()

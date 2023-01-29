@@ -1,6 +1,6 @@
 // import * as turf from '@turf/turf'
-// import type { BBox } from '@turf/turf'
-import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
+import * as turf from '@turf/turf'
+import type { LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_BBOX_FILL, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
 import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceFeatureCollection } from './store'
@@ -29,16 +29,17 @@ let stopNumber = 0
 
 export const addPlaceSource = () => {
   const map = window.map
+  console.log(mapPlaceFeatureCollection.value)
   const source: any = map.getSource(MAP_PLACE_SOURCE)
   if (source) {
     source.setData(
-      mapPlaceFeatureCollection.value,
+      turf.featureCollection(mapPlaceFeatureCollection.value as any),
     )
   }
   else {
     map.addSource(MAP_PLACE_SOURCE, {
       type: 'geojson',
-      data: mapPlaceFeatureCollection.value as any,
+      data: turf.featureCollection(mapPlaceFeatureCollection.value as any),
     })
   }
 }
@@ -181,7 +182,6 @@ export const drawPoint = () => {
       'icon-size': 0.15,
       'icon-image': ['get', 'icon'],
       'text-size': 12,
-      'text-font': ['Smiley Sans Oblique'],
       'text-offset': [0, 0.55],
       'text-anchor': 'top',
       'icon-allow-overlap': true,
