@@ -8,22 +8,18 @@
 Web App for <a href='https://github.com/lanseria/xuyun-map-data'>徐云流浪中国地图开源数据</a>
 </p>
 
-## Features
+## 功能
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite 3](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [ESBuild](https://github.com/evanw/esbuild) - born with fastness
+- ⚡️查看徐云当前位置（信息延迟）
 
-- 🗂 [File based routing](./src/pages)
+- 🗂 查看徐云当前行走路线
 
-- 📦 [Components auto importing](./src/components)
+- 📦 查看徐云每个视频行走轨迹与路程
 
-- 🎨 [UnoCSS](https://github.com/antfu/unocss) - The instant on-demand atomic CSS engine.
+- 🎨 预计算出到达漠河日期与剩余天数/剩余里程
 
-- 😃 Use icons from any icon sets in [Pure CSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- 😃 数据包含每个切片地点与视频点
 
-- 🔥 Use the [new `<script setup>` style](https://github.com/vuejs/rfcs/pull/227)
+- 🔥 数据开源，凡是有兴趣的都可以贡献或纠错位置点与视频点
 
-- ✅ Use [Arco UI](https://arco.design/vue/docs/start) UI Framework
-
-- 🦾 TypeScript, of course
-
-- ☁️ Deploy on Netlify, zero-config
+- ✅ 数据埋点统计
