@@ -23,3 +23,16 @@ Web App for <a href='https://github.com/lanseria/xuyun-map-data'>徐云流浪中
 - 🔥 数据开源，凡是有兴趣的都可以贡献或纠错位置点与视频点
 
 - ✅ 数据埋点统计
+
+## 待做功能
+
+- 🔥 统计其余线路（急需小伙伴贡献，会出视频统计）
+
+- 🎨 美化网页界面与操作逻辑（急需优秀设计师，UX/UI设计师，会用即时设计）
+
+- ✅ 提出建议与功能
+
+
+## License
+
+MIT - Lanseria 2023
