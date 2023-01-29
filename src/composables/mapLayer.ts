@@ -71,15 +71,29 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => 
   currentProperties.value = {
     ...props.properties,
   }
-  currentFeature.value = props
+  // console.log(props)
+  currentFeature.value = { ...props }
   collapsed.value = true
+  window.map.flyTo({
+    center: currentFeature.value.geometry.coordinates as LngLatLike,
+    zoom: 15,
+    speed: 2,
+    curve: 1,
+  })
 }
 
 const handleFeatureClick = (e: any) => {
   const props: PointFeature = e.features[0]
   if (props.properties.id) {
-    handleFeatureDetail(props)
-    fitBbox()
+    const currentFeature = mapPlacePoints.value.find(item => item.properties.id === props.properties.id)
+    // console.log(currentFeature)
+    if (currentFeature) {
+      // const isZoomFit = !currentProperties.value
+      handleFeatureDetail(currentFeature)
+      // if (isZoomFit)
+      //   fitBbox()
+      // else
+    }
   }
 }
 
@@ -115,7 +129,7 @@ const drawAnimateLine = () => {
     paint: {
       'line-color': ['get', 'color'],
       'line-width': 6,
-      'line-dasharray': [0, 4, 3],
+      // 'line-dasharray': [0, 4, 3],
     },
     filter: ['==', ['geometry-type'], 'LineString'],
   })

@@ -43,10 +43,15 @@ export const activeTab = useStorage('map-activeTab', 'detail')
 
 export const mapCenter = useStorage('map-center', [124.724, 40.881])
 export const mapStyle = useStorage('map-style', 'streets')
+export const mapPoints = useStorage('map-points', true)
 
 export const handleToggleMapStyle = () => {
   mapStyle.value = mapStyle.value === 'satellite_streets' ? 'streets' : 'satellite_streets'
   location.reload()
+}
+
+export const handleToggleMapPoints = () => {
+  mapPoints.value = !mapPoints.value
 }
 
 export type MyFeature = Feature<Polygon | Point | LineString>
@@ -135,7 +140,7 @@ export const mapPlacePointsFeatures = computed(() => {
   //     item.properties.vid === currentProperties.value!.vid)
   //   : [...mapPlacePoints.value]
 
-  const filterPoints = [...mapPlacePoints.value]
+  const filterPoints = mapPoints.value ? [...mapPlacePoints.value] : []
 
   mapStartPlacePoint.value && filterPoints.push(mapStartPlacePoint.value)
   mapEndPlacePoint.value && filterPoints.push(mapEndPlacePoint.value)

@@ -63,6 +63,7 @@ declare global {
   const handleFeatureDetail: typeof import('./src/composables/mapLayer')['handleFeatureDetail']
   const handleSetEndPoint: typeof import('./src/composables/store')['handleSetEndPoint']
   const handleSetStartPoint: typeof import('./src/composables/store')['handleSetStartPoint']
+  const handleToggleMapPoints: typeof import('./src/composables/store')['handleToggleMapPoints']
   const handleToggleMapStyle: typeof import('./src/composables/store')['handleToggleMapStyle']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
@@ -89,6 +90,7 @@ declare global {
   const mapPlacePoints: typeof import('./src/composables/store')['mapPlacePoints']
   const mapPlacePointsFeatures: typeof import('./src/composables/store')['mapPlacePointsFeatures']
   const mapPlaceUnfinishedLine: typeof import('./src/composables/store')['mapPlaceUnfinishedLine']
+  const mapPoints: typeof import('./src/composables/store')['mapPoints']
   const mapStartPlacePoint: typeof import('./src/composables/store')['mapStartPlacePoint']
   const mapStyle: typeof import('./src/composables/store')['mapStyle']
   const mapVideos: typeof import('./src/composables/store')['mapVideos']
@@ -261,6 +263,7 @@ declare global {
   const usePreferredDark: typeof import('@vueuse/core')['usePreferredDark']
   const usePreferredLanguages: typeof import('@vueuse/core')['usePreferredLanguages']
   const usePreferredReducedMotion: typeof import('@vueuse/core')['usePreferredReducedMotion']
+  const usePrevious: typeof import('@vueuse/core')['usePrevious']
   const useRafFn: typeof import('@vueuse/core')['useRafFn']
   const useRefHistory: typeof import('@vueuse/core')['useRefHistory']
   const useResizeObserver: typeof import('@vueuse/core')['useResizeObserver']
@@ -395,6 +398,7 @@ declare module 'vue' {
     readonly handleFeatureDetail: UnwrapRef<typeof import('./src/composables/mapLayer')['handleFeatureDetail']>
     readonly handleSetEndPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetEndPoint']>
     readonly handleSetStartPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetStartPoint']>
+    readonly handleToggleMapPoints: UnwrapRef<typeof import('./src/composables/store')['handleToggleMapPoints']>
     readonly handleToggleMapStyle: UnwrapRef<typeof import('./src/composables/store')['handleToggleMapStyle']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -421,6 +425,7 @@ declare module 'vue' {
     readonly mapPlacePoints: UnwrapRef<typeof import('./src/composables/store')['mapPlacePoints']>
     readonly mapPlacePointsFeatures: UnwrapRef<typeof import('./src/composables/store')['mapPlacePointsFeatures']>
     readonly mapPlaceUnfinishedLine: UnwrapRef<typeof import('./src/composables/store')['mapPlaceUnfinishedLine']>
+    readonly mapPoints: UnwrapRef<typeof import('./src/composables/store')['mapPoints']>
     readonly mapStartPlacePoint: UnwrapRef<typeof import('./src/composables/store')['mapStartPlacePoint']>
     readonly mapStyle: UnwrapRef<typeof import('./src/composables/store')['mapStyle']>
     readonly mapVideos: UnwrapRef<typeof import('./src/composables/store')['mapVideos']>
@@ -593,6 +598,7 @@ declare module 'vue' {
     readonly usePreferredDark: UnwrapRef<typeof import('@vueuse/core')['usePreferredDark']>
     readonly usePreferredLanguages: UnwrapRef<typeof import('@vueuse/core')['usePreferredLanguages']>
     readonly usePreferredReducedMotion: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedMotion']>
+    readonly usePrevious: UnwrapRef<typeof import('@vueuse/core')['usePrevious']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
     readonly useResizeObserver: UnwrapRef<typeof import('@vueuse/core')['useResizeObserver']>
