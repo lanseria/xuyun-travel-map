@@ -53,15 +53,16 @@ export const customPopupStyleOpt: mapboxgl.PopupOptions = {
 
 export const descHtml = (props: PointFeature) => {
   return `<h2>${props.properties!.name}</h2>
-  <p>时间: ${props.properties!.date}</p>
+  <p>日期: ${props.properties!.date}</p>
+  <p>时间: ${props.properties!.time}</p>
   `
 }
 
+const popup = new mapboxgl.Popup(customPopupStyleOpt)
+
 export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
   const description = descHtml(props)
-
-  const popup = new mapboxgl.Popup(customPopupStyleOpt)
-
+  popup.remove()
   const coordinates = props.geometry.coordinates.slice() as LngLatLike
   popup.setLngLat(coordinates).setHTML(description).addTo(window.map)
 
@@ -178,7 +179,7 @@ export const drawPoint = () => {
     type: 'symbol',
     source: MAP_PLACE_SOURCE,
     layout: {
-      'text-field': ['get', 'date'],
+      'text-field': ['get', 'name'],
       'icon-size': 0.15,
       'icon-image': ['get', 'icon'],
       'text-size': 12,
