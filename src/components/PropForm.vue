@@ -1,24 +1,25 @@
 <script lang="ts" setup>
 import type { PointFeature } from '~/composables'
 import { currentProperties, mapDistanceEndInput, mapDistanceStartInput } from '~/composables/store'
-const isShowForm = computed(() => {
-  return currentProperties.value !== undefined
-})
 
 const handleGeojsonUpdate = () => {
-  const data: PointFeature = {
-    properties: currentFeature.value.properties,
-    type: currentFeature.value.type,
-    geometry: currentFeature.value.geometry,
+  if (currentFeature.value) {
+    const data: PointFeature = {
+      properties: currentFeature.value.properties,
+      type: currentFeature.value.type,
+      geometry: currentFeature.value.geometry,
+    }
+    const json = JSON.stringify(data)
+    const url = `http://geojson.io/#data=data:application/json,${encodeURIComponent(json)}`
+    open((url))
   }
-  const json = JSON.stringify(data)
-  const url = `http://geojson.io/#data=data:application/json,${encodeURIComponent(json)}`
-  open((url))
 }
 
 const handleUpdate = () => {
-  const url = `https://github.com/lanseria/xuyun-map-data/blob/main/2212-2303-dongbei/raw/${currentProperties.value.vDate}.json`
-  open(url)
+  if (currentProperties.value) {
+    const url = `https://github.com/lanseria/xuyun-map-data/blob/main/2212-2303-dongbei/raw/${currentProperties.value.vDate}.json`
+    open(url)
+  }
 }
 
 const handleCalcDistance = () => {
@@ -31,11 +32,16 @@ const handleCalcDistance = () => {
     open(url)
   }
 }
+const visible = ref(false)
+
+const handleVideoModalPlay = () => {
+  visible.value = true
+}
 </script>
 
 <template>
   <div class="p-5">
-    <a-form v-if="isShowForm" :model="currentProperties" layout="vertical">
+    <a-form v-if="currentProperties" :model="currentProperties" layout="vertical">
       <!-- <a-form-item field="type" label="要素类型">
         <a-input disabled :model-value="TypeEnumMap[currentProperties.type as TypeEnum]" />
       </a-form-item> -->
@@ -67,12 +73,20 @@ const handleCalcDistance = () => {
       </a-form-item>
       <a-form-item field="url" label="视频">
         <div class="flex flex-col w-full">
-          <iframe class="w-full h-250px" :src="`//player.bilibili.com/player.html?bvid=${currentProperties.vid}&t=${currentProperties.vt}`" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />
+          <iframe v-if="activeTab === 'detail' && collapsed" class="w-full h-250px" :src="`//player.bilibili.com/player.html?bvid=${currentProperties.vid}&t=${currentProperties.vt}&as_wide=1&high_quality=1`" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />
           <div>
-            B站链接：
             <a-link :href="`https://www.bilibili.com/video/${currentProperties.vid}/?t=${currentProperties.vt}`" target="_blank">
               {{ currentProperties.vName }}
             </a-link>
+            <a-button @click="handleVideoModalPlay">
+              浮窗播放
+            </a-button>
+            <a-modal v-model:visible="visible" :width="720" draggable :footer="false">
+              <template #title>
+                浮窗播放
+              </template>
+              <iframe v-if="visible" class="w-full h-500px" :src="`//player.bilibili.com/player.html?bvid=${currentProperties.vid}&t=${currentProperties.vt}&as_wide=1&high_quality=1`" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />
+            </a-modal>
           </div>
         </div>
       </a-form-item>
