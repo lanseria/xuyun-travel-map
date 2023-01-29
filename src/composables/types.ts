@@ -1,8 +1,6 @@
 import type { Feature, LineString, Point } from '@turf/turf'
 
 export interface PointFeatureProp {
-  // 路线value值
-  rValue: string
   // 自动生成
   id: string
   // 切片点描述
@@ -23,25 +21,6 @@ export interface PointFeatureProp {
   vt: number
   // 视频发布时间
   vDate: string
-}
-
-export interface LineFeatureProp {
-  // 自动生成
-  id: string
-  // 类型
-  type: 'finish' | 'rest'
-  // 颜色
-  color: string
-  // 路线value值
-  rValue: string
-  // 视频ID
-  vid: string
-  // 视频发布时间
-  vDate: string
-  // 视频名称
-  vName: string
-  // 视频路程km
-  vDistanceKm: number
 }
 
 export interface RawItemData {
@@ -79,6 +58,8 @@ export interface VideoData {
   vName: string
   // 视频路程km
   vDistanceKm: number
+  vPointIds: string[]
+  vLine?: LineFeature
 }
 
 export type StartEndPointFeature = Feature<Point, {
@@ -89,7 +70,7 @@ export type StartEndPointFeature = Feature<Point, {
 }>
 
 export interface RouteItem {
-  name: string
+  label: string
   value: string
   dateRange: number[]
   url: string
@@ -100,17 +81,13 @@ export interface RouteVideoItem {
   sid: string
   name: string
   desc: string
-  // 2203-2305-dongbei
   value: string
   date: string
   startEndPoints: StartEndPointFeature[]
-  // gpx
-  featureList: Array<LineFeature | PointFeature | StartEndPointFeature>
-  videoList: VideoData[]
 }
+
+export interface RouteVideoJsonItem extends RouteVideoItem, RouteItem {}
 
 export type PointFeature = Feature<Point, PointFeatureProp>
 
-export type LineFeature = Feature<LineString, LineFeatureProp>
-
-export type AllFeature = LineFeature | PointFeature | StartEndPointFeature
+export type LineFeature = Feature<LineString>
