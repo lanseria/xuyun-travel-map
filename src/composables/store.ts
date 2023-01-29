@@ -44,6 +44,11 @@ export const activeTab = useStorage('map-activeTab', 'detail')
 export const mapCenter = useStorage('map-center', [124.724, 40.881])
 export const mapStyle = useStorage('map-style', 'streets')
 
+export const handleToggleMapStyle = () => {
+  mapStyle.value = mapStyle.value === 'satellite_streets' ? 'streets' : 'satellite_streets'
+  location.reload()
+}
+
 export type MyFeature = Feature<Polygon | Point | LineString>
 
 export const mapPlacePoints = ref<PointFeature[]>([])

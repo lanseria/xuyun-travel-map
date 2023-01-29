@@ -21,7 +21,7 @@ export const fitBbox = () => {
   }
   else {
     map.fitBounds(bbox, {
-      padding: { top: 300, bottom: 100, left: 200, right: 200 },
+      padding: { top: 200, bottom: 20, left: 200, right: 200 },
       duration: 100,
     })
   }
@@ -183,7 +183,7 @@ export const drawPoint = () => {
       'icon-size': 0.15,
       'icon-image': ['get', 'icon'],
       'text-size': 12,
-      'text-font': ['Smiley Sans Oblique'],
+      // 'text-font': ['HarmonyOS Sans SC Regular'],
       'text-offset': [0, 0.55],
       'text-anchor': 'top',
       'icon-allow-overlap': true,

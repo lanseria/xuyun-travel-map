@@ -63,6 +63,7 @@ declare global {
   const handleFeatureDetail: typeof import('./src/composables/mapLayer')['handleFeatureDetail']
   const handleSetEndPoint: typeof import('./src/composables/store')['handleSetEndPoint']
   const handleSetStartPoint: typeof import('./src/composables/store')['handleSetStartPoint']
+  const handleToggleMapStyle: typeof import('./src/composables/store')['handleToggleMapStyle']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
   const isAnimation: typeof import('./src/composables/store')['isAnimation']
@@ -394,6 +395,7 @@ declare module 'vue' {
     readonly handleFeatureDetail: UnwrapRef<typeof import('./src/composables/mapLayer')['handleFeatureDetail']>
     readonly handleSetEndPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetEndPoint']>
     readonly handleSetStartPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetStartPoint']>
+    readonly handleToggleMapStyle: UnwrapRef<typeof import('./src/composables/store')['handleToggleMapStyle']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isAnimation: UnwrapRef<typeof import('./src/composables/store')['isAnimation']>

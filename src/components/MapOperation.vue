@@ -190,6 +190,9 @@ const handle3DNext = () => {
     <div class="custom-btn" @click="handle3DNext()">
       <icon-skip-next-fill :size="40" />
     </div>
+    <div class="custom-btn" @click="handleToggleMapStyle()">
+      <icon-camera :size="40" />
+    </div>
   </ASpace>
 </template>
 

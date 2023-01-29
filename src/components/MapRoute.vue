@@ -3,7 +3,7 @@ import type { RouteVideoJsonItem } from '~/composables'
 import { allRouteList, currentRouteValue } from '~/composables'
 
 const handleCheck = (item: RouteVideoJsonItem) => {
-  currentRouteValue.value = item.value
+  // currentRouteValue.value = item.value
 }
 </script>
 

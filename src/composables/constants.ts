@@ -1,4 +1,4 @@
-import { osmStyle } from './mapStyle'
+// import { osmStyle } from './mapStyle'
 
 const MapBoxStylePrefix = 'mapbox://styles'
 
@@ -12,14 +12,19 @@ export const MAP_PLACE_LAYER_LINESTRING_DASHED = 'MAP_PLACE_LAYER_LINESTRING_DAS
 export const MAP_PLACE_LAYER_BBOX = 'MapPlaceLayerBbox'
 
 export const LayerStyleList = [
-  {
-    name: 'osm',
-    value: 'osm',
-    style: osmStyle,
-  },
+  // {
+  //   name: 'osm',
+  //   value: 'osm',
+  //   style: osmStyle,
+  // },
   {
     name: 'streets',
     value: 'streets',
     style: `${MapBoxStylePrefix}/lanseria/cld5ur36v000301lngmbtq0qh`,
+  },
+  {
+    name: 'Satellite Streets',
+    value: 'satellite_streets',
+    style: `${MapBoxStylePrefix}/lanseria/cldecwoux001t01pk90yx1jj3`,
   },
 ]
