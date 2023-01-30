@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { LngLatLike } from 'mapbox-gl'
 import type { PointFeature } from '~/composables'
 import { currentProperties, mapDistanceEndInput, mapDistanceStartInput } from '~/composables/store'
 
@@ -37,6 +38,38 @@ const visible = ref(false)
 const handleVideoModalPlay = () => {
   visible.value = true
 }
+
+const pointIdx = computed(() => {
+  if (currentProperties.value)
+    return mapPlacePoints.value.findIndex(item => item.properties.id === currentProperties.value!.id)
+  else
+    return -1
+})
+
+const handlePosition = () => {
+  if (currentFeature.value) {
+    window.map.flyTo({
+      center: currentFeature.value.geometry.coordinates as LngLatLike,
+      zoom: 15,
+      speed: 2,
+      curve: 1,
+    })
+  }
+}
+
+const handlePreviousPosition = () => {
+  //
+  const nextId = pointIdx.value - 1
+  if (nextId >= 0)
+    handleFeatureDetail({ ...mapPlacePoints.value[nextId] })
+}
+
+const handleNextPosition = () => {
+  //
+  const nextId = pointIdx.value + 1
+  if (nextId >= 0)
+    handleFeatureDetail({ ...mapPlacePoints.value[nextId] })
+}
 </script>
 
 <template>
@@ -73,14 +106,37 @@ const handleVideoModalPlay = () => {
       </a-form-item>
       <a-form-item field="url" label="视频">
         <div class="flex flex-col w-full">
-          <iframe v-if="activeTab === 'detail' && collapsed" class="w-full h-250px" :src="`//player.bilibili.com/player.html?bvid=${currentProperties.vid}&t=${currentProperties.vt}&as_wide=1&high_quality=1`" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />
+          <!-- <iframe v-if="activeTab === 'detail' && collapsed" class="w-full h-250px" :src="`//player.bilibili.com/player.html?bvid=${currentProperties.vid}&t=${currentProperties.vt}&as_wide=1&high_quality=1`" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" /> -->
           <div>
-            <a-link :href="`https://www.bilibili.com/video/${currentProperties.vid}/?t=${currentProperties.vt}`" target="_blank">
-              {{ currentProperties.vName }}
-            </a-link>
-            <a-button @click="handleVideoModalPlay">
-              浮窗播放
-            </a-button>
+            <div>
+              <a-link :href="`https://www.bilibili.com/video/${currentProperties.vid}/?t=${currentProperties.vt}`" target="_blank">
+                {{ currentProperties.vName }}
+              </a-link>
+            </div>
+            <ASpace>
+              <a-button :disabled="pointIdx - 1 === -1" @click="handlePreviousPosition">
+                <template #icon>
+                  <icon-skip-previous-fill />
+                </template>
+              </a-button>
+              <a-button @click="handleVideoModalPlay">
+                <template #icon>
+                  <icon-play-arrow-fill />
+                </template>
+                浮窗播放
+              </a-button>
+              <a-button @click="handlePosition">
+                <template #icon>
+                  <icon-location />
+                </template>
+                定位
+              </a-button>
+              <a-button @click="handleNextPosition">
+                <template #icon>
+                  <icon-skip-next-fill />
+                </template>
+              </a-button>
+            </ASpace>
             <a-modal v-model:visible="visible" :width="720" draggable :footer="false">
               <template #title>
                 浮窗播放

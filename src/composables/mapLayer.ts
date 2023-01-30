@@ -17,12 +17,13 @@ export const fitBbox = () => {
   if (isMobile) {
     map.fitBounds(bbox, {
       padding: { top: 200, bottom: 10, left: 20, right: 20 },
+      duration: 1000,
     })
   }
   else {
     map.fitBounds(bbox, {
       padding: { top: 200, bottom: 20, left: 200, right: 200 },
-      duration: 100,
+      duration: 1000,
     })
   }
 }
@@ -44,18 +45,16 @@ export const addPlaceSource = () => {
 }
 
 export const customPopupStyleOpt: mapboxgl.PopupOptions = {
-  offset: [10, -20],
-  anchor: 'bottom-left',
+  offset: [-10, -20],
+  anchor: 'bottom-right',
   closeButton: false,
   closeOnClick: true,
   className: 'LayerPopup',
 }
 
 export const descHtml = (props: PointFeature) => {
-  return `<h2>${props.properties!.name}</h2>
-  <p>日期: ${props.properties!.date}</p>
-  <p>时间: ${props.properties!.time}</p>
-  `
+  return `
+  <iframe style="height:120px; width:100%;" src="//player.bilibili.com/player.html?bvid=${props.properties.vid}&t=${props.properties.vt}&as_wide=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />`
 }
 
 const popup = new mapboxgl.Popup(customPopupStyleOpt)
