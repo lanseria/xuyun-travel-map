@@ -1,7 +1,7 @@
 {
   "name": "xuyun-travel-map",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "fetchxyz": "git clone https://hub.fastgit.xyz/lanseria/xuyun-map-data.git public/data || git -C public/data pull",

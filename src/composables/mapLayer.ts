@@ -54,6 +54,7 @@ export const customPopupStyleOpt: mapboxgl.PopupOptions = {
 
 export const descHtml = (props: PointFeature) => {
   return `
+  <div>${props.properties.name}</div>
   <iframe style="height:120px; width:100%;" src="//player.bilibili.com/player.html?bvid=${props.properties.vid}&t=${props.properties.vt}&as_wide=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />`
 }
 
