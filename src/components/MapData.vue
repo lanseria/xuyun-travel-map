@@ -81,7 +81,7 @@ const { isMobile } = useMobile()
     <div v-else class="px-4 py-2">
       <ASpace>
         <div>已骑行距离 <span class="text-blue">{{ alreadyDayCount }}</span> 天</div>
-        <div>已骑行 <span class="text-green">{{ alreadyKm }}</span> Km</div>
+        <div>已骑行 <span class="text-green">{{ alreadyKm.toFixed(2) }}</span> Km</div>
         <div>平均每日骑行 <span class="text-green">{{ avgKm.toFixed(2) }}</span> Km</div>
       </ASpace>
       <ASpace>

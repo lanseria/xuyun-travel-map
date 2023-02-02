@@ -151,56 +151,70 @@ const handle3DNext = () => {
     if (vPoints.length)
       handleFeatureDetail(vPoints[0], false)
   }
-  // const map = window.map
-  // const currentIdx = mapPlacePoints.value.findIndex(item => item.properties.id === currentProperties.value!.id)
-  // const nextIdx = currentIdx
-  // const currentPoint = mapPlacePoints.value[nextIdx]
-  // const nextPoint = mapPlacePoints.value[nextIdx + 1]
-  // if (nextPoint) {
-  //   const camera = map.getFreeCameraOptions()
-  //   const position = currentPoint.geometry.coordinates as LngLatLike
-  //   const altitude = 3000
+}
 
-  //   camera.position = mapboxgl.MercatorCoordinate.fromLngLat(position, altitude)
-  //   camera.lookAtPoint(nextPoint.geometry.coordinates as LngLatLike)
-
-  //   map.setFreeCameraOptions(camera)
-  //   handleFeatureDetail(nextPoint)
-  // }
+const handle3DPrev = () => {
+  const vid = currentProperties.value?.vid
+  const vIdx = mapVideos.value.findIndex(item => item.vid === vid)
+  const recordVideo = mapVideos.value[vIdx - 1]
+  if (recordVideo) {
+    const vPoints = mapPlacePoints.value.filter(item => item.properties.vid === recordVideo.vid)
+    if (vPoints.length)
+      handleFeatureDetail(vPoints[0], false)
+  }
 }
 </script>
 
 <template>
   <ASpace>
-    <div class="custom-btn" @click="reloadInitStatus">
-      <icon-reply :size="40" />
-    </div>
-    <div class="custom-btn" @click="toggleAnimation">
-      <icon-play-circle-fill v-if="!isAnimation" :size="40" />
-      <icon-pause-circle-fill v-else :size="40" />
-    </div>
+    <a-tooltip content="返回主视图">
+      <div class="custom-btn" @click="reloadInitStatus">
+        <icon-reply :size="30" />
+      </div>
+    </a-tooltip>
 
-    <div class="custom-btn">
-      <icon-skip-previous-fill :size="40" @click="handle3DNext()" />
-    </div>
-    <div class="custom-btn" @click="handle3DStart()">
-      <icon-play-arrow-fill v-if="stopNumber === 0" :size="40" />
-      <icon-pause v-else :size="40" />
-    </div>
-    <div class="custom-btn" @click="handle3DNext()">
-      <icon-skip-next-fill :size="40" />
-    </div>
-    <div class="custom-btn" @click="handleToggleMapStyle()">
-      <icon-camera :size="40" />
-    </div>
-    <div class="custom-btn" @click="handleToggleMapPoints()">
-      <icon-location :size="40" />
-    </div>
+    <a-tooltip content="播放路线动画">
+      <div class="custom-btn" @click="toggleAnimation">
+        <icon-play-circle-fill v-if="!isAnimation" :size="30" />
+        <icon-pause-circle-fill v-else :size="30" />
+      </div>
+    </a-tooltip>
+
+    <a-tooltip content="上一个途径点">
+      <div class="custom-btn">
+        <icon-skip-previous-fill :size="30" @click="handle3DPrev()" />
+      </div>
+    </a-tooltip>
+
+    <a-tooltip content="从这个途径点模拟骑行">
+      <div class="custom-btn" @click="handle3DStart()">
+        <icon-play-arrow-fill v-if="stopNumber === 0" :size="30" />
+        <icon-pause v-else :size="30" />
+      </div>
+    </a-tooltip>
+
+    <a-tooltip content="下一个途径点">
+      <div class="custom-btn" @click="handle3DNext()">
+        <icon-skip-next-fill :size="30" />
+      </div>
+    </a-tooltip>
+
+    <a-tooltip content="切换底图">
+      <div class="custom-btn" @click="handleToggleMapStyle()">
+        <icon-camera :size="30" />
+      </div>
+    </a-tooltip>
+
+    <a-tooltip content="显示/隐藏途径点">
+      <div class="custom-btn" @click="handleToggleMapPoints()">
+        <icon-location :size="30" />
+      </div>
+    </a-tooltip>
   </ASpace>
 </template>
 
 <style lang="css" scoped>
 .custom-btn {
-  @apply bg-white rounded-1/2 w-50px h-50px flex justify-center items-center cursor-pointer hover:text-blue-5;
+  @apply bg-white rounded-1/2 w-40px h-40px flex justify-center items-center cursor-pointer hover:text-blue-5;
 }
 </style>
