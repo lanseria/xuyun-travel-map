@@ -51,6 +51,7 @@ declare global {
   const drawLine: typeof import('./src/composables/mapLayer')['drawLine']
   const drawPoint: typeof import('./src/composables/mapLayer')['drawPoint']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
+  const editForm: typeof import('./src/composables/store')['editForm']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const fetchRouteData: typeof import('./src/composables/store')['fetchRouteData']
@@ -66,10 +67,13 @@ declare global {
   const handleToggleMapPoints: typeof import('./src/composables/store')['handleToggleMapPoints']
   const handleToggleMapStyle: typeof import('./src/composables/store')['handleToggleMapStyle']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const initEditFormData: typeof import('./src/composables/constants')['initEditFormData']
   const inject: typeof import('vue')['inject']
   const isAnimation: typeof import('./src/composables/store')['isAnimation']
   const isDark: typeof import('./src/composables/dark')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
+  const isEditSide: typeof import('./src/composables/store')['isEditSide']
+  const isGetCoord: typeof import('./src/composables/store')['isGetCoord']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
@@ -317,6 +321,7 @@ declare global {
   const useWindowFocus: typeof import('@vueuse/core')['useWindowFocus']
   const useWindowScroll: typeof import('@vueuse/core')['useWindowScroll']
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
+  const vClipIdx: typeof import('./src/composables/store')['vClipIdx']
   const watch: typeof import('vue')['watch']
   const watchArray: typeof import('@vueuse/core')['watchArray']
   const watchAtMost: typeof import('@vueuse/core')['watchAtMost']
@@ -386,6 +391,7 @@ declare module 'vue' {
     readonly drawLine: UnwrapRef<typeof import('./src/composables/mapLayer')['drawLine']>
     readonly drawPoint: UnwrapRef<typeof import('./src/composables/mapLayer')['drawPoint']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
+    readonly editForm: UnwrapRef<typeof import('./src/composables/store')['editForm']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly fetchRouteData: UnwrapRef<typeof import('./src/composables/store')['fetchRouteData']>
@@ -401,10 +407,13 @@ declare module 'vue' {
     readonly handleToggleMapPoints: UnwrapRef<typeof import('./src/composables/store')['handleToggleMapPoints']>
     readonly handleToggleMapStyle: UnwrapRef<typeof import('./src/composables/store')['handleToggleMapStyle']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initEditFormData: UnwrapRef<typeof import('./src/composables/constants')['initEditFormData']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isAnimation: UnwrapRef<typeof import('./src/composables/store')['isAnimation']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isEditSide: UnwrapRef<typeof import('./src/composables/store')['isEditSide']>
+    readonly isGetCoord: UnwrapRef<typeof import('./src/composables/store')['isGetCoord']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
@@ -652,6 +661,7 @@ declare module 'vue' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
+    readonly vClipIdx: UnwrapRef<typeof import('./src/composables/store')['vClipIdx']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchArray: UnwrapRef<typeof import('@vueuse/core')['watchArray']>
     readonly watchAtMost: UnwrapRef<typeof import('@vueuse/core')['watchAtMost']>

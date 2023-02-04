@@ -28,3 +28,13 @@ export const LayerStyleList = [
     style: `${MapBoxStylePrefix}/lanseria/cldecwoux001t01pk90yx1jj3`,
   },
 ]
+
+export const initEditFormData = () => {
+  return {
+    vid: '',
+    vName: '',
+    vDate: '',
+    vDistanceKm: 0,
+    vClips: [],
+  }
+}

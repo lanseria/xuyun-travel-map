@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
+import queryString from 'query-string'
 import { editForm, isGetCoord, vClipIdx } from '~/composables'
 const handleAdd = () => {
   const center = window.map.getCenter()
@@ -26,6 +27,21 @@ const handleDel = (item: any) => {
 const handleGetCoord = (idx: number) => {
   vClipIdx.value = idx
   isGetCoord.value = true
+}
+const handleSearchRoute = () => {
+  if (editForm.value.vClips.length > 1) {
+    const point = editForm.value.vClips.map((it) => {
+      const coord = [...it.coordinates]
+      return coord.reverse().join()
+    })
+    const pointObj = {
+      point,
+    }
+    const paramsStr = queryString.stringify(pointObj)
+    // console.log(paramsStr)
+    const url = `https://graphhopper.com/maps/?${paramsStr}&profile=mtb&layer=OpenStreetMap`
+    open(url)
+  }
 }
 </script>
 
@@ -54,14 +70,21 @@ const handleGetCoord = (idx: number) => {
         v-model="editForm.vDistanceKm"
       />
     </a-form-item>
+    <ASpace direction="horizontal">
+      <a-button type="primary" @click="handleAdd">
+        <template #icon>
+          <icon-plus />
+        </template>
+        添加片段
+      </a-button>
 
-    <a-button type="primary" @click="handleAdd">
-      <template #icon>
-        <icon-plus />
-      </template>
-      添加片段
-    </a-button>
-
+      <a-button type="primary" status="success" @click="handleSearchRoute">
+        <template #icon>
+          <icon-search />
+        </template>
+        查询路线与距离
+      </a-button>
+    </ASpace>
     <a-card v-for="(item, idx) in editForm.vClips" :key="idx" class="mt-5" hoverable>
       <template #title>
         <AInput v-model="item.name" />

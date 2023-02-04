@@ -1,5 +1,6 @@
 import type { Feature, LineString, Point, Polygon } from '@turf/turf'
 import * as turf from '@turf/turf'
+import { initEditFormData } from './constants'
 import type { PointFeature, PointFeatureProp, RawData, RouteVideoJsonItem, VideoData } from './types'
 
 export const mapContainerWidth = ref(0)
@@ -9,13 +10,7 @@ export const isEditSide = ref(false)
 export const vClipIdx = ref(-1)
 export const isGetCoord = ref(false)
 export const isAnimation = ref(false)
-export const editForm = useStorage<RawData>('map-edit-form', {
-  vid: '',
-  vName: '',
-  vDate: '',
-  vDistanceKm: 0,
-  vClips: [],
-})
+export const editForm = useStorage<RawData>('map-edit-form', initEditFormData())
 watchDebounced(() => collapsed.value, () => {
   window.map.resize()
 }, { debounce: 300, maxWait: 600 })

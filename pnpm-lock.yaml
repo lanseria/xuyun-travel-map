@@ -19,6 +19,7 @@ specifiers:
   lodash-es: ^4.17.21
   mapbox-gl: ^2.12.0
   pnpm: ^7.26.3
+  query-string: ^8.1.0
   taze: ^0.8.5
   typescript: ^4.9.5
   unocss: ^0.49.4
@@ -41,6 +42,7 @@ dependencies:
   dayjs: 1.11.7
   lodash-es: 4.17.21
   mapbox-gl: 2.12.0
+  query-string: 8.1.0
   vue: 3.2.47
   vue-router: 4.1.6_vue@3.2.47
 
@@ -3113,6 +3115,11 @@ packages:
       ms: 2.1.2
     dev: true
 
+  /decode-uri-component/0.4.1:
+    resolution: {integrity: sha512-+8VxcR21HhTy8nOt6jf20w0c9CADrw1O8d+VZ/YzzCt4bJ3uBjw+D1q2osAB8RnpwwaeYBxy0HyKQxD5JBMuuQ==}
+    engines: {node: '>=14.16'}
+    dev: false
+
   /deep-equal/1.1.1:
     resolution: {integrity: sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==}
     dependencies:
@@ -3909,6 +3916,11 @@ packages:
     dependencies:
       to-regex-range: 5.0.1
     dev: true
+
+  /filter-obj/5.1.0:
+    resolution: {integrity: sha512-qWeTREPoT7I0bifpPUXtxkZJ1XJzxWtfoWWkdVGqa+eCr3SHW/Ocp89o8vLvbUuQnadybJpjOKu4V+RwO6sGng==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /find-up/4.1.0:
     resolution: {integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==}
@@ -5594,6 +5606,15 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /query-string/8.1.0:
+    resolution: {integrity: sha512-BFQeWxJOZxZGix7y+SByG3F36dA0AbTy9o6pSmKFcFz7DAj0re9Frkty3saBn3nHo3D0oZJ/+rx3r8H8r8Jbpw==}
+    engines: {node: '>=14.16'}
+    dependencies:
+      decode-uri-component: 0.4.1
+      filter-obj: 5.1.0
+      split-on-first: 3.0.0
+    dev: false
+
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
@@ -5968,6 +5989,11 @@ packages:
 
   /splaytree/3.1.1:
     resolution: {integrity: sha512-9FaQ18FF0+sZc/ieEeXHt+Jw2eSpUgUtTLDYB/HXKWvhYVyOc7h1hzkn5MMO3GPib9MmXG1go8+OsBBzs/NMww==}
+    dev: false
+
+  /split-on-first/3.0.0:
+    resolution: {integrity: sha512-qxQJTx2ryR0Dw0ITYyekNQWpz6f8dGd7vffGNflQQ3Iqj9NJ6qiZ7ELpZsJ/QBhIVAiDfXdag3+Gp8RvWa62AA==}
+    engines: {node: '>=12'}
     dev: false
 
   /ssri/9.0.1:
