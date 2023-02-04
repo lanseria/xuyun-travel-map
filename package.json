@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "fetchxyz": "git clone https://hub.fastgit.xyz/lanseria/xuyun-map-data.git public/data || git -C public/data pull",
-    "fetch": "git clone https://github.com/lanseria/xuyun-map-data.git public/data || git -C public/data pull",
+    "fetchxyz": "git clone https://hub.fastgit.xyz/lanseria/xuyun-map-data.git public/data || git -C public/data pull ||git -C public/data reset --hard origin/main",
+    "fetch": "git clone https://github.com/lanseria/xuyun-map-data.git public/data || git -C public/data pull || git -C public/data reset --hard origin/main",
     "data": " ni -C public/data/ && nr -C public/data/ dev:gen",
     "postinstall": "npm i -g @antfu/ni && npm run fetch && npm run data && cp public/data/src/types.ts ./src/composables/types.ts",
     "dev": "vite --port 3333 --host",
@@ -15,7 +15,7 @@
     "up": "taze major -I"
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.42.0",
+    "@arco-design/web-vue": "^2.42.1",
     "@mapbox/mapbox-gl-language": "^1.0.1",
     "@sentry/tracing": "^7.36.0",
     "@sentry/vue": "^7.36.0",

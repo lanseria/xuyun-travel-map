@@ -3,7 +3,7 @@
 import type { LngLatBoundsLike, LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import { MAP_PLACE_LAYER_BBOX, MAP_PLACE_LAYER_LINESTRING_BG, MAP_PLACE_LAYER_LINESTRING_DASHED, MAP_PLACE_LAYER_POINT, MAP_PLACE_SOURCE } from './constants'
-import { activeTab, currentFeature, currentProperties, isAnimation, mapPlaceLineBbox, mapPlacePointsFeatures } from './store'
+import { activeTab, currentFeature, currentProperties, editForm, isAnimation, isEditSide, isGetCoord, mapPlaceLineBbox, mapPlacePointsFeatures, vClipIdx } from './store'
 import type { PointFeature } from './types'
 import { queryDevice } from './utils'
 
@@ -61,25 +61,36 @@ export const descHtml = (props: PointFeature) => {
 const popup = new mapboxgl.Popup(customPopupStyleOpt)
 
 export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
-  const description = descHtml(props)
-  popup.remove()
-  const coordinates = props.geometry.coordinates.slice() as LngLatLike
-  popup.setLngLat(coordinates).setHTML(description).addTo(window.map)
-
-  // 设置完立即显示其当前要素属性
-  isTabDetail && (activeTab.value = 'detail')
-  currentProperties.value = {
-    ...props.properties,
+  console.warn('feature-click', isGetCoord.value)
+  if (isGetCoord.value) {
+    const item = editForm.value.vClips[vClipIdx.value]
+    if (item) {
+      item.coordinates = props.geometry.coordinates as [number, number]
+      isGetCoord.value = false
+    }
   }
-  // console.log(props)
-  currentFeature.value = { ...props }
-  collapsed.value = true
-  window.map.flyTo({
-    center: currentFeature.value.geometry.coordinates as LngLatLike,
-    zoom: 15,
-    speed: 2,
-    curve: 1,
-  })
+  else {
+    const description = descHtml(props)
+    popup.remove()
+    const coordinates = props.geometry.coordinates.slice() as LngLatLike
+    popup.setLngLat(coordinates).setHTML(description).addTo(window.map)
+
+    // 设置完立即显示其当前要素属性
+    isTabDetail && (activeTab.value = 'detail')
+    currentProperties.value = {
+      ...props.properties,
+    }
+    // console.log(props)
+    currentFeature.value = { ...props }
+    collapsed.value = true
+    isEditSide.value = false
+    window.map.flyTo({
+      center: currentFeature.value.geometry.coordinates as LngLatLike,
+      zoom: 15,
+      speed: 2,
+      curve: 1,
+    })
+  }
 }
 
 const handleFeatureClick = (e: any) => {

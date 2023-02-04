@@ -5,8 +5,17 @@ import type { PointFeature, PointFeatureProp, RawData, RouteVideoJsonItem, Video
 export const mapContainerWidth = ref(0)
 
 export const collapsed = ref(false)
+export const isEditSide = ref(false)
+export const vClipIdx = ref(-1)
+export const isGetCoord = ref(false)
 export const isAnimation = ref(false)
-
+export const editForm = useStorage<RawData>('map-edit-form', {
+  vid: '',
+  vName: '',
+  vDate: '',
+  vDistanceKm: 0,
+  vClips: [],
+})
 watchDebounced(() => collapsed.value, () => {
   window.map.resize()
 }, { debounce: 300, maxWait: 600 })

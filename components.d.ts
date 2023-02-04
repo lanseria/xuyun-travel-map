@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DataList: typeof import('./src/components/DataList.vue')['default']
     DataPointList: typeof import('./src/components/DataPointList.vue')['default']
+    EditSide: typeof import('./src/components/EditSide.vue')['default']
     HelpText: typeof import('./src/components/HelpText.vue')['default']
     MapComp: typeof import('./src/components/MapComp.vue')['default']
     MapData: typeof import('./src/components/MapData.vue')['default']
@@ -21,5 +22,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Side: typeof import('./src/components/Side.vue')['default']
+    VideoData: typeof import('./src/components/VideoData.vue')['default']
+    VideoEdit: typeof import('./src/components/VideoEdit.vue')['default']
   }
 }

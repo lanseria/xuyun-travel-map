@@ -9,10 +9,10 @@ import { BrowserTracing } from '@sentry/tracing'
 
 import App from './App.vue'
 
-import '@arco-design/web-vue/dist/arco.css'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
+import '@arco-design/web-vue/dist/arco.css'
 
 const app = createApp(App)
 const router = createRouter({

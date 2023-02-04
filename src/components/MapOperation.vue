@@ -4,7 +4,7 @@ import * as turf from '@turf/turf'
 import mapboxgl from 'mapbox-gl'
 import type { Feature, LineString, Point } from '@turf/turf'
 import type { PointFeature } from '~/composables'
-import { customPopupStyleOpt, descHtml, reloadInitStatus } from '~/composables'
+import { customPopupStyleOpt, descHtml, isEditSide, reloadInitStatus } from '~/composables'
 
 // let savedBearing = 0
 
@@ -123,23 +123,6 @@ const showLinePopup = () => {
 const handle3DStart = () => {
   showLinePopup()
   cameraStart()
-  // if (currentProperties.value) {
-  //   const map = window.map
-  //   const currentIdx = mapPlacePoints.value.findIndex(item => item.properties.id === currentProperties.value!.id)
-  //   const currentPoint = mapPlacePoints.value[currentIdx]
-  //   const nextPoint = mapPlacePoints.value[currentIdx + 1]
-  //   if (nextPoint) {
-  //     const bearing = turf.bearing(currentPoint.geometry.coordinates, nextPoint.geometry.coordinates)
-  //     savedBearing = bearing || savedBearing
-  //     map.flyTo({
-  //       center: currentPoint.geometry.coordinates as LngLatLike,
-  //       bearing: savedBearing,
-  //       pitch: 70,
-  //       zoom: 14,
-  //       offset: [0, 500],
-  //     })
-  //   }
-  // }
 }
 
 const handle3DNext = () => {
@@ -162,6 +145,11 @@ const handle3DPrev = () => {
     if (vPoints.length)
       handleFeatureDetail(vPoints[0], false)
   }
+}
+
+const handleNewVideo = () => {
+  isEditSide.value = true
+  collapsed.value = true
 }
 </script>
 
@@ -208,6 +196,12 @@ const handle3DPrev = () => {
     <a-tooltip content="显示/隐藏途径点">
       <div class="custom-btn" @click="handleToggleMapPoints()">
         <icon-location :size="30" />
+      </div>
+    </a-tooltip>
+
+    <a-tooltip content="新建视频记录">
+      <div class="custom-btn" @click="handleNewVideo()">
+        <icon-file-video :size="30" />
       </div>
     </a-tooltip>
   </ASpace>

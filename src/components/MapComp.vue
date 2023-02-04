@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import MapboxLanguage from '@mapbox/mapbox-gl-language'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { LayerStyleList, MapboxAccessToken, handleCollapsed, mapLoaded, mapStyle } from '~/composables'
+import { LayerStyleList, MapboxAccessToken, editForm, handleCollapsed, isGetCoord, mapLoaded, mapStyle, vClipIdx } from '~/composables'
 
 mapboxgl.accessToken
   = MapboxAccessToken
@@ -40,6 +40,16 @@ onMounted(() => {
     mapLoad()
     updateMap()
     mapLoaded.value = true
+  })
+  map.on('click', (e) => {
+    console.warn('map-click')
+    if (isGetCoord.value) {
+      const item = editForm.value.vClips[vClipIdx.value]
+      if (item) {
+        const { lng, lat } = e.lngLat
+        item.coordinates = [lng, lat]
+      }
+    }
   })
 })
 </script>
