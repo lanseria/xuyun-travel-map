@@ -32,7 +32,7 @@
     "@antfu/eslint-config": "^0.35.1",
     "@iconify-json/carbon": "^1.1.14",
     "@types/mapbox-gl": "^2.7.10",
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.11.19",
     "@unocss/reset": "^0.49.4",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.47",
