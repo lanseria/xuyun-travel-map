@@ -9,7 +9,7 @@ const alreadyKm = computed(() => {
 })
 
 const allKm = computed(() => {
-  return 1346.8 + alreadyKm.value
+  return 1050 + 1448.60
 })
 
 const restKm = computed(() => {
