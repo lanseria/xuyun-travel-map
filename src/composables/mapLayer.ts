@@ -9,8 +9,8 @@ import { queryDevice } from './utils'
 
 let stopNumber = 0
 
-export const fitBbox = () => {
-  const box = mapPlaceLineBbox.value.bbox!
+export const fitBbox = (b: [number, number, number, number] | undefined) => {
+  const box = b || mapPlaceLineBbox.value.bbox!
   const map = window.map
   const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
   const isMobile = queryDevice()
@@ -60,14 +60,13 @@ export const descHtml = (props: PointFeature) => {
 
 const popup = new mapboxgl.Popup(customPopupStyleOpt)
 
-export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => {
+export const handleFeatureDetail = (props: PointFeature, isTabDetail = true, isFly = true) => {
   console.warn('feature-click', isGetCoord.value)
   if (isGetCoord.value) {
     const item = editForm.value.vClips[vClipIdx.value]
-    if (item) {
+    if (item)
       item.coordinates = props.geometry.coordinates as [number, number]
-      isGetCoord.value = false
-    }
+      // isGetCoord.value = false
   }
   else {
     const description = descHtml(props)
@@ -84,7 +83,7 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true) => 
     currentFeature.value = { ...props }
     collapsed.value = true
     isEditSide.value = false
-    window.map.flyTo({
+    isFly && window.map.flyTo({
       center: currentFeature.value.geometry.coordinates as LngLatLike,
       zoom: 15,
       speed: 2,

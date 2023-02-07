@@ -43,6 +43,14 @@ const handleSearchRoute = () => {
     open(url)
   }
 }
+const handleFly = (lnglat: any) => {
+  window.map.flyTo({
+    center: lnglat,
+  })
+}
+const handleClearGetCoord = () => {
+  isGetCoord.value = false
+}
 </script>
 
 <template>
@@ -84,6 +92,12 @@ const handleSearchRoute = () => {
         </template>
         查询路线与距离
       </a-button>
+      <a-button type="primary" status="danger" @click="handleClearGetCoord">
+        <template #icon>
+          <IconClose />
+        </template>
+        清除点选状态
+      </a-button>
     </ASpace>
     <a-card v-for="(item, idx) in editForm.vClips" :key="idx" class="mt-5" hoverable>
       <template #title>
@@ -108,12 +122,18 @@ const handleSearchRoute = () => {
         </a-switch>
       </div>
       <div class="div-form-item">
-        位置：{{ item.coordinates }}
-        <a-button size="mini" status="success" :type="isGetCoord ? 'dashed' : 'text'" @click="handleGetCoord(idx)">
+        位置：
+        <a-button size="mini" status="success" @click="handleFly(item.coordinates)">
+          <template #icon>
+            <icon-arrow-up />
+          </template>
+        </a-button>
+        <a-button size="mini" status="success" :type="isGetCoord ? 'outline' : 'text'" @click="handleGetCoord(idx)">
           <template #icon>
             <icon-pushpin />
           </template>
         </a-button>
+        {{ item.coordinates }}
       </div>
       <div class="div-form-item">
         日期：<a-date-picker v-model="item.date" value-format="YYYY-MM-DD" />

@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import type { TableExpandable, TableSortable } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
+import { IconCheck, IconRefresh } from '@arco-design/web-vue/es/icon'
 // import type { VideoData } from '~/composables'
-// import * as turf from '@turf/turf'
+import * as turf from '@turf/turf'
 import type { VideoData } from '~/composables'
 import { mapVideos } from '~/composables'
 
@@ -44,14 +46,44 @@ const rowClass = (record: any) => {
 }
 
 const handleViewLine = (record: VideoData) => {
+  // if (record.vLine)
+  //   console.log(record.vLine)
+
   const vPoints = mapPlacePoints.value.filter(item => item.properties.vid === record.vid)
   if (vPoints.length)
-    handleFeatureDetail(vPoints[0], false)
+    handleFeatureDetail(vPoints[0], false, false)
 
-  // if (record.vLine) {
-  //   const b = turf.bbox(record.vLine)
-  //   fitBbox(b)
-  // }
+  if (record.vLine) {
+    const b = turf.bbox(record.vLine)
+    // console.log(b)
+    fitBbox(b as any)
+  }
+}
+
+const handleCopy = (record: VideoData) => {
+  //
+  // console.log(record.vDate)
+  const { data, onFetchResponse } = useFetch(`https://raw.githubusercontent.com/lanseria/xuyun-map-data/main/${currentRouteValue.value}/raw/${record.vDate}.json`, { immediate: true }).get().json()
+  const messageIns = Message.info({
+    content: '加载中',
+    icon: () => h(IconRefresh, { spin: true }),
+  })
+  onFetchResponse(() => {
+    // console.log(data.value)
+    editForm.value = data.value
+    handleNewVideo()
+    messageIns.close()
+    Message.success({
+      content: '加载成功',
+      icon: () => h(IconCheck),
+    })
+    if (record.vLine) {
+      const b = turf.bbox(record.vLine)
+      // console.log(b)
+      fitBbox(b as any)
+    }
+  })
+  //
 }
 </script>
 
@@ -70,6 +102,11 @@ const handleViewLine = (record: VideoData) => {
         <div class="cursor-pointer text-cyan-5 underline" @click="handleViewLine(record)">
           {{ record.vDistanceKm }}Km
         </div>
+        <a-button type="text" status="success" size="mini" @click="handleCopy(record)">
+          <template #icon>
+            <icon-copy />
+          </template>
+        </a-button>
       </template>
       <template #expand-row="{ record }">
         <DataPointList :vid="record.vid" />

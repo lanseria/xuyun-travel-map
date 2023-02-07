@@ -54,7 +54,6 @@ declare global {
   const editForm: typeof import('./src/composables/store')['editForm']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
-  const fetchRouteData: typeof import('./src/composables/store')['fetchRouteData']
   const fitBbox: typeof import('./src/composables/mapLayer')['fitBbox']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -62,6 +61,7 @@ declare global {
   const handleCollapsed: typeof import('./src/composables/store')['handleCollapsed']
   const handleCollapsedFalse: typeof import('./src/composables/store')['handleCollapsedFalse']
   const handleFeatureDetail: typeof import('./src/composables/mapLayer')['handleFeatureDetail']
+  const handleNewVideo: typeof import('./src/composables/store')['handleNewVideo']
   const handleSetEndPoint: typeof import('./src/composables/store')['handleSetEndPoint']
   const handleSetStartPoint: typeof import('./src/composables/store')['handleSetStartPoint']
   const handleToggleMapPoints: typeof import('./src/composables/store')['handleToggleMapPoints']
@@ -394,7 +394,6 @@ declare module 'vue' {
     readonly editForm: UnwrapRef<typeof import('./src/composables/store')['editForm']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly fetchRouteData: UnwrapRef<typeof import('./src/composables/store')['fetchRouteData']>
     readonly fitBbox: UnwrapRef<typeof import('./src/composables/mapLayer')['fitBbox']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -402,6 +401,7 @@ declare module 'vue' {
     readonly handleCollapsed: UnwrapRef<typeof import('./src/composables/store')['handleCollapsed']>
     readonly handleCollapsedFalse: UnwrapRef<typeof import('./src/composables/store')['handleCollapsedFalse']>
     readonly handleFeatureDetail: UnwrapRef<typeof import('./src/composables/mapLayer')['handleFeatureDetail']>
+    readonly handleNewVideo: UnwrapRef<typeof import('./src/composables/store')['handleNewVideo']>
     readonly handleSetEndPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetEndPoint']>
     readonly handleSetStartPoint: UnwrapRef<typeof import('./src/composables/store')['handleSetStartPoint']>
     readonly handleToggleMapPoints: UnwrapRef<typeof import('./src/composables/store')['handleToggleMapPoints']>

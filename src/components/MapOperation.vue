@@ -4,7 +4,7 @@ import * as turf from '@turf/turf'
 import mapboxgl from 'mapbox-gl'
 import type { Feature, LineString, Point } from '@turf/turf'
 import type { PointFeature } from '~/composables'
-import { customPopupStyleOpt, descHtml, isEditSide, reloadInitStatus } from '~/composables'
+import { customPopupStyleOpt, descHtml, reloadInitStatus } from '~/composables'
 
 // let savedBearing = 0
 
@@ -145,11 +145,6 @@ const handle3DPrev = () => {
     if (vPoints.length)
       handleFeatureDetail(vPoints[0], false)
   }
-}
-
-const handleNewVideo = () => {
-  isEditSide.value = true
-  collapsed.value = true
 }
 </script>
 

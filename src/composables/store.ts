@@ -70,45 +70,6 @@ export const lastestVideoInfo = ref<RawData>()
 
 export const currentRouteValue = ref('2212-2303-dongbei')
 export const allRouteList = ref<RouteVideoJsonItem[]>([])
-const { data, onFetchResponse } = useFetch('/data/routes.json', { immediate: true }).get().json()
-
-export const fetchRouteData = () => {
-  const currentRoute = allRouteList.value.find(item => item.value === currentRouteValue.value)
-  if (currentRoute) {
-    const { data, onFetchResponse } = useFetch(`/data/${currentRouteValue.value}/data/all-points.geojson`, { immediate: true }).get().json()
-    onFetchResponse(() => {
-      const features: PointFeature[] = data.value.features
-      mapPlacePoints.value = features
-    })
-
-    const { data: videoData, onFetchResponse: videoOnFetchResponse } = useFetch(`/data/${currentRouteValue.value}/data/all-videos.json`, { immediate: true }).get().json()
-    videoOnFetchResponse(() => {
-      const features: VideoData[] = videoData.value.map((item: any) => ({
-        ...item, expand: '',
-      }))
-      mapVideos.value = features
-    })
-    const { data: endData, onFetchResponse: endOnFetchResponse } = useFetch(`/data/${currentRouteValue.value}/video.json`, { immediate: true }).get().json()
-    endOnFetchResponse(() => {
-      mapStartPlacePoint.value = endData.value.startEndPoints[0]
-      mapEndPlacePoint.value = endData.value.startEndPoints[1]
-    })
-
-    const { data: lastVideoData, onFetchResponse: lastVideoOnFetchResponse } = useFetch('/data/lastest.json', { immediate: true }).get().json()
-    lastVideoOnFetchResponse(() => {
-      lastestVideoInfo.value = lastVideoData.value
-    })
-  }
-}
-
-watchDebounced(() => currentRouteValue.value, () => {
-  fetchRouteData()
-}, { debounce: 300, maxWait: 600 })
-
-onFetchResponse(() => {
-  allRouteList.value = data.value
-  fetchRouteData()
-})
 
 export const mapPlaceFinishedLine = computed(() => {
   const linePointList = mapPlacePoints.value.map((item) => {
@@ -255,5 +216,10 @@ export const reloadInitStatus = () => {
   currentFeature.value = undefined
   currentProperties.value = undefined
   reloadPlace()
-  fitBbox()
+  fitBbox(undefined)
+}
+
+export const handleNewVideo = () => {
+  isEditSide.value = true
+  collapsed.value = true
 }

@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Dashboard: typeof import('./src/components/Dashboard.vue')['default']
     DataList: typeof import('./src/components/DataList.vue')['default']
     DataPointList: typeof import('./src/components/DataPointList.vue')['default']
     EditSide: typeof import('./src/components/EditSide.vue')['default']
