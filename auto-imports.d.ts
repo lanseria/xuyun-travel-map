@@ -22,6 +22,7 @@ declare global {
   const allRouteList: typeof import('./src/composables/store')['allRouteList']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const clearMode: typeof import('./src/composables/store')['clearMode']
   const collapsed: typeof import('./src/composables/store')['collapsed']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
@@ -362,6 +363,7 @@ declare module 'vue' {
     readonly allRouteList: UnwrapRef<typeof import('./src/composables/store')['allRouteList']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly clearMode: UnwrapRef<typeof import('./src/composables/store')['clearMode']>
     readonly collapsed: UnwrapRef<typeof import('./src/composables/store')['collapsed']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>

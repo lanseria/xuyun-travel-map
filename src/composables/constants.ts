@@ -27,6 +27,11 @@ export const LayerStyleList = [
     value: 'satellite_streets',
     style: `${MapBoxStylePrefix}/lanseria/cldecwoux001t01pk90yx1jj3`,
   },
+  {
+    name: 'Monochrome',
+    value: 'monochrome',
+    style: `${MapBoxStylePrefix}/lanseria/cldwdod87000e01pcn2ezak1n`,
+  },
 ]
 
 export const initEditFormData = () => {

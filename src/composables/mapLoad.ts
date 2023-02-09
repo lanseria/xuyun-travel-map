@@ -53,6 +53,6 @@ export const mapLoad = () => {
   }, { debounce: 300, maxWait: 600, immediate: true })
 
   setTimeout(() => {
-    fitBbox()
+    fitBbox(undefined)
   }, 1000)
 }

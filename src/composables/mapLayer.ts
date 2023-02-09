@@ -252,6 +252,8 @@ export const drawBboxPolygon = () => {
 export const reloadPlace = () => {
   addPlaceSource()
   drawLine()
-  drawPoint()
-  drawBboxPolygon()
+  if (!clearMode.value) {
+    drawPoint()
+    drawBboxPolygon()
+  }
 }

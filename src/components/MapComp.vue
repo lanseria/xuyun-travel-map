@@ -63,6 +63,7 @@ onMounted(() => {
       <!-- <MapDistance class="bg-white" /> -->
     </div>
     <div
+      v-if="!clearMode"
       class="absolute top-0 left-1/2 z-10 flex flex-col items-start"
       :style="{
         transform: 'translate(-50%, 0)',
