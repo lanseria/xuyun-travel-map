@@ -15,10 +15,10 @@
     "up": "taze major -I"
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.42.1",
+    "@arco-design/web-vue": "^2.43.0",
     "@mapbox/mapbox-gl-language": "^1.0.1",
-    "@sentry/tracing": "^7.36.0",
-    "@sentry/vue": "^7.36.0",
+    "@sentry/tracing": "^7.37.1",
+    "@sentry/vue": "^7.37.1",
     "@turf/turf": "^6.5.0",
     "@vueuse/core": "^9.12.0",
     "dayjs": "^1.11.7",
