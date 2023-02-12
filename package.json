@@ -36,7 +36,7 @@
     "@unocss/reset": "^0.49.4",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.47",
-    "eslint": "^8.33.0",
+    "eslint": "^8.34.0",
     "pnpm": "^7.27.0",
     "taze": "^0.8.5",
     "typescript": "^4.9.5",
