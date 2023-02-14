@@ -17,8 +17,8 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.43.0",
     "@mapbox/mapbox-gl-language": "^1.0.1",
-    "@sentry/tracing": "^7.37.1",
-    "@sentry/vue": "^7.37.1",
+    "@sentry/tracing": "^7.37.2",
+    "@sentry/vue": "^7.37.2",
     "@turf/turf": "^6.5.0",
     "@vueuse/core": "^9.12.0",
     "dayjs": "^1.11.7",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
-    "@iconify-json/carbon": "^1.1.14",
+    "@iconify-json/carbon": "^1.1.15",
     "@types/mapbox-gl": "^2.7.10",
     "@types/node": "^18.13.0",
     "@unocss/reset": "^0.49.4",
