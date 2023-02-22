@@ -83,12 +83,12 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true, isF
     currentFeature.value = { ...props }
     collapsed.value = true
     isEditSide.value = false
-    isFly && window.map.flyTo({
-      center: currentFeature.value.geometry.coordinates as LngLatLike,
-      zoom: 15,
-      speed: 2,
-      curve: 1,
-    })
+    // isFly && window.map.flyTo({
+    //   center: currentFeature.value.geometry.coordinates as LngLatLike,
+    //   zoom: 15,
+    //   speed: 2,
+    //   curve: 1,
+    // })
   }
 }
 
