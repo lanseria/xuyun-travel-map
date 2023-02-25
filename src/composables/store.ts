@@ -152,7 +152,7 @@ export const mapPlacePointsFeatures = computed(() => {
   const all: MyFeature[] = [
     ...filterPoints,
     ...finishedVideoLines, unfinishedLineString,
-    mapPlaceLineBbox.value,
+    // mapPlaceLineBbox.value,
   ]
   return turf.featureCollection(all)
 })
