@@ -17,8 +17,8 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.43.2",
     "@mapbox/mapbox-gl-language": "^1.0.1",
-    "@sentry/tracing": "^7.38.0",
-    "@sentry/vue": "^7.38.0",
+    "@sentry/tracing": "^7.39.0",
+    "@sentry/vue": "^7.39.0",
     "@turf/turf": "^6.5.0",
     "@vueuse/core": "^9.13.0",
     "dayjs": "^1.11.7",
