@@ -9,7 +9,7 @@ const alreadyKm = computed(() => {
 })
 
 const allKm = computed(() => {
-  return 1050 + 1448.60 + 54.7
+  return 1050 + 1448.60 + 54.7 + 3.1
 })
 
 const restKm = computed(() => {
@@ -21,7 +21,8 @@ const startDay = computed(() => {
 })
 
 const alreadyDayCount = computed(() => {
-  return dayjs().diff(startDay.value, 'day') // 7
+  // return dayjs().diff(startDay.value, 'day') // 7
+  return 84
 })
 const avgKm = computed(() => {
   return alreadyKm.value / alreadyDayCount.value
@@ -31,7 +32,8 @@ const restDayCount = computed(() => {
 })
 
 const arriveDate = computed(() => {
-  return dayjs().add(restDayCount.value, 'day').toDate()
+  // return dayjs().add(restDayCount.value, 'day').toDate()
+  return '2023-03-03'
 })
 const { isMobile } = useMobile()
 </script>
@@ -43,7 +45,7 @@ const { isMobile } = useMobile()
         <template #suffix />
       </a-statistic>
 
-      <a-statistic title="已骑行" :value="alreadyDayCount" show-group-separator>
+      <a-statistic title="共骑行" :value="alreadyDayCount" show-group-separator>
         <template #suffix>
           天
         </template>
@@ -62,19 +64,19 @@ const { isMobile } = useMobile()
         </template>
       </a-statistic>
 
-      <a-statistic extra="预计剩余" :value="restKm" :precision="2">
+      <a-statistic extra="剩余" :value="restKm" :precision="2">
         <template #suffix>
           Km
         </template>
       </a-statistic>
 
-      <a-statistic title="预计剩余" :value="restDayCount">
+      <a-statistic title="剩余" :value="restDayCount">
         <template #suffix>
           天
         </template>
       </a-statistic>
 
-      <a-statistic title="预计到达日期" :value="arriveDate" format="YYYY-MM-DD">
+      <a-statistic title="到达日期" :value="arriveDate" format="YYYY-MM-DD">
         <template #suffix />
       </a-statistic>
     </a-space>
