@@ -13,7 +13,7 @@ export const LayerStyleList = [
   {
     name: 'streets',
     value: 'streets',
-    style: 'mapbox://styles/lanseria/cld5ur36v000301lngmbtq0qh',
+    style: 'mapbox://styles/lanseria/clhluh3n100kq01r87c9deet0',
   },
   {
     name: 'Satellite Streets',
