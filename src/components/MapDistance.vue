@@ -2,7 +2,7 @@
 import type { SelectOptionData } from '@arco-design/web-vue'
 
 const data = ref<SelectOptionData[]>([])
-const handleSearch = (value: string) => {
+function handleSearch(value: string) {
   if (value) {
     data.value = mapPlacePoints.value.filter((item) => {
       return item.properties && item.properties.name.match(value)
@@ -17,11 +17,11 @@ const handleSearch = (value: string) => {
   else { data.value = [] }
 }
 
-const handleSelectStart = () => {
+function handleSelectStart() {
   //
 }
 
-const handleSelectEnd = () => {
+function handleSelectEnd() {
   //
 }
 </script>

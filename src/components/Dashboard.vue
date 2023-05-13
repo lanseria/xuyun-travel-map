@@ -13,7 +13,7 @@ watchDebounced(() => width.value, () => {
 // 所有路线对应的数据
 const { data, onFetchResponse } = useFetch('/data/routes.json', { immediate: true }).get().json()
 
-const fetchRouteData = () => {
+function fetchRouteData() {
   const currentRoute = allRouteList.value.find(item => item.value === currentRouteValue.value)
   if (currentRoute) {
     const { data, onFetchResponse } = useFetch(`/data/${currentRouteValue.value}/data/all-points.geojson`, { immediate: true }).get().json()

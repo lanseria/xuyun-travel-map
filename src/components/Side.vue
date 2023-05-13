@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { activeTab } from '~/composables/store'
+
 interface TabItem {
   label: string
   icon: string
@@ -23,7 +24,7 @@ const tabList: TabItem[] = [
   },
 ]
 
-const handleActive = (item: TabItem) => {
+function handleActive(item: TabItem) {
   activeTab.value = item.value
 }
 </script>

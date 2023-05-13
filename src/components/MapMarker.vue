@@ -25,7 +25,7 @@ const props = defineProps({
   },
 })
 let marker: any = null
-const loadMarker = () => {
+function loadMarker() {
   const map = window.map
   const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
     `<h2>${props.properties.name}</h2>

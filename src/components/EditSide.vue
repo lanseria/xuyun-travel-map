@@ -17,7 +17,7 @@ const tabList: TabItem[] = [
     value: 'data',
   },
 ]
-const handleActive = (item: TabItem) => {
+function handleActive(item: TabItem) {
   videoActiveTab.value = item.value
 }
 </script>

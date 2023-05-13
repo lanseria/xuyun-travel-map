@@ -9,7 +9,7 @@ import { queryDevice } from './utils'
 
 let stopNumber = 0
 
-export const fitBbox = (b: [number, number, number, number] | undefined) => {
+export function fitBbox(b: [number, number, number, number] | undefined) {
   const box = b || mapPlaceLineBbox.value.bbox!
   const map = window.map
   const bbox: LngLatBoundsLike = [[box[0], box[1]], [box[2], box[3]]]
@@ -28,7 +28,7 @@ export const fitBbox = (b: [number, number, number, number] | undefined) => {
   }
 }
 
-export const addPlaceSource = () => {
+export function addPlaceSource() {
   const map = window.map
   const source: any = map.getSource(MAP_PLACE_SOURCE)
   if (source) {
@@ -52,7 +52,7 @@ export const customPopupStyleOpt: mapboxgl.PopupOptions = {
   className: 'LayerPopup',
 }
 
-export const descHtml = (props: PointFeature) => {
+export function descHtml(props: PointFeature) {
   return `
   <div>${props.properties.name}</div>
   <iframe style="height:120px; width:100%;" src="//player.bilibili.com/player.html?bvid=${props.properties.vid}&t=${props.properties.vt}&as_wide=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" />`
@@ -60,7 +60,7 @@ export const descHtml = (props: PointFeature) => {
 
 const popup = new mapboxgl.Popup(customPopupStyleOpt)
 
-export const handleFeatureDetail = (props: PointFeature, isTabDetail = true, isFly = true) => {
+export function handleFeatureDetail(props: PointFeature, isTabDetail = true, isFly = true) {
   console.warn('feature-click', isGetCoord.value)
   if (isGetCoord.value) {
     const item = editForm.value.vClips[vClipIdx.value]
@@ -92,7 +92,7 @@ export const handleFeatureDetail = (props: PointFeature, isTabDetail = true, isF
   }
 }
 
-const handleFeatureClick = (e: any) => {
+function handleFeatureClick(e: any) {
   const props: PointFeature = e.features[0]
   if (props.properties.id) {
     const currentFeature = mapPlacePoints.value.find(item => item.properties.id === props.properties.id)
@@ -107,7 +107,7 @@ const handleFeatureClick = (e: any) => {
   }
 }
 
-const drawAnimateLine = () => {
+function drawAnimateLine() {
   const map = window.map
   const source: any = map.getSource(MAP_PLACE_SOURCE)
   const LayerNameBg = `${MAP_PLACE_LAYER_LINESTRING_BG}`
@@ -187,11 +187,11 @@ const drawAnimateLine = () => {
   isAnimation.value && animateDashArray(0)
 }
 
-export const drawLine = () => {
+export function drawLine() {
   drawAnimateLine()
 }
 
-export const drawPoint = () => {
+export function drawPoint() {
   const map = window.map
   const source: any = map.getSource(MAP_PLACE_SOURCE)
   if (!source)
@@ -225,7 +225,7 @@ export const drawPoint = () => {
   map.on('touchend', MAP_PLACE_LAYER_POINT, handleFeatureClick)
 }
 
-export const drawBboxPolygon = () => {
+export function drawBboxPolygon() {
   const map = window.map
   const source: any = map.getSource(MAP_PLACE_SOURCE)
   if (!source)
@@ -249,7 +249,7 @@ export const drawBboxPolygon = () => {
   })
 }
 
-export const reloadPlace = () => {
+export function reloadPlace() {
   addPlaceSource()
   drawLine()
   if (!clearMode.value) {

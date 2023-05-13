@@ -14,10 +14,10 @@ export const editForm = useStorage<RawData>('map-edit-form', initEditFormData())
 watchDebounced(() => collapsed.value, () => {
   window.map.resize()
 }, { debounce: 300, maxWait: 600 })
-export const handleCollapsed = () => {
+export function handleCollapsed() {
   collapsed.value = !collapsed.value
 }
-export const handleCollapsedFalse = () => {
+export function handleCollapsedFalse() {
   collapsed.value = false
 }
 export const currentProperties = ref<PointFeatureProp>()
@@ -31,13 +31,13 @@ export const mapDistanceEndPoint = ref<PointFeature>()
 export const mapDistanceStartInput = ref('')
 export const mapDistanceEndInput = ref('')
 
-export const handleSetStartPoint = () => {
+export function handleSetStartPoint() {
   mapDistanceStartPoint.value = currentFeature.value
   if (currentFeature.value)
     mapDistanceStartInput.value = JSON.stringify(currentFeature.value.geometry.coordinates)
 }
 
-export const handleSetEndPoint = () => {
+export function handleSetEndPoint() {
   mapDistanceEndPoint.value = currentFeature.value
   if (currentFeature.value)
     mapDistanceEndInput.value = JSON.stringify(currentFeature.value.geometry.coordinates)
@@ -49,7 +49,7 @@ export const mapCenter = useStorage('map-center', [124.724, 40.881])
 export const mapStyle = useStorage('map-style', 'streets')
 export const mapPoints = useStorage('map-points', true)
 
-export const handleToggleMapStyle = () => {
+export function handleToggleMapStyle() {
   const len = LayerStyleList.length
   const idx = LayerStyleList.findIndex(item => item.value === mapStyle.value)
   if (idx >= 0) {
@@ -68,7 +68,7 @@ export const handleToggleMapStyle = () => {
   }
 }
 
-export const handleToggleMapPoints = () => {
+export function handleToggleMapPoints() {
   mapPoints.value = !mapPoints.value
 }
 
@@ -157,7 +157,7 @@ export const mapPlacePointsFeatures = computed(() => {
   return turf.featureCollection(all)
 })
 
-export const toggleAnimation = () => {
+export function toggleAnimation() {
   isAnimation.value = !isAnimation.value
   drawLine()
   drawPoint()
@@ -226,14 +226,14 @@ export const toggleAnimation = () => {
   // }
 }
 
-export const reloadInitStatus = () => {
+export function reloadInitStatus() {
   currentFeature.value = undefined
   currentProperties.value = undefined
   reloadPlace()
   fitBbox(undefined)
 }
 
-export const handleNewVideo = () => {
+export function handleNewVideo() {
   isEditSide.value = true
   collapsed.value = true
 }

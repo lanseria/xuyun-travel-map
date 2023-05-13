@@ -4,7 +4,7 @@ import { editForm, initEditFormData } from '~/composables'
 const editFormStr = computed(() => {
   return JSON.stringify(editForm.value, null, 2)
 })
-const handleOk = () => {
+function handleOk() {
   editForm.value = initEditFormData()
 }
 </script>

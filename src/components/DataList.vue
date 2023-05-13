@@ -2,6 +2,7 @@
 import type { TableExpandable, TableSortable } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import { IconCheck, IconRefresh } from '@arco-design/web-vue/es/icon'
+
 // import type { VideoData } from '~/composables'
 import * as turf from '@turf/turf'
 import type { VideoData } from '~/composables'
@@ -37,7 +38,7 @@ const scroll = computed(() => {
     y: isMobile.value ? '300px' : 'calc(100vh - 50px)',
   }
 })
-const rowClass = (record: any) => {
+function rowClass(record: any) {
   if (currentProperties.value) {
     // console.log(record.key === currentProperties.value.vid)
     return record.key === currentProperties.value.vid ? 'sepia' : ''
@@ -45,7 +46,7 @@ const rowClass = (record: any) => {
   else { return '' }
 }
 
-const handleViewLine = (record: VideoData) => {
+function handleViewLine(record: VideoData) {
   // if (record.vLine)
   //   console.log(record.vLine)
 
@@ -60,7 +61,7 @@ const handleViewLine = (record: VideoData) => {
   }
 }
 
-const handleCopy = (record: VideoData) => {
+function handleCopy(record: VideoData) {
   //
   // console.log(record.vDate)
   const { data, onFetchResponse } = useFetch(`https://raw.githubusercontent.com/lanseria/xuyun-map-data/main/${currentRouteValue.value}/raw/${record.vDate}.json`, { immediate: true }).get().json()

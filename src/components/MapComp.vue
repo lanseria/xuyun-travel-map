@@ -13,7 +13,7 @@ mapboxgl.accessToken
 let map: mapboxgl.Map | null = null
 const mapContainer = shallowRef()
 
-const updateMap = () => {
+function updateMap() {
   //
 }
 onMounted(() => {

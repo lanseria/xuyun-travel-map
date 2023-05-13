@@ -14,7 +14,7 @@ const pointList = computed(() => {
   })
 })
 
-const handleZoomClick = (record: PointFeature, openDetail = false) => {
+function handleZoomClick(record: PointFeature, openDetail = false) {
   handleFeatureDetail(record, openDetail)
   // setTimeout(() => {
   //   window.map.flyTo({

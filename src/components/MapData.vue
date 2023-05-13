@@ -2,6 +2,7 @@
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { mapStartPlacePoint, useMobile } from '~/composables'
+
 dayjs.extend(relativeTime)
 
 const alreadyKm = computed(() => {

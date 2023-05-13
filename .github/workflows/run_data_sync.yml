@@ -2,7 +2,7 @@ name: Xuyun Data Sync
 
 on:
   schedule:
-    - cron: '0 22 * * *'    # 国际标准时间22点（北京时间早上6点更新网站） 
+    - cron: '0 22 * * *' # 国际标准时间22点（北京时间早上6点更新网站）
   push:
     branches:
       - main
@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Get source sha
-        run: curl https://api.github.com/repos/lanseria/xuyun-map-data/branches/main --silent | grep "sha" | head -n1 > sha 
+        run: curl https://api.github.com/repos/lanseria/xuyun-map-data/branches/main --silent | grep "sha" | head -n1 > sha
 
       - name: Update source sha
         uses: EndBug/add-and-commit@v9
         with:
-          message: "chore: update source sha"
-          add: "sha"
+          message: 'chore: update source sha'
+          add: sha

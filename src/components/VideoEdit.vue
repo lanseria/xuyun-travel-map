@@ -2,7 +2,8 @@
 import dayjs from 'dayjs'
 import queryString from 'query-string'
 import { editForm, isGetCoord, vClipIdx } from '~/composables'
-const handleAdd = () => {
+
+function handleAdd() {
   const center = window.map.getCenter()
   const coord: [number, number] = [center.lng, center.lat]
   if (editForm.value.vClips.length) {
@@ -21,14 +22,14 @@ const handleAdd = () => {
     })
   }
 }
-const handleDel = (item: any) => {
+function handleDel(item: any) {
   editForm.value.vClips = editForm.value.vClips.filter(m => m.name !== item.name)
 }
-const handleGetCoord = (idx: number) => {
+function handleGetCoord(idx: number) {
   vClipIdx.value = idx
   isGetCoord.value = true
 }
-const handleSearchRoute = () => {
+function handleSearchRoute() {
   if (editForm.value.vClips.length > 1) {
     const point = editForm.value.vClips.map((it) => {
       const coord = [...it.coordinates]
@@ -43,12 +44,12 @@ const handleSearchRoute = () => {
     open(url)
   }
 }
-const handleFly = (lnglat: any) => {
+function handleFly(lnglat: any) {
   window.map.flyTo({
     center: lnglat,
   })
 }
-const handleClearGetCoord = () => {
+function handleClearGetCoord() {
   isGetCoord.value = false
 }
 </script>

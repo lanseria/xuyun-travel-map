@@ -6,7 +6,7 @@ export function queryDevice() {
   return mapContainerWidth.value - 1 < WIDTH
 }
 
-export const useMobile = () => {
+export function useMobile() {
   const isMobile = computed(() => {
     // const rect = document.body.getBoundingClientRect()
     return mapContainerWidth.value - 1 < WIDTH

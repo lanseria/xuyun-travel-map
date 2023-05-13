@@ -27,7 +27,7 @@ export const LayerStyleList = [
   },
 ]
 
-export const initEditFormData = () => {
+export function initEditFormData() {
   return {
     vid: '',
     vName: '',

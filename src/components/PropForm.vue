@@ -3,7 +3,7 @@ import type { LngLatLike } from 'mapbox-gl'
 import type { PointFeature } from '~/composables'
 import { currentProperties, mapDistanceEndInput, mapDistanceStartInput } from '~/composables/store'
 
-const handleGeojsonUpdate = () => {
+function handleGeojsonUpdate() {
   if (currentFeature.value) {
     const data: PointFeature = {
       properties: currentFeature.value.properties,
@@ -16,14 +16,14 @@ const handleGeojsonUpdate = () => {
   }
 }
 
-const handleUpdate = () => {
+function handleUpdate() {
   if (currentProperties.value) {
     const url = `https://github.com/lanseria/xuyun-map-data/blob/main/2212-2303-dongbei/raw/${currentProperties.value.vDate}.json`
     open(url)
   }
 }
 
-const handleCalcDistance = () => {
+function handleCalcDistance() {
   if (mapDistanceStartInput.value && mapDistanceEndInput.value) {
     const startPosition = JSON.parse(mapDistanceStartInput.value).reverse().join(',')
     const endPosition = JSON.parse(mapDistanceEndInput.value).reverse().join(',')
@@ -35,7 +35,7 @@ const handleCalcDistance = () => {
 }
 const visible = ref(false)
 
-const handleVideoModalPlay = () => {
+function handleVideoModalPlay() {
   visible.value = true
 }
 
@@ -46,7 +46,7 @@ const pointIdx = computed(() => {
     return -1
 })
 
-const handlePosition = () => {
+function handlePosition() {
   if (currentFeature.value) {
     window.map.flyTo({
       center: currentFeature.value.geometry.coordinates as LngLatLike,
@@ -57,14 +57,14 @@ const handlePosition = () => {
   }
 }
 
-const handlePreviousPosition = () => {
+function handlePreviousPosition() {
   //
   const nextId = pointIdx.value - 1
   if (nextId >= 0)
     handleFeatureDetail({ ...mapPlacePoints.value[nextId] })
 }
 
-const handleNextPosition = () => {
+function handleNextPosition() {
   //
   const nextId = pointIdx.value + 1
   if (nextId >= 0)

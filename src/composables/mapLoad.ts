@@ -33,7 +33,7 @@ import { mapPlacePointsFeatures } from './store'
 //   return { width: d, height: d, data }
 // }
 
-export const mapLoad = () => {
+export function mapLoad() {
   // const map = window.map
   // map.addImage('#79c0ff', createColorPoint(121, 192, 255, 255))
   // map.addImage('#50C240', createColorPoint(80, 194, 64, 255))

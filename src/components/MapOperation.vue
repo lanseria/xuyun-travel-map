@@ -8,11 +8,11 @@ import { customPopupStyleOpt, descHtml, reloadInitStatus } from '~/composables'
 
 // let savedBearing = 0
 
-const get点与线段最近的点 = (line: Feature<LineString>, pt: PointFeature) => {
+function get点与线段最近的点(line: Feature<LineString>, pt: PointFeature) {
   return turf.nearestPointOnLine(line, pt)
 }
 
-const get指定点到终点的线段 = (line: Feature<LineString>, pt: Feature<Point>) => {
+function get指定点到终点的线段(line: Feature<LineString>, pt: Feature<Point>) {
   const len = turf.length(line, { units: 'meters' })
   const endPointOfLine = turf.along(line, len, { units: 'meters' })
   return turf.lineSlice(pt, endPointOfLine, line)
@@ -23,20 +23,20 @@ const stopNumber = ref(0)
 let start = 0
 let popupInstance: mapboxgl.Popup[] = []
 
-const clearPopup = () => {
+function clearPopup() {
   popupInstance.forEach((popup) => {
     popup.remove()
   })
 }
 
-const clearAnimation = () => {
+function clearAnimation() {
   start = 0.0
   cancelAnimationFrame(stopNumber.value)
   stopNumber.value = 0
   clearPopup()
 }
 
-const cameraStart = () => {
+function cameraStart() {
   const vid = currentProperties.value?.vid
   const vIdx = mapVideos.value.findIndex(item => item.vid === vid)
   const vLine = mapVideos.value[vIdx].vLine
@@ -110,7 +110,7 @@ const cameraStart = () => {
   }
 }
 
-const showLinePopup = () => {
+function showLinePopup() {
   const vid = currentProperties.value?.vid
   const currentVideoPoints = mapPlacePoints.value.filter(item => item.properties.vid === vid)
   popupInstance = currentVideoPoints.map((item) => {
@@ -120,12 +120,12 @@ const showLinePopup = () => {
   })
 }
 
-const handle3DStart = () => {
+function handle3DStart() {
   showLinePopup()
   cameraStart()
 }
 
-const handle3DNext = () => {
+function handle3DNext() {
   const vid = currentProperties.value?.vid
   const vIdx = mapVideos.value.findIndex(item => item.vid === vid)
   const recordVideo = mapVideos.value[vIdx + 1]
@@ -136,7 +136,7 @@ const handle3DNext = () => {
   }
 }
 
-const handle3DPrev = () => {
+function handle3DPrev() {
   const vid = currentProperties.value?.vid
   const vIdx = mapVideos.value.findIndex(item => item.vid === vid)
   const recordVideo = mapVideos.value[vIdx - 1]
